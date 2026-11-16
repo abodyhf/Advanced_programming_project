@@ -1,0 +1,155 @@
+# WatchTogether — Python edition
+
+A working movie-night web app based on your project proposal. Friends enter their likes and dislikes, get a shared shortlist, and vote for one movie.
+
+**Start here:** install Python 3.11 or newer, extract this folder, and open a terminal inside it.
+
+```bash
+python -m pip install -r requirements.txt
+python app.py
+```
+
+Open **http://127.0.0.1:8000** in your browser. Keep the terminal running. Press Ctrl+C in the terminal to stop.
+
+On macOS/Linux, use `python3` if `python` is not available. On Windows, `py` can also be used instead of `python`. The included `start.bat` (Windows) and `start.sh` (macOS/Linux) create an isolated Python environment and run the app for you; the first launch downloads dependencies.
+
+## Try it in one minute
+
+1. Click **Try a sample group**. You join as “You,” with Ada and Cem as clearly marked sample members.
+2. Add or remove a few tastes and click **Save my tastes**.
+3. Click **Find our movies**. Ada and Cem automatically cast sample votes.
+4. Vote for your favorite. The final pick appears.
+
+## Use it with real friends
+
+1. Enter a group name and your nickname on the home page.
+2. Copy the invitation link and send it to your friends.
+3. Each person joins with a different nickname and selects at least three tastes, including at least one like. Search genres, films, actors, or directors.
+4. Everyone clicks **Save my tastes**. When 2–8 members are ready, the organiser clicks **Find our movies**.
+5. Each member votes once. Voting closes automatically when everyone has voted, or the organiser can close it after at least one vote.
+6. Most votes wins. A tie goes to the higher recommendation score; a remaining tie uses title/identifier order for a repeatable result.
+
+The organiser can start a new round, keeping tastes while clearing the shortlist and votes, or delete the whole group. New members and taste edits are locked during voting so the shortlist stays consistent.
+
+To test several people on one computer, open the invitation in a different browser or a separate private window. Membership is stored in **sessionStorage for each tab**. A duplicated tab may inherit the same membership; use a fresh window. Closing the tab loses that membership credential. Rejoining requires a new nickname. Nicknames alone cannot be used to impersonate an existing member.
+
+### Friends on the same Wi-Fi
+
+Run:
+
+```bash
+python app.py --host 0.0.0.0
+```
+
+Find the computer's local network IP address, for example `192.168.1.20`. Open `http://192.168.1.20:8000` on that computer before creating the group, then share the invitation generated there. `127.0.0.1` only works on the device running Python. Other devices must be on the same reachable network, and the operating system may ask to allow the server through its firewall.
+
+## What is included
+
+| Feature | Implementation |
+| --- | --- |
+| Groups and invitation links | FastAPI, randomly generated room identifiers, maximum 8 members |
+| Taste profiles | Likes/dislikes of films, genres, actors and directors; validated RDF Turtle stored with the membership |
+| Movie graph | RDFLib builds RDF and schema.org Movie descriptions; Oxigraph answers SPARQL queries |
+| Recommendations | Every candidate must match a like of **each** member; all member dislikes are hard exclusions |
+| Fairness and explanations | Score favors the least matched member; each film shows the preferences it connects to for each person |
+| Voting | One ballot per membership, automatic close, organiser close, deterministic tie handling |
+| Durable state | SQLite rooms/profiles/votes survive server restarts |
+| Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
+| Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
+| UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
+| Quality checks | 57 automated tests and a browser-checked sample flow; see `docs/TEST_REPORT.md` |
+
+## Movie data and the 10,000-film goal
+
+The app ships with **80 hand-curated starter movies** so recommendations work without any external service. This is a starter catalogue, **not** 10,000 downloaded Wikidata movies. Genres are simplified editorial categories, and cast lists are intentionally partial.
+
+A separate importer fetches real Wikidata records in small SPARQL batches. Start small:
+
+```bash
+python -m watchtogether.import_wikidata --limit 100
+```
+
+For the proposal's intended data volume:
+
+```bash
+python -m watchtogether.import_wikidata --limit 10000 --batch-size 100
+```
+
+The importer keeps English-labeled films with a publication year, director, cast member, and genre. It preserves Wikidata identifiers for imported films and people, normalizes genre labels into local categories, saves progress after each batch, retries temporary service errors, and validates/export the RDF graph with SHACL. Run the same command to resume. It writes `data/wikidata.json` and a Turtle export beside it; it preserves `data/catalog.json`.
+
+Restart the app after importing. It automatically uses `data/wikidata.json` if it exists. To choose a different catalogue, set the `WATCHTOGETHER_CATALOG` environment variable to its absolute path. `GET /api/health` reports the actual film count and data source. A partially completed import can be used, but it may offer fewer matches.
+
+If a catalogue change removes selected entities, affected profiles are marked unfinished and their groups return to collecting tastes. Save updated tastes before starting the next round.
+
+Live Wikidata access depends on connectivity and the public endpoint. The included test suite verifies the importer with controlled SPARQL responses. See the test report for whether a live import could be verified in the build environment. No 10,000-film import or large-catalogue performance result is claimed for this delivery.
+
+## How the recommendations work
+
+1. SPARQL queries match movies to each member's liked entities. A liked film connects to itself and films sharing a genre, director, or cast member. Liked actors/directors match films they appear in or direct. Genres include configured subgenres through a SPARQL property path.
+2. A disliked genre excludes films in that genre or its configured subgenres; a disliked person excludes their films. A disliked film excludes that exact film, rather than every film resembling it.
+3. Each remaining film must match **at least one like from every member**. Otherwise it is excluded.
+4. A member's match is the fraction of their weighted likes that connect to that film. Person preferences have weight 2; genre and film preferences have weight 1. Each input like counts at most once, even if several graph paths match it.
+5. The group score is `100 × (0.6 × lowest member match + 0.4 × average member match)`.
+6. Return up to five films, highest score first. If none qualify, explain that the group should change its tastes or expand the catalogue.
+
+These percentages describe graph preference overlap. They are **not measured probabilities of enjoyment**. No language-model API, machine-learning training, or paid key is needed. The supplied OWL ontology describes the domain; the implemented inference is the explicit genre hierarchy in SPARQL, rather than a general OWL reasoner.
+
+## Project files
+
+```text
+app.py                         Run the Python server
+watchtogether/api.py            Routes, membership, profiles, voting, expiry task
+watchtogether/db.py             SQLite schema and atomic transactions
+watchtogether/graph.py          RDF graph construction, SHACL, SPARQL
+watchtogether/recommender.py    Group scoring and explanations
+watchtogether/import_wikidata.py Resumable external-data importer
+watchtogether/cleanup.py        Scheduled deletion command
+data/catalog.json              80-film offline starter catalogue
+data/ontology.ttl               OWL domain vocabulary
+data/shapes.ttl                 Film and closed-profile SHACL constraints
+static/                        Browser interface
+tests/                         API, recommendation, concurrency, importer tests
+docs/                          Design, verification, and API notes
+```
+
+Runtime room data is created in `instance/watchtogether.sqlite3`. It is not bundled in this download. `WATCHTOGETHER_DATA_DIR` selects a different runtime directory. Movie JSON is the durable film-data source; the Oxigraph query index is rebuilt in memory at startup. This keeps this version easy to run with a single server process.
+
+## Run the tests
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m pytest tests -q
+```
+
+Tests create isolated temporary databases and do not call the live Wikidata service.
+
+## Expiry when the server is not running
+
+An open, authenticated group page counts as activity. Anonymous invitation views do not refresh expiry. Expired groups cannot be revived by a read or join request.
+
+For cleanup independent of the web server, schedule this command with cron or Windows Task Scheduler:
+
+```bash
+python -m watchtogether.cleanup
+```
+
+Deletion cascades to group members, saved profile RDF, votes and recommendations. SQLite secure deletion and WAL checkpoints are enabled. External backups, if you make them yourself, need their own retention policy.
+
+## API and deployment notes
+
+Interactive API documentation is at `/api/docs` when internet access is available for its Swagger UI assets; the JSON schema is at `/api/openapi.json`. Endpoint notes are in `docs/API.md`.
+
+This download is a working local Python application and an implementation starting point for the course project. It has not been publicly hosted. For an internet deployment, use a Python-capable host, one application worker, a persistent writable data directory, HTTPS, and deployment-specific rate limits. Membership uses random bearer credentials stored as hashes on the server; it does not verify real-world identity. “One vote” means one vote per membership.
+
+Course milestones still requiring your team: a verified 10,000-film dataset, performance measurements at that scale, real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
+
+## Technical references
+
+- [FastAPI](https://fastapi.tiangolo.com/)
+- [RDFLib](https://rdflib.readthedocs.io/)
+- [Oxigraph Python API](https://pyoxigraph.readthedocs.io/)
+- [pySHACL](https://github.com/RDFLib/pySHACL)
+- [Wikidata Query Service](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service)
+- [Wikidata movie properties](https://www.wikidata.org/wiki/Wikidata:WikiProject_Movies/Properties)
+
+Wikidata structured data is CC0. This project does not include film files, poster artwork, or streaming availability data.

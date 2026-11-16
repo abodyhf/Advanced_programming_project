@@ -1,0 +1,1519 @@
+{
+  "source": "Hand-curated starter catalogue (80 films; not a Wikidata dump)",
+  "films": [
+    {
+      "id": "film:inception-2010",
+      "title": "Inception",
+      "year": 2010,
+      "genres": [
+        "science-fiction",
+        "thriller",
+        "action"
+      ],
+      "directors": [
+        "Christopher Nolan"
+      ],
+      "cast": [
+        "Leonardo DiCaprio",
+        "Joseph Gordon-Levitt",
+        "Elliot Page"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:interstellar-2014",
+      "title": "Interstellar",
+      "year": 2014,
+      "genres": [
+        "science-fiction",
+        "adventure",
+        "drama"
+      ],
+      "directors": [
+        "Christopher Nolan"
+      ],
+      "cast": [
+        "Matthew McConaughey",
+        "Anne Hathaway",
+        "Jessica Chastain"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-dark-knight-2008",
+      "title": "The Dark Knight",
+      "year": 2008,
+      "genres": [
+        "action",
+        "crime",
+        "drama"
+      ],
+      "directors": [
+        "Christopher Nolan"
+      ],
+      "cast": [
+        "Christian Bale",
+        "Heath Ledger",
+        "Michael Caine"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-prestige-2006",
+      "title": "The Prestige",
+      "year": 2006,
+      "genres": [
+        "drama",
+        "mystery",
+        "thriller"
+      ],
+      "directors": [
+        "Christopher Nolan"
+      ],
+      "cast": [
+        "Christian Bale",
+        "Hugh Jackman",
+        "Scarlett Johansson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-martian-2015",
+      "title": "The Martian",
+      "year": 2015,
+      "genres": [
+        "science-fiction",
+        "adventure",
+        "comedy"
+      ],
+      "directors": [
+        "Ridley Scott"
+      ],
+      "cast": [
+        "Matt Damon",
+        "Jessica Chastain",
+        "Chiwetel Ejiofor"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:arrival-2016",
+      "title": "Arrival",
+      "year": 2016,
+      "genres": [
+        "science-fiction",
+        "drama",
+        "mystery"
+      ],
+      "directors": [
+        "Denis Villeneuve"
+      ],
+      "cast": [
+        "Amy Adams",
+        "Jeremy Renner",
+        "Forest Whitaker"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:blade-runner-2049-2017",
+      "title": "Blade Runner 2049",
+      "year": 2017,
+      "genres": [
+        "science-fiction",
+        "thriller",
+        "drama"
+      ],
+      "directors": [
+        "Denis Villeneuve"
+      ],
+      "cast": [
+        "Ryan Gosling",
+        "Harrison Ford",
+        "Ana de Armas"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:dune-2021",
+      "title": "Dune",
+      "year": 2021,
+      "genres": [
+        "science-fiction",
+        "adventure",
+        "drama"
+      ],
+      "directors": [
+        "Denis Villeneuve"
+      ],
+      "cast": [
+        "Timothée Chalamet",
+        "Rebecca Ferguson",
+        "Oscar Isaac"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:everything-everywhere-all-at-once-2022",
+      "title": "Everything Everywhere All at Once",
+      "year": 2022,
+      "genres": [
+        "science-fiction",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "Daniel Kwan",
+        "Daniel Scheinert"
+      ],
+      "cast": [
+        "Michelle Yeoh",
+        "Stephanie Hsu",
+        "Ke Huy Quan"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:back-to-the-future-1985",
+      "title": "Back to the Future",
+      "year": 1985,
+      "genres": [
+        "science-fiction",
+        "adventure",
+        "comedy"
+      ],
+      "directors": [
+        "Robert Zemeckis"
+      ],
+      "cast": [
+        "Michael J. Fox",
+        "Christopher Lloyd",
+        "Lea Thompson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-truman-show-1998",
+      "title": "The Truman Show",
+      "year": 1998,
+      "genres": [
+        "comedy",
+        "drama",
+        "science-fiction"
+      ],
+      "directors": [
+        "Peter Weir"
+      ],
+      "cast": [
+        "Jim Carrey",
+        "Laura Linney",
+        "Ed Harris"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:eternal-sunshine-of-the-spotless-mind-2004",
+      "title": "Eternal Sunshine of the Spotless Mind",
+      "year": 2004,
+      "genres": [
+        "romance",
+        "drama",
+        "science-fiction"
+      ],
+      "directors": [
+        "Michel Gondry"
+      ],
+      "cast": [
+        "Jim Carrey",
+        "Kate Winslet",
+        "Mark Ruffalo"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:knives-out-2019",
+      "title": "Knives Out",
+      "year": 2019,
+      "genres": [
+        "mystery",
+        "comedy",
+        "crime"
+      ],
+      "directors": [
+        "Rian Johnson"
+      ],
+      "cast": [
+        "Daniel Craig",
+        "Ana de Armas",
+        "Chris Evans"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:glass-onion-2022",
+      "title": "Glass Onion",
+      "year": 2022,
+      "genres": [
+        "mystery",
+        "comedy",
+        "crime"
+      ],
+      "directors": [
+        "Rian Johnson"
+      ],
+      "cast": [
+        "Daniel Craig",
+        "Janelle Monáe",
+        "Edward Norton"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-grand-budapest-hotel-2014",
+      "title": "The Grand Budapest Hotel",
+      "year": 2014,
+      "genres": [
+        "comedy",
+        "adventure",
+        "drama"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "Ralph Fiennes",
+        "Tony Revolori",
+        "Saoirse Ronan"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:fantastic-mr-fox-2009",
+      "title": "Fantastic Mr. Fox",
+      "year": 2009,
+      "genres": [
+        "animation",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "George Clooney",
+        "Meryl Streep",
+        "Jason Schwartzman"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:isle-of-dogs-2018",
+      "title": "Isle of Dogs",
+      "year": 2018,
+      "genres": [
+        "animation",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "Bryan Cranston",
+        "Edward Norton",
+        "Bill Murray"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:moonrise-kingdom-2012",
+      "title": "Moonrise Kingdom",
+      "year": 2012,
+      "genres": [
+        "comedy",
+        "romance",
+        "adventure"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "Jared Gilman",
+        "Kara Hayward",
+        "Bruce Willis"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-life-aquatic-with-steve-zissou-2004",
+      "title": "The Life Aquatic with Steve Zissou",
+      "year": 2004,
+      "genres": [
+        "adventure",
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "Bill Murray",
+        "Owen Wilson",
+        "Cate Blanchett"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-royal-tenenbaums-2001",
+      "title": "The Royal Tenenbaums",
+      "year": 2001,
+      "genres": [
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Wes Anderson"
+      ],
+      "cast": [
+        "Gene Hackman",
+        "Anjelica Huston",
+        "Ben Stiller"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:little-miss-sunshine-2006",
+      "title": "Little Miss Sunshine",
+      "year": 2006,
+      "genres": [
+        "comedy",
+        "drama",
+        "adventure"
+      ],
+      "directors": [
+        "Jonathan Dayton",
+        "Valerie Faris"
+      ],
+      "cast": [
+        "Steve Carell",
+        "Toni Collette",
+        "Abigail Breslin"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-secret-life-of-walter-mitty-2013",
+      "title": "The Secret Life of Walter Mitty",
+      "year": 2013,
+      "genres": [
+        "adventure",
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Ben Stiller"
+      ],
+      "cast": [
+        "Ben Stiller",
+        "Kristen Wiig",
+        "Sean Penn"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:hunt-for-the-wilderpeople-2016",
+      "title": "Hunt for the Wilderpeople",
+      "year": 2016,
+      "genres": [
+        "adventure",
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Taika Waititi"
+      ],
+      "cast": [
+        "Sam Neill",
+        "Julian Dennison",
+        "Rima Te Wiata"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:jojo-rabbit-2019",
+      "title": "Jojo Rabbit",
+      "year": 2019,
+      "genres": [
+        "comedy",
+        "drama",
+        "war"
+      ],
+      "directors": [
+        "Taika Waititi"
+      ],
+      "cast": [
+        "Roman Griffin Davis",
+        "Thomasin McKenzie",
+        "Scarlett Johansson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:what-we-do-in-the-shadows-2014",
+      "title": "What We Do in the Shadows",
+      "year": 2014,
+      "genres": [
+        "comedy",
+        "horror"
+      ],
+      "directors": [
+        "Jemaine Clement",
+        "Taika Waititi"
+      ],
+      "cast": [
+        "Jemaine Clement",
+        "Taika Waititi",
+        "Jonathan Brugh"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:spirited-away-2001",
+      "title": "Spirited Away",
+      "year": 2001,
+      "genres": [
+        "anime",
+        "fantasy",
+        "adventure"
+      ],
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "cast": [
+        "Rumi Hiiragi",
+        "Miyu Irino",
+        "Mari Natsuki"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:howl-s-moving-castle-2004",
+      "title": "Howl’s Moving Castle",
+      "year": 2004,
+      "genres": [
+        "anime",
+        "fantasy",
+        "adventure"
+      ],
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "cast": [
+        "Chieko Baisho",
+        "Takuya Kimura",
+        "Akihiro Miwa"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:my-neighbor-totoro-1988",
+      "title": "My Neighbor Totoro",
+      "year": 1988,
+      "genres": [
+        "anime",
+        "fantasy",
+        "family"
+      ],
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "cast": [
+        "Noriko Hidaka",
+        "Chika Sakamoto",
+        "Hitoshi Takagi"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:princess-mononoke-1997",
+      "title": "Princess Mononoke",
+      "year": 1997,
+      "genres": [
+        "anime",
+        "fantasy",
+        "adventure"
+      ],
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "cast": [
+        "Yoji Matsuda",
+        "Yuriko Ishida",
+        "Yuko Tanaka"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:kiki-s-delivery-service-1989",
+      "title": "Kiki’s Delivery Service",
+      "year": 1989,
+      "genres": [
+        "anime",
+        "fantasy",
+        "adventure"
+      ],
+      "directors": [
+        "Hayao Miyazaki"
+      ],
+      "cast": [
+        "Minami Takayama",
+        "Rei Sakuma",
+        "Kappei Yamaguchi"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:your-name-2016",
+      "title": "Your Name",
+      "year": 2016,
+      "genres": [
+        "anime",
+        "romance",
+        "fantasy"
+      ],
+      "directors": [
+        "Makoto Shinkai"
+      ],
+      "cast": [
+        "Ryunosuke Kamiki",
+        "Mone Kamishiraishi",
+        "Ryo Narita"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:toy-story-1995",
+      "title": "Toy Story",
+      "year": 1995,
+      "genres": [
+        "animation",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "John Lasseter"
+      ],
+      "cast": [
+        "Tom Hanks",
+        "Tim Allen",
+        "Don Rickles"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:toy-story-2-1999",
+      "title": "Toy Story 2",
+      "year": 1999,
+      "genres": [
+        "animation",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "John Lasseter"
+      ],
+      "cast": [
+        "Tom Hanks",
+        "Tim Allen",
+        "Joan Cusack"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:finding-nemo-2003",
+      "title": "Finding Nemo",
+      "year": 2003,
+      "genres": [
+        "animation",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "Andrew Stanton"
+      ],
+      "cast": [
+        "Albert Brooks",
+        "Ellen DeGeneres",
+        "Alexander Gould"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:wall-e-2008",
+      "title": "WALL-E",
+      "year": 2008,
+      "genres": [
+        "animation",
+        "science-fiction",
+        "romance"
+      ],
+      "directors": [
+        "Andrew Stanton"
+      ],
+      "cast": [
+        "Ben Burtt",
+        "Elissa Knight",
+        "Jeff Garlin"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:up-2009",
+      "title": "Up",
+      "year": 2009,
+      "genres": [
+        "animation",
+        "adventure",
+        "comedy"
+      ],
+      "directors": [
+        "Pete Docter"
+      ],
+      "cast": [
+        "Ed Asner",
+        "Jordan Nagai",
+        "Christopher Plummer"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:inside-out-2015",
+      "title": "Inside Out",
+      "year": 2015,
+      "genres": [
+        "animation",
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Pete Docter"
+      ],
+      "cast": [
+        "Amy Poehler",
+        "Phyllis Smith",
+        "Richard Kind"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:soul-2020",
+      "title": "Soul",
+      "year": 2020,
+      "genres": [
+        "animation",
+        "comedy",
+        "fantasy"
+      ],
+      "directors": [
+        "Pete Docter"
+      ],
+      "cast": [
+        "Jamie Foxx",
+        "Tina Fey",
+        "Graham Norton"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:coco-2017",
+      "title": "Coco",
+      "year": 2017,
+      "genres": [
+        "animation",
+        "adventure",
+        "fantasy"
+      ],
+      "directors": [
+        "Lee Unkrich"
+      ],
+      "cast": [
+        "Anthony Gonzalez",
+        "Gael García Bernal",
+        "Benjamin Bratt"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:ratatouille-2007",
+      "title": "Ratatouille",
+      "year": 2007,
+      "genres": [
+        "animation",
+        "comedy",
+        "family"
+      ],
+      "directors": [
+        "Brad Bird"
+      ],
+      "cast": [
+        "Patton Oswalt",
+        "Ian Holm",
+        "Lou Romano"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-incredibles-2004",
+      "title": "The Incredibles",
+      "year": 2004,
+      "genres": [
+        "animation",
+        "superhero",
+        "comedy"
+      ],
+      "directors": [
+        "Brad Bird"
+      ],
+      "cast": [
+        "Craig T. Nelson",
+        "Holly Hunter",
+        "Samuel L. Jackson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:spider-man-into-the-spider-verse-2018",
+      "title": "Spider-Man: Into the Spider-Verse",
+      "year": 2018,
+      "genres": [
+        "animation",
+        "superhero",
+        "adventure"
+      ],
+      "directors": [
+        "Bob Persichetti",
+        "Peter Ramsey",
+        "Rodney Rothman"
+      ],
+      "cast": [
+        "Shameik Moore",
+        "Jake Johnson",
+        "Hailee Steinfeld"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:paddington-2-2017",
+      "title": "Paddington 2",
+      "year": 2017,
+      "genres": [
+        "comedy",
+        "adventure",
+        "family"
+      ],
+      "directors": [
+        "Paul King"
+      ],
+      "cast": [
+        "Ben Whishaw",
+        "Hugh Grant",
+        "Sally Hawkins"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:paddington-2014",
+      "title": "Paddington",
+      "year": 2014,
+      "genres": [
+        "comedy",
+        "adventure",
+        "family"
+      ],
+      "directors": [
+        "Paul King"
+      ],
+      "cast": [
+        "Ben Whishaw",
+        "Hugh Bonneville",
+        "Nicole Kidman"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:wonka-2023",
+      "title": "Wonka",
+      "year": 2023,
+      "genres": [
+        "fantasy",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "Paul King"
+      ],
+      "cast": [
+        "Timothée Chalamet",
+        "Calah Lane",
+        "Olivia Colman"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-princess-bride-1987",
+      "title": "The Princess Bride",
+      "year": 1987,
+      "genres": [
+        "fantasy",
+        "adventure",
+        "romance",
+        "comedy"
+      ],
+      "directors": [
+        "Rob Reiner"
+      ],
+      "cast": [
+        "Cary Elwes",
+        "Robin Wright",
+        "Mandy Patinkin"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:stardust-2007",
+      "title": "Stardust",
+      "year": 2007,
+      "genres": [
+        "fantasy",
+        "adventure",
+        "romance"
+      ],
+      "directors": [
+        "Matthew Vaughn"
+      ],
+      "cast": [
+        "Charlie Cox",
+        "Claire Danes",
+        "Michelle Pfeiffer"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-lord-of-the-rings-the-fellowship-of-the-ring-2001",
+      "title": "The Lord of the Rings: The Fellowship of the Ring",
+      "year": 2001,
+      "genres": [
+        "fantasy",
+        "adventure",
+        "drama"
+      ],
+      "directors": [
+        "Peter Jackson"
+      ],
+      "cast": [
+        "Elijah Wood",
+        "Ian McKellen",
+        "Viggo Mortensen"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:harry-potter-and-the-prisoner-of-azkaban-2004",
+      "title": "Harry Potter and the Prisoner of Azkaban",
+      "year": 2004,
+      "genres": [
+        "fantasy",
+        "adventure",
+        "family"
+      ],
+      "directors": [
+        "Alfonso Cuarón"
+      ],
+      "cast": [
+        "Daniel Radcliffe",
+        "Rupert Grint",
+        "Emma Watson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:jurassic-park-1993",
+      "title": "Jurassic Park",
+      "year": 1993,
+      "genres": [
+        "science-fiction",
+        "adventure",
+        "thriller"
+      ],
+      "directors": [
+        "Steven Spielberg"
+      ],
+      "cast": [
+        "Sam Neill",
+        "Laura Dern",
+        "Jeff Goldblum"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:catch-me-if-you-can-2002",
+      "title": "Catch Me If You Can",
+      "year": 2002,
+      "genres": [
+        "crime",
+        "comedy",
+        "drama"
+      ],
+      "directors": [
+        "Steven Spielberg"
+      ],
+      "cast": [
+        "Leonardo DiCaprio",
+        "Tom Hanks",
+        "Christopher Walken"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-terminal-2004",
+      "title": "The Terminal",
+      "year": 2004,
+      "genres": [
+        "comedy",
+        "drama",
+        "romance"
+      ],
+      "directors": [
+        "Steven Spielberg"
+      ],
+      "cast": [
+        "Tom Hanks",
+        "Catherine Zeta-Jones",
+        "Stanley Tucci"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:forrest-gump-1994",
+      "title": "Forrest Gump",
+      "year": 1994,
+      "genres": [
+        "drama",
+        "romance",
+        "comedy"
+      ],
+      "directors": [
+        "Robert Zemeckis"
+      ],
+      "cast": [
+        "Tom Hanks",
+        "Robin Wright",
+        "Gary Sinise"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-shawshank-redemption-1994",
+      "title": "The Shawshank Redemption",
+      "year": 1994,
+      "genres": [
+        "drama",
+        "crime"
+      ],
+      "directors": [
+        "Frank Darabont"
+      ],
+      "cast": [
+        "Tim Robbins",
+        "Morgan Freeman",
+        "Bob Gunton"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-green-mile-1999",
+      "title": "The Green Mile",
+      "year": 1999,
+      "genres": [
+        "drama",
+        "fantasy",
+        "crime"
+      ],
+      "directors": [
+        "Frank Darabont"
+      ],
+      "cast": [
+        "Tom Hanks",
+        "Michael Clarke Duncan",
+        "David Morse"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-social-network-2010",
+      "title": "The Social Network",
+      "year": 2010,
+      "genres": [
+        "drama"
+      ],
+      "directors": [
+        "David Fincher"
+      ],
+      "cast": [
+        "Jesse Eisenberg",
+        "Andrew Garfield",
+        "Justin Timberlake"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:gone-girl-2014",
+      "title": "Gone Girl",
+      "year": 2014,
+      "genres": [
+        "psychological-thriller",
+        "mystery",
+        "drama"
+      ],
+      "directors": [
+        "David Fincher"
+      ],
+      "cast": [
+        "Ben Affleck",
+        "Rosamund Pike",
+        "Neil Patrick Harris"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:fight-club-1999",
+      "title": "Fight Club",
+      "year": 1999,
+      "genres": [
+        "drama",
+        "thriller"
+      ],
+      "directors": [
+        "David Fincher"
+      ],
+      "cast": [
+        "Brad Pitt",
+        "Edward Norton",
+        "Helena Bonham Carter"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-curious-case-of-benjamin-button-2008",
+      "title": "The Curious Case of Benjamin Button",
+      "year": 2008,
+      "genres": [
+        "drama",
+        "fantasy",
+        "romance"
+      ],
+      "directors": [
+        "David Fincher"
+      ],
+      "cast": [
+        "Brad Pitt",
+        "Cate Blanchett",
+        "Taraji P. Henson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:ocean-s-eleven-2001",
+      "title": "Ocean’s Eleven",
+      "year": 2001,
+      "genres": [
+        "heist",
+        "comedy",
+        "thriller"
+      ],
+      "directors": [
+        "Steven Soderbergh"
+      ],
+      "cast": [
+        "George Clooney",
+        "Brad Pitt",
+        "Matt Damon"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:logan-lucky-2017",
+      "title": "Logan Lucky",
+      "year": 2017,
+      "genres": [
+        "heist",
+        "comedy",
+        "crime"
+      ],
+      "directors": [
+        "Steven Soderbergh"
+      ],
+      "cast": [
+        "Channing Tatum",
+        "Adam Driver",
+        "Daniel Craig"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-nice-guys-2016",
+      "title": "The Nice Guys",
+      "year": 2016,
+      "genres": [
+        "comedy",
+        "crime",
+        "mystery"
+      ],
+      "directors": [
+        "Shane Black"
+      ],
+      "cast": [
+        "Ryan Gosling",
+        "Russell Crowe",
+        "Angourie Rice"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:la-la-land-2016",
+      "title": "La La Land",
+      "year": 2016,
+      "genres": [
+        "romance",
+        "drama",
+        "musical"
+      ],
+      "directors": [
+        "Damien Chazelle"
+      ],
+      "cast": [
+        "Ryan Gosling",
+        "Emma Stone",
+        "John Legend"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:whiplash-2014",
+      "title": "Whiplash",
+      "year": 2014,
+      "genres": [
+        "drama",
+        "music"
+      ],
+      "directors": [
+        "Damien Chazelle"
+      ],
+      "cast": [
+        "Miles Teller",
+        "J. K. Simmons",
+        "Paul Reiser"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-notebook-2004",
+      "title": "The Notebook",
+      "year": 2004,
+      "genres": [
+        "romance",
+        "drama"
+      ],
+      "directors": [
+        "Nick Cassavetes"
+      ],
+      "cast": [
+        "Ryan Gosling",
+        "Rachel McAdams",
+        "James Garner"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:about-time-2013",
+      "title": "About Time",
+      "year": 2013,
+      "genres": [
+        "romantic-comedy",
+        "fantasy",
+        "drama"
+      ],
+      "directors": [
+        "Richard Curtis"
+      ],
+      "cast": [
+        "Domhnall Gleeson",
+        "Rachel McAdams",
+        "Bill Nighy"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:notting-hill-1999",
+      "title": "Notting Hill",
+      "year": 1999,
+      "genres": [
+        "romantic-comedy",
+        "drama"
+      ],
+      "directors": [
+        "Roger Michell"
+      ],
+      "cast": [
+        "Julia Roberts",
+        "Hugh Grant",
+        "Rhys Ifans"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:crazy-rich-asians-2018",
+      "title": "Crazy Rich Asians",
+      "year": 2018,
+      "genres": [
+        "romantic-comedy",
+        "drama"
+      ],
+      "directors": [
+        "Jon M. Chu"
+      ],
+      "cast": [
+        "Constance Wu",
+        "Henry Golding",
+        "Michelle Yeoh"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:get-out-2017",
+      "title": "Get Out",
+      "year": 2017,
+      "genres": [
+        "horror",
+        "thriller",
+        "mystery"
+      ],
+      "directors": [
+        "Jordan Peele"
+      ],
+      "cast": [
+        "Daniel Kaluuya",
+        "Allison Williams",
+        "Bradley Whitford"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:us-2019",
+      "title": "Us",
+      "year": 2019,
+      "genres": [
+        "horror",
+        "thriller",
+        "mystery"
+      ],
+      "directors": [
+        "Jordan Peele"
+      ],
+      "cast": [
+        "Lupita Nyong’o",
+        "Winston Duke",
+        "Elisabeth Moss"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:a-quiet-place-2018",
+      "title": "A Quiet Place",
+      "year": 2018,
+      "genres": [
+        "horror",
+        "thriller",
+        "science-fiction"
+      ],
+      "directors": [
+        "John Krasinski"
+      ],
+      "cast": [
+        "Emily Blunt",
+        "John Krasinski",
+        "Millicent Simmonds"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:alien-1979",
+      "title": "Alien",
+      "year": 1979,
+      "genres": [
+        "horror",
+        "science-fiction",
+        "thriller"
+      ],
+      "directors": [
+        "Ridley Scott"
+      ],
+      "cast": [
+        "Sigourney Weaver",
+        "Tom Skerritt",
+        "John Hurt"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-shining-1980",
+      "title": "The Shining",
+      "year": 1980,
+      "genres": [
+        "horror",
+        "drama"
+      ],
+      "directors": [
+        "Stanley Kubrick"
+      ],
+      "cast": [
+        "Jack Nicholson",
+        "Shelley Duvall",
+        "Danny Lloyd"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:parasite-2019",
+      "title": "Parasite",
+      "year": 2019,
+      "genres": [
+        "thriller",
+        "drama",
+        "comedy"
+      ],
+      "directors": [
+        "Bong Joon-ho"
+      ],
+      "cast": [
+        "Song Kang-ho",
+        "Lee Sun-kyun",
+        "Cho Yeo-jeong"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-grandmaster-2013",
+      "title": "The Grandmaster",
+      "year": 2013,
+      "genres": [
+        "action",
+        "drama",
+        "romance"
+      ],
+      "directors": [
+        "Wong Kar-wai"
+      ],
+      "cast": [
+        "Tony Leung",
+        "Zhang Ziyi",
+        "Chang Chen"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:mad-max-fury-road-2015",
+      "title": "Mad Max: Fury Road",
+      "year": 2015,
+      "genres": [
+        "action",
+        "adventure",
+        "science-fiction"
+      ],
+      "directors": [
+        "George Miller"
+      ],
+      "cast": [
+        "Tom Hardy",
+        "Charlize Theron",
+        "Nicholas Hoult"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-matrix-1999",
+      "title": "The Matrix",
+      "year": 1999,
+      "genres": [
+        "action",
+        "science-fiction"
+      ],
+      "directors": [
+        "Lana Wachowski",
+        "Lilly Wachowski"
+      ],
+      "cast": [
+        "Keanu Reeves",
+        "Laurence Fishburne",
+        "Carrie-Anne Moss"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:john-wick-2014",
+      "title": "John Wick",
+      "year": 2014,
+      "genres": [
+        "action",
+        "thriller",
+        "crime"
+      ],
+      "directors": [
+        "Chad Stahelski"
+      ],
+      "cast": [
+        "Keanu Reeves",
+        "Michael Nyqvist",
+        "Alfie Allen"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:guardians-of-the-galaxy-2014",
+      "title": "Guardians of the Galaxy",
+      "year": 2014,
+      "genres": [
+        "superhero",
+        "comedy",
+        "adventure"
+      ],
+      "directors": [
+        "James Gunn"
+      ],
+      "cast": [
+        "Chris Pratt",
+        "Zoe Saldaña",
+        "Dave Bautista"
+      ],
+      "source": "Hand-curated starter catalogue"
+    },
+    {
+      "id": "film:the-avengers-2012",
+      "title": "The Avengers",
+      "year": 2012,
+      "genres": [
+        "superhero",
+        "adventure"
+      ],
+      "directors": [
+        "Joss Whedon"
+      ],
+      "cast": [
+        "Robert Downey Jr.",
+        "Chris Evans",
+        "Scarlett Johansson"
+      ],
+      "source": "Hand-curated starter catalogue"
+    }
+  ]
+}

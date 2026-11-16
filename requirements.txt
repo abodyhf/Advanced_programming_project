@@ -1,0 +1,6 @@
+fastapi==0.162.5
+uvicorn==0.54.0
+rdflib==7.6.0
+pyoxigraph==0.5.13
+pyshacl==0.40.2
+httpx[socks]==0.28.1

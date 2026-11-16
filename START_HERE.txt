@@ -1,0 +1,24 @@
+WATCHTOGETHER — YOUR PYTHON APP
+
+1. Install Python 3.11 or newer if you do not already have it.
+2. Extract this ZIP file.
+3. On Windows, open the WatchTogether-Python folder and double-click start.bat.
+   On macOS/Linux, open a terminal in the folder and run: bash start.sh
+4. In your browser, open: http://127.0.0.1:8000
+5. Click "Try a sample group" to see how it works.
+
+The first setup downloads Python packages. Keep the terminal window open
+while you use the app. Press Ctrl+C to stop the server.
+
+Manual alternative, from inside the extracted folder:
+
+  python -m pip install -r requirements.txt
+  python app.py
+
+Use python3 or py instead of python if that is how Python is installed on
+your computer.
+
+The app includes 80 starter movies. It also includes a Wikidata importer
+for a larger catalogue; instructions are in README.md.
+
+For friends on other devices, follow the same-Wi-Fi instructions in README.md.

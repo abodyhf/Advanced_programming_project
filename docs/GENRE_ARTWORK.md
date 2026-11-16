@@ -1,0 +1,14 @@
+# Genre artwork
+
+The room gallery and shortlist use original cinematic genre illustrations from
+`static/genre-scenes.png`. These are genre scenes, not official film posters.
+Subgenres share the corresponding broader genre artwork. The application loads
+the image locally and requires no external image service.
+
+Created using the built-in image generation tool. One 4 by 4 atlas supplies all
+16 scenes. CSS classes select the tiles without inline styles so the app's
+existing Content Security Policy stays intact.
+
+## Generation prompt
+
+Use case: stylized-concept. Asset type: one seamless 4 by 4 contact sheet sprite atlas for the genre cards of a premium movie night web application. Output a square image, exactly 4 equal width columns and 4 equal height rows, sixteen edge-to-edge rectangular cinematic photographs with absolutely NO gaps, borders, typography, letters, symbols, logos or watermarks. Each cell is an independent richly textured cinematic film still, premium art direction, grain, atmospheric lighting, dark enough behind white UI labels but vibrant vivid highlights, film photography. Keep the main subject centered within each cell and away from edges. The cells MUST appear in this precise row-major order: row 1: ACTION (lone leather jacket silhouette on rain-drenched city rooftop, orange city explosions far in background); ADVENTURE (tiny explorer and immense lush ancient jungle temple in golden sunlight); ANIMATION (beautiful whimsical painted 3D small fox in a magical colorful moonlit forest); COMEDY (bright yellow vintage tiny car with absurd towering suitcases on sunny pastel pink street). Row 2: CRIME (classic noir detective silhouette on rainy red neon urban alley); DRAMA (emotional lone figure looking through a warm amber rainy window); FAMILY (cozy warm outdoor cinema under fairy lights with a family in silhouette); FANTASY (majestic castle above clouds in violet sky with luminous moon). Row 3: HISTORY (ancient Roman marble architecture and distant toga-clad silhouette in dusty gold light); HORROR (abandoned house in misty forest, ominous single red window, cool dark blue green); MUSICAL (single dancer on richly lit theatrical stage, crimson curtains, golden spotlight and floating sparkles); MYSTERY (dark teal old library with one desk lamp and mysterious silhouette). Row 4: ROMANCE (couple silhouettes on a lavender-pink sunset overlook); SCIENCE FICTION (astronaut silhouette beneath enormous ringed planet on cobalt alien landscape); THRILLER (silhouette on steep brutalist city stairway with harsh diagonal teal light); WAR (distant helmeted soldier silhouette on smoky ochre battlefield at dawn, no graphic violence). All images evocative original artwork without famous movie characters or recognizable actors. Absolutely no text. Exactly sixteen equal cells in 4x4 arrangement. This is a functional background atlas: exact even boundaries, no graphic UI or mockup.

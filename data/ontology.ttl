@@ -1,0 +1,19 @@
+@prefix wt: <https://watchtogether.example/vocab/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <https://schema.org/> .
+wt: a owl:Ontology ; rdfs:label "WatchTogether ontology" .
+wt:Film a owl:Class ; rdfs:subClassOf schema:Movie .
+wt:Person a owl:Class ; rdfs:subClassOf schema:Person .
+wt:Genre a owl:Class .
+wt:TasteProfile a owl:Class .
+wt:ViewingGroup a owl:Class .
+wt:Vote a owl:Class .
+wt:Recommendation a owl:Class .
+wt:hasGenre a owl:ObjectProperty ; rdfs:domain wt:Film ; rdfs:range wt:Genre .
+wt:directedBy a owl:ObjectProperty ; rdfs:domain wt:Film ; rdfs:range wt:Person .
+wt:hasCast a owl:ObjectProperty ; rdfs:domain wt:Film ; rdfs:range wt:Person .
+wt:subGenreOf a owl:ObjectProperty, owl:TransitiveProperty ; rdfs:domain wt:Genre ; rdfs:range wt:Genre .
+wt:likes a owl:ObjectProperty ; rdfs:domain wt:TasteProfile .
+wt:dislikes a owl:ObjectProperty ; rdfs:domain wt:TasteProfile .
+wt:nickname a owl:DatatypeProperty ; rdfs:domain wt:TasteProfile .

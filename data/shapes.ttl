@@ -1,0 +1,15 @@
+@prefix wt: <https://watchtogether.example/vocab/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+wt:FilmShape a sh:NodeShape ; sh:targetClass wt:Film ;
+  sh:property [ sh:path wt:title ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path wt:year ; sh:datatype xsd:integer ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path wt:hasGenre ; sh:nodeKind sh:IRI ; sh:minCount 1 ] ;
+  sh:property [ sh:path wt:directedBy ; sh:nodeKind sh:IRI ; sh:minCount 1 ] ;
+  sh:property [ sh:path wt:hasCast ; sh:nodeKind sh:IRI ; sh:minCount 1 ] .
+wt:ProfileShape a sh:NodeShape ; sh:targetClass wt:TasteProfile ;
+  sh:closed true ; sh:ignoredProperties ( rdf:type ) ;
+  sh:property [ sh:path wt:nickname ; sh:datatype xsd:string ; sh:minCount 1 ; sh:maxCount 1 ; sh:maxLength 24 ] ;
+  sh:property [ sh:path wt:likes ; sh:nodeKind sh:IRI ; sh:minCount 1 ; sh:maxCount 40 ] ;
+  sh:property [ sh:path wt:dislikes ; sh:nodeKind sh:IRI ; sh:maxCount 40 ] .
