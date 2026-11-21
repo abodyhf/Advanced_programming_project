@@ -5,6 +5,7 @@ The starter catalogue stays untouched; the app detects data/wikidata.json.
 """
 import argparse
 import json
+import os
 import re
 import sys
 import time
@@ -19,12 +20,23 @@ PREFIX wikibase: <http://wikiba.se/ontology#>
 PREFIX bd: <http://www.bigdata.com/rdf#>
 """
 PROPERTIES = {"P57": "directors", "P161": "cast", "P136": "genres", "P577": "years"}
+CONTACT_ENV = "WATCHTOGETHER_CONTACT"
+
+def build_user_agent(contact):
+    """Wikimedia's User-Agent policy: client/version (contact) library/version.
+
+    Requests without a reachable contact (e-mail or URL) are refused with 403.
+    """
+    contact = " ".join(str(contact).split())
+    if not contact or any(ord(char) < 32 or ord(char) > 126 for char in contact):
+        raise ValueError("The contact must be a plain e-mail address or URL")
+    return f"WatchTogether/1.0 ({contact}; educational film knowledge graph) httpx/{httpx.__version__}"
 
 def genre_key(label):
     label = re.sub(r"\s+(film|films|movie|cinema)$", "", label.lower().strip())
-    return slug(label)
+    return slug(re.sub(r"['’]", "", label))  # "children's film" -> "childrens", not "children-s"
 
-def select(client, query, attempts=3):
+def select(client, query, attempts=4):
     for attempt in range(attempts):
         try:
             response = client.get(ENDPOINT, params={"query": PREFIX + query, "format": "json"})
@@ -33,15 +45,28 @@ def select(client, query, attempts=3):
                     response.raise_for_status()
                 retry_after = response.headers.get("Retry-After", "")
                 delay = min(int(retry_after), 30) if retry_after.isdigit() else 5 * (attempt + 1)
-                print(f"Endpoint busy ({response.status_code}); retrying in {delay}s…", flush=True)
+                print(f"Endpoint busy ({response.status_code}); retrying in {delay}s...", flush=True)
                 time.sleep(delay)
                 continue
+            if response.status_code == 403:
+                # Not retried: Wikimedia refuses clients that do not identify themselves.
+                raise httpx.HTTPStatusError(
+                    "Wikidata refused the request (HTTP 403): " + response.text.strip()[:200] +
+                    f"\nIdentify yourself: set the {CONTACT_ENV} environment variable (or --contact) "
+                    "to an e-mail address or URL where Wikimedia can reach you.",
+                    request=response.request, response=response)
             response.raise_for_status()
-            return response.json()["results"]["bindings"]
-        except httpx.TransportError:
+            try:
+                return response.json()["results"]["bindings"]
+            except ValueError as error:
+                # The service sometimes cuts a large answer off mid-stream; it still says HTTP 200.
+                raise httpx.DecodingError(f"Incomplete answer from Wikidata ({error})") from error
+        except (httpx.TransportError, httpx.DecodingError) as error:
             if attempt == attempts - 1:
                 raise
-            time.sleep(3 * (attempt + 1))
+            delay = 3 * (attempt + 1)
+            print(f"{type(error).__name__}; retrying in {delay}s...", flush=True)
+            time.sleep(delay)
 
 def parse_films(rows):
     records = {}
@@ -101,13 +126,17 @@ def import_catalog(limit=10000, batch_size=100, output=None, user_agent=None):
     with httpx.Client(headers=headers, timeout=50, follow_redirects=True) as client:
         while len(films) < limit:
             size = min(batch_size, limit - len(films))
-            ids = select(client, f"""SELECT DISTINCT ?film WHERE {{
+            # No ORDER BY: sorting every Wikidata film exceeds the service's 60 s limit, while the
+            # unsorted scan streams and stops at LIMIT. The public servers do not all return the
+            # same order, so a page can repeat films (dropped by id below) or skip some (harmless:
+            # any complete film is acceptable).
+            ids = select(client, f"""SELECT ?film WHERE {{
                 ?film wdt:P31 wd:Q11424 .
                 FILTER EXISTS {{ ?film wdt:P57 [] }}
                 FILTER EXISTS {{ ?film wdt:P161 [] }}
                 FILTER EXISTS {{ ?film wdt:P136 [] }}
                 FILTER EXISTS {{ ?film wdt:P577 [] }}
-            }} ORDER BY ?film LIMIT {size} OFFSET {offset}""")
+            }} LIMIT {size} OFFSET {offset}""")
             if not ids:
                 break
             qids = [row["film"]["value"].rsplit("/", 1)[-1] for row in ids]
@@ -130,7 +159,8 @@ def import_catalog(limit=10000, batch_size=100, output=None, user_agent=None):
             temporary = output.with_suffix(".json.tmp")
             temporary.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             temporary.replace(output)
-            print(f"Saved {len(films):,} valid films (scanned {offset:,}) → {output.name}", flush=True)
+            # ASCII only: a piped Windows console (cp1252) cannot encode arrows and would abort the run.
+            print(f"Saved {len(films):,} valid films (scanned {offset:,}) -> {output.name}", flush=True)
             if len(films) < limit:
                 time.sleep(1)
     if not films:
@@ -144,16 +174,25 @@ def import_catalog(limit=10000, batch_size=100, output=None, user_agent=None):
     return output
 
 def main():
+    for stream in (sys.stdout, sys.stderr):  # Never let an unencodable character stop an import.
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(errors="backslashreplace")
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--limit", type=int, default=10000)
     parser.add_argument("--batch-size", type=int, default=100)
     parser.add_argument("--output", type=Path)
-    parser.add_argument("--user-agent", help="Identify your project and contact address to Wikimedia")
+    parser.add_argument("--contact", default=os.environ.get(CONTACT_ENV),
+                        help=f"E-mail address or URL sent to Wikimedia in the User-Agent (default: ${CONTACT_ENV})")
+    parser.add_argument("--user-agent", help="Full User-Agent header, replacing the one built from --contact")
     args = parser.parse_args()
     if not 1 <= args.limit <= 100000 or not 1 <= args.batch_size <= 200:
-        parser.error("Use a limit of 1–100000 and a batch size of 1–200")
+        parser.error("Use a limit of 1-100000 and a batch size of 1-200")
+    if not args.user_agent and not (args.contact or "").strip():
+        parser.error(f"Wikimedia blocks anonymous scripts (HTTP 403). Set the {CONTACT_ENV} environment "
+                     "variable, or pass --contact, with an e-mail address or URL where you can be reached.")
     try:
-        import_catalog(args.limit, args.batch_size, args.output, args.user_agent)
+        user_agent = args.user_agent or build_user_agent(args.contact)
+        import_catalog(args.limit, args.batch_size, args.output, user_agent)
     except (httpx.HTTPError, ValueError, KeyError, OSError) as error:
         print(f"Import stopped: {error}\nAny completed batches remain saved. Run the same command to resume. The bundled catalogue is unchanged.", file=sys.stderr)
         sys.exit(1)

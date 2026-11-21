@@ -3,6 +3,5 @@ instance/
 __pycache__/
 .pytest_cache/
 *.pyc
-data/wikidata.json
 data/wikidata.ttl
 data/*.tmp

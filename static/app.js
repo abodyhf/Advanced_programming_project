@@ -3,11 +3,14 @@ const app = document.querySelector('#app');
 const roomId = location.pathname.match(/^\/g\/([A-Za-z0-9_-]+)$/)?.[1];
 let credentials = roomId ? JSON.parse(sessionStorage.getItem('wt:' + roomId) || 'null') : null;
 let group = null, signature = '', filter = 'genre', query = '', searchTimer, toastTimer;
-let likes = [], dislikes = [], dirty = false, items = [], entities = new Map(), fetching = false;
+let likes = [], dislikes = [], dirty = false, items = [], hasMore = false, entities = new Map(), fetching = false;
 const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const entityLabel = id => entities.get(id)?.label || id.split(':').slice(1).join(':').replaceAll('-', ' ');
 const genreLabel = id => id.replaceAll('-', ' ');
 const isOwner = () => group?.me?.id === group?.owner_id;
+// Film pictures are remote (Wikimedia or TMDB). One that fails to load is removed so the built-in artwork shows.
+const picture = (url, className) => /^https:\/\//.test(url || '') ? `<img class="${className}" src="${esc(url)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer">` : '';
+document.addEventListener('error', event => { if (event.target.matches?.('img.entity-thumb, img.movie-poster')) { event.target.parentElement.classList.remove('has-thumb'); event.target.remove(); } }, true);
 document.body.classList.toggle('room-page', !!roomId);
 const icon = (name, size = 18) => {
   const paths = {
@@ -116,16 +119,17 @@ function drawResults() {
       const liked = likes.includes(item.id), avoided = dislikes.includes(item.id);
       return `<article class="genre-card ${liked?'state-liked':avoided?'state-avoided':''}" aria-label="${esc(item.label)} genre"><div class="genre-art scene-${scene}" aria-hidden="true"></div><div class="genre-vignette" aria-hidden="true"></div><div class="genre-card-top"><span class="genre-number">${String(index+1).padStart(2,'0')} / GENRE</span>${liked||avoided?`<span class="genre-state">${icon('check',12)} ${liked?'Liked':'Avoided'}</span>`:''}</div><div class="genre-content"><h3>${esc(item.label)}</h3><p>${description}</p></div><div class="genre-actions">${tasteActions(item)}</div></article>`;
     }
-    return `<div class="entity-row"><span class="entity-icon" aria-hidden="true">${icon(item.kind==='film'?'film':'person',20)}</span><div class="entity-copy"><div class="entity-name">${esc(item.label)}</div><div class="entity-detail">${esc(item.detail)}</div></div>${tasteActions(item)}</div>`;
-  }).join('') : '<div class="empty-results">No matches in this catalogue.<br>Try another name or category.</div>';
+    return `<div class="entity-row"><span class="entity-icon ${item.image?'has-thumb':''}" aria-hidden="true">${icon(item.kind==='film'?'film':'person',20)}${picture(item.image,'entity-thumb')}</span><div class="entity-copy"><div class="entity-name">${esc(item.label)}</div><div class="entity-detail">${esc(item.detail)}</div></div>${tasteActions(item)}</div>`;
+  }).join('') + (hasMore ? `<div class="load-more-row"><button class="button secondary small" data-action="more">Load more</button><span>${items.length} shown</span></div>` : '') : '<div class="empty-results">No matches in this catalogue.<br>Try another name or category.</div>';
   if (focused) [...node.querySelectorAll('button')].find(b => b.dataset.id === focused.id && b.dataset.action === focused.action)?.focus({preventScroll:true});
 }
-async function searchCatalog() {
-  const capturedQuery = query, capturedFilter = filter;
+async function searchCatalog(append = false) {
+  const capturedQuery = query, capturedFilter = filter, offset = append ? items.length : 0;
   try {
-    const result = await api('/catalog?q=' + encodeURIComponent(query) + '&kind=' + filter);
+    const result = await api('/catalog?q=' + encodeURIComponent(query) + '&kind=' + filter + '&offset=' + offset);
     if (capturedQuery !== query || capturedFilter !== filter) return;
-    items = result.items;
+    items = append ? items.concat(result.items.filter(item => !items.some(shown => shown.id === item.id))) : result.items;
+    hasMore = !!result.has_more;
     if (filter === 'genre') {
       const order = ['action','musical','comedy','adventure','science-fiction','fantasy','animation','romance','thriller','drama','horror','crime','family'];
       const rank = id => { const index = order.indexOf(id.replace('genre:', '')); return index < 0 ? order.length : index; };
@@ -149,7 +153,7 @@ function movieCard(movie,index) {
   const voted = group.my_vote === movie.id;
   const disabled = group.phase !== 'voting' || !!group.my_vote;
   const scene = genreScenes[movie.genres[0]]?.[0] ?? 5;
-  return `<article class="movie-card"><div class="movie-art swatch-${index%6}" aria-hidden="true"><div class="movie-scene scene-${scene}"></div><div class="movie-vignette"></div><span class="film-no">THE SHORTLIST / 0${index+1}</span><span class="art-title">${esc(movie.title)}</span></div><div class="movie-body"><div class="movie-meta"><span>${movie.year} · ${esc(movie.genres.slice(0,2).map(genreLabel).join(' / '))}</span><span class="match-score">${Math.round(movie.score)}% taste match</span></div><h3>${esc(movie.title)}</h3><div class="director-line">Directed by ${esc(movie.directors.join(', '))}</div><div class="cast-line">With ${esc(movie.cast.slice(0,3).join(', '))}</div><details class="match-details"><summary>Why it works for your group</summary>${movie.matches.map(match=>`<div class="match-person"><strong><span>${esc(match.nickname)}</span><span>${match.match}%</span></strong><p>Connected to: ${match.because.map(esc).join(', ')}</p></div>`).join('')}<p class="cast-line">Match scores describe shared tastes, not a prediction of how much you’ll enjoy a film.</p></details><div class="movie-vote"><span class="vote-tally">${group.tally[movie.id] || 0} vote(s)</span><button class="button ${voted?'':'secondary'} small" data-action="vote" data-id="${esc(movie.id)}" ${disabled?'disabled':''}>${voted?'Your vote ✓':group.phase==='finished'?(group.winner===movie.id?'Tonight’s pick ✦':'Voting closed'):'Vote for this →'}</button></div></div></article>`;
+  return `<article class="movie-card"><div class="movie-art swatch-${index%6}" aria-hidden="true"><div class="movie-scene scene-${scene}"></div>${picture(movie.image,'movie-poster')}<div class="movie-vignette"></div><span class="film-no">THE SHORTLIST / 0${index+1}</span><span class="art-title">${esc(movie.title)}</span></div><div class="movie-body"><div class="movie-meta"><span>${movie.year} · ${esc(movie.genres.slice(0,2).map(genreLabel).join(' / '))}</span><span class="match-score">${Math.round(movie.score)}% taste match</span></div><h3>${esc(movie.title)}</h3><div class="director-line">Directed by ${esc(movie.directors.join(', '))}</div><div class="cast-line">With ${esc(movie.cast.slice(0,3).join(', '))}</div><details class="match-details"><summary>Why it works for your group</summary>${movie.matches.map(match=>`<div class="match-person"><strong><span>${esc(match.nickname)}</span><span>${match.match}%</span></strong><p>Connected to: ${match.because.map(esc).join(', ')}</p></div>`).join('')}<p class="cast-line">Match scores describe shared tastes, not a prediction of how much you’ll enjoy a film.</p></details><div class="movie-vote"><span class="vote-tally">${group.tally[movie.id] || 0} vote(s)</span><button class="button ${voted?'':'secondary'} small" data-action="vote" data-id="${esc(movie.id)}" ${disabled?'disabled':''}>${voted?'Your vote ✓':group.phase==='finished'?(group.winner===movie.id?'Tonight’s pick ✦':'Voting closed'):'Vote for this →'}</button></div></div></article>`;
 }
 async function loadGroup(silent = false) {
   if (fetching) return;
@@ -200,8 +204,11 @@ document.addEventListener('click', async event => {
       }
       dirty = true; drawSelection(); drawResults(); updateReady(); return;
     }
+    if (action === 'more') {
+      button.disabled = true; button.textContent = 'Loading…'; await searchCatalog(true); return;
+    }
     if (action === 'filter') {
-      filter = button.dataset.filter; query = ''; items = []; roomView(); await searchCatalog(); document.querySelector('#taste-search').focus(); return;
+      filter = button.dataset.filter; query = ''; items = []; hasMore = false; roomView(); await searchCatalog(); document.querySelector('#taste-search').focus(); return;
     }
     if (action === 'invite') {
       document.querySelector('#invite-banner').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'center'});

@@ -3,6 +3,7 @@ import asyncio
 from contextlib import asynccontextmanager
 import hashlib
 import json
+import mimetypes
 import os
 from pathlib import Path
 import secrets
@@ -17,6 +18,12 @@ from pydantic import BaseModel, Field, field_validator
 from .db import Database
 from .graph import GraphStore, ROOT
 from .recommender import Recommender
+
+# Windows takes file types from the registry, where .js is often "text/plain". Combined with
+# the nosniff header below, browsers then refuse to run app.js and the page never loads.
+mimetypes.add_type("text/javascript", ".js")
+mimetypes.add_type("text/css", ".css")
+mimetypes.add_type("image/svg+xml", ".svg")
 
 class Nickname(BaseModel):
     nickname: str = Field(min_length=1, max_length=24)
@@ -98,7 +105,7 @@ def create_app(data_dir=None, catalog_path=None):
         response.headers["Referrer-Policy"] = "no-referrer"
         response.headers["Cache-Control"] = "no-store" if request.url.path.startswith("/api/") else "no-cache"
         if not request.url.path.startswith("/api/docs"):
-            response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"
+            response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://commons.wikimedia.org https://upload.wikimedia.org https://thumb.wikimedia.org https://image.tmdb.org; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'"
         return response
 
     def room(connection, group_id):
@@ -173,8 +180,12 @@ def create_app(data_dir=None, catalog_path=None):
         return {"status": "ok", "films": len(graph.movies), "catalogue_source": graph.source, "catalogue_version": graph.fingerprint}
 
     @app.get("/api/catalog")
-    def search(q: str = Query(default="", max_length=80), kind: Literal["all", "film", "genre", "actor", "director"] = "all"):
-        return {"items": graph.search(q, kind), "film_count": len(graph.movies), "source": graph.source}
+    def search(q: str = Query(default="", max_length=80), kind: Literal["all", "film", "genre", "actor", "director"] = "all",
+               offset: int = Query(default=0, ge=0, le=100000), limit: int = Query(default=24, ge=1, le=100)):
+        # One extra result tells the page whether a "Load more" button is worth showing.
+        found = graph.search(q, kind, offset + limit + 1)
+        return {"items": found[offset:offset + limit], "has_more": len(found) > offset + limit,
+                "film_count": len(graph.movies), "source": graph.source}
 
     @app.post("/api/groups", status_code=201)
     def new_group(body: NewGroup):

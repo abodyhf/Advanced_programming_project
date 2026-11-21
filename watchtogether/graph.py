@@ -49,6 +49,9 @@ class GraphStore:
                 graph.add((node, OWL.sameAs, URIRef("http://www.wikidata.org/entity/" + film_id[5:])))
             self.entities[film_id] = {"id": film_id, "label": film["title"], "kind": "film",
                                       "detail": f'{film["year"]} · {", ".join(film["directors"])}'}
+            if str(film.get("image", "")).startswith("https://"):
+                graph.add((node, SCHEMA.image, URIRef(film["image"])))
+                self.entities[film_id]["image"] = film["image"]
             for genre in film["genres"]:
                 genre_id = "genre:" + genre
                 graph.add((node, WT.hasGenre, iri(genre_id)))
