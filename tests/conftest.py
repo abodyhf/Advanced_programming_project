@@ -2,7 +2,10 @@ from pathlib import Path
 import sys
 import pytest
 from fastapi.testclient import TestClient
+import os
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+# Tests describe the bundled starter catalogue; a locally imported data/wikidata.json must not replace it.
+os.environ["WATCHTOGETHER_CATALOG"] = str(Path(__file__).resolve().parents[1] / "data/catalog.json")
 from watchtogether.api import create_app
 
 @pytest.fixture

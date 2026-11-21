@@ -15,6 +15,26 @@ def test_home_serves_local_assets_and_csp(client):
     assert client.get('/static/app.js').status_code == 200
     assert client.get('/static/styles.css').status_code == 200
 
+def test_script_is_served_as_javascript(client):
+    # With nosniff, a text/plain app.js (the Windows registry default) is never executed.
+    assert 'javascript' in client.get('/static/app.js').headers['content-type']
+    assert client.get('/static/styles.css').headers['content-type'].startswith('text/css')
+
+def test_catalogue_search_pages_without_gaps_or_repeats(client):
+    first = client.get('/api/catalog', params={'q':'','kind':'film'}).json()
+    assert len(first['items']) == 24 and first['has_more'] is True
+    seen = [item['id'] for item in first['items']]
+    offset = 24
+    while True:
+        page = client.get('/api/catalog', params={'q':'','kind':'film','offset':offset}).json()
+        seen += [item['id'] for item in page['items']]
+        offset += 24
+        if not page['has_more']:
+            break
+    assert len(seen) == len(set(seen)) == 80
+    assert client.get('/api/catalog', params={'q':'','kind':'film','offset':80}).json() == {**page, 'items': [], 'has_more': False}
+    assert client.get('/api/catalog', params={'limit':101}).status_code == 422
+
 def test_health_reports_actual_catalogue(client):
     health = client.get('/api/health').json()
     assert health['films'] == 80

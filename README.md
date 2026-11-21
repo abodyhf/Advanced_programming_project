@@ -57,16 +57,24 @@ Find the computer's local network IP address, for example `192.168.1.20`. Open `
 | Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
 | Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
 | UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
-| Quality checks | 57 automated tests and a browser-checked sample flow; see `docs/TEST_REPORT.md` |
+| Quality checks | 64 automated tests and a browser-checked sample flow; see `docs/TEST_REPORT.md` |
 
 ## Movie data and the 10,000-film goal
 
 The app ships with **80 hand-curated starter movies** so recommendations work without any external service. This is a starter catalogue, **not** 10,000 downloaded Wikidata movies. Genres are simplified editorial categories, and cast lists are intentionally partial.
 
-A separate importer fetches real Wikidata records in small SPARQL batches. Start small:
+A separate importer fetches real Wikidata records in small SPARQL batches. Wikimedia refuses scripts that do not say who runs them (HTTP 403), so first set a contact e-mail address or URL. It is sent to Wikidata in the User-Agent header and is not stored in the project:
+
+```bash
+setx WATCHTOGETHER_CONTACT "you@example.com"     # Windows, then open a new terminal
+export WATCHTOGETHER_CONTACT="you@example.com"   # macOS/Linux
+```
+
+Start small, then check the records (duplicate IDs, missing title/year/genres/directors/actors, SHACL):
 
 ```bash
 python -m watchtogether.import_wikidata --limit 100
+python -m watchtogether.validate_catalog
 ```
 
 For the proposal's intended data volume:
@@ -81,7 +89,7 @@ Restart the app after importing. It automatically uses `data/wikidata.json` if i
 
 If a catalogue change removes selected entities, affected profiles are marked unfinished and their groups return to collecting tastes. Save updated tastes before starting the next round.
 
-Live Wikidata access depends on connectivity and the public endpoint. The included test suite verifies the importer with controlled SPARQL responses. See the test report for whether a live import could be verified in the build environment. No 10,000-film import or large-catalogue performance result is claimed for this delivery.
+Live Wikidata access depends on connectivity and the public endpoint. The included test suite verifies the importer with controlled SPARQL responses. A live import of 10,000 valid films was completed and validated on 15 November 2026; see `docs/IMPORT_REPORT.md` for the count, validation results, timings and known limits.
 
 ## How the recommendations work
 
@@ -103,6 +111,7 @@ watchtogether/db.py             SQLite schema and atomic transactions
 watchtogether/graph.py          RDF graph construction, SHACL, SPARQL
 watchtogether/recommender.py    Group scoring and explanations
 watchtogether/import_wikidata.py Resumable external-data importer
+watchtogether/validate_catalog.py Duplicate/missing-field and SHACL checks for a catalogue
 watchtogether/cleanup.py        Scheduled deletion command
 data/catalog.json              80-film offline starter catalogue
 data/ontology.ttl               OWL domain vocabulary
@@ -141,7 +150,7 @@ Interactive API documentation is at `/api/docs` when internet access is availabl
 
 This download is a working local Python application and an implementation starting point for the course project. It has not been publicly hosted. For an internet deployment, use a Python-capable host, one application worker, a persistent writable data directory, HTTPS, and deployment-specific rate limits. Membership uses random bearer credentials stored as hashes on the server; it does not verify real-world identity. “One vote” means one vote per membership.
 
-Course milestones still requiring your team: a verified 10,000-film dataset, performance measurements at that scale, real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
+Course milestones still requiring your team: fuller performance measurements at the 10,000-film scale, real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
 
 ## Technical references
 
@@ -152,4 +161,12 @@ Course milestones still requiring your team: a verified 10,000-film dataset, per
 - [Wikidata Query Service](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service)
 - [Wikidata movie properties](https://www.wikidata.org/wiki/Wikidata:WikiProject_Movies/Properties)
 
-Wikidata structured data is CC0. This project does not include film files, poster artwork, or streaming availability data.
+Wikidata structured data is CC0. This project does not include film files, poster image files, or streaming availability data.
+
+### Film pictures
+
+```bash
+python -m watchtogether.add_images
+```
+
+This stores a picture address (never the image file) for each imported film. Without further setup it uses Wikidata's free Wikimedia Commons images, which cover about 18% of films and are often stills rather than posters. For real posters, create a free account at themoviedb.org, copy its "API Read Access Token" into the `TMDB_TOKEN` environment variable, and run the command again. TMDB requires the notice "This product uses the TMDB API but is not endorsed or certified by TMDB" wherever its images are shown. Films without a picture keep the built-in genre artwork. The delivered dataset has picture addresses for 9,917 of its 10,000 films (9,909 from TMDB).
