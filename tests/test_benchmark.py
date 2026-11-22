@@ -34,4 +34,4 @@ def test_compare_prints_one_row_per_measured_group():
 def test_summary_has_a_row_per_run():
     runs = [ROOT / "docs/performance/baseline.json", ROOT / "docs/performance/after.json"]
     lines = benchmark.summarise(runs).splitlines()
-    assert len(lines) == 4 and lines[2].startswith("| baseline (4be8ad3) |") and lines[3].startswith("| after (")
+    assert len(lines) == 4 and lines[2].startswith("| baseline (b7fbbe6) |") and lines[3].startswith("| after (")

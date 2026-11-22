@@ -26,13 +26,13 @@ python -m watchtogether.benchmark --repeats 10 --out docs/performance/after.json
 python -m watchtogether.benchmark --compare docs/performance/baseline.json docs/performance/after.json
 
 # the "before" numbers: same command on the commit before any change
-git worktree add ../baseline 4be8ad3
+git worktree add ../baseline b7fbbe6
 cd ../baseline && python -m watchtogether.benchmark --repeats 10 --out ../before.json
 ```
 
 ## Result
 
-Before: commit 4be8ad3 (original code plus the benchmark), after: commit a5146d2. Medians in ms, 10 timed runs each.
+Before: commit b7fbbe6 (original code plus the benchmark), after: commit 360d256. Medians in ms, 10 timed runs each.
 
 | Catalogue | Members | Group | Rank before | Rank after | Speed-up | API before | API after | Speed-up |
 | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -63,22 +63,22 @@ The shortlists are the same before and after, except where the genre fix below c
 `docs/performance/steps/` has a 10k-film run (5 timed calls) at each commit of the series, so every step can be checked on its own:
 
 ```bash
-python -m watchtogether.benchmark --summary docs/performance/baseline.json docs/performance/steps/{35aabb3,c759716,2e74640,8ffde81,3f62770,8413194,3231551,b76384f,b0e3ea0}.json docs/performance/after.json
+python -m watchtogether.benchmark --summary docs/performance/baseline.json docs/performance/steps/{9060954,769fc80,d4054c9,d6a4f6f,50ae9fd,f7f6573,9950549,157328d,d24c6f8}.json docs/performance/after.json
 ```
 
 | Step (commit) | Startup s | Rank 2 shared / mixed | Rank 4 shared / mixed | Rank 8 shared / mixed | API 8 shared / mixed | Slowest API call |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| baseline (4be8ad3) | 45.1 | 416 / 443 | 900 / 890 | 1771 / 1637 | 2667 / 2524 | 4706 |
-| 1. genre tree fix (35aabb3) | 43.6 | 494 / 473 | 978 / 1458 | 2076 / 1774 | 3993 / 2669 | 5005 |
-| 2. genre closure stored, new query shape (c759716) | 45.3 | 250 / 238 | 642 / 270 | 633 / 398 | 2553 / 1328 | 3032 |
-| 3. one query per group (2e74640) | 50.2 | 145 / 131 | 129 / 252 | 199 / 327 | 545 / 1064 | 1639 |
-| 4. rows read as tuples (8ffde81) | 46.3 | 111 / 88 | 108 / 141 | 118 / 288 | 910 / 1288 | 1728 |
-| 5. each genre/person read once (3f62770) | 50.9 | 121 / 83 | 102 / 149 | 127 / 203 | 397 / 398 | 925 |
-| 6. N-Triples at startup (8413194) | 24.8 | 118 / 80 | 138 / 161 | 132 / 187 | 485 / 421 | 1537 |
-| 7. SQLite sync at checkpoints (3231551) | 26.6 | 118 / 78 | 136 / 140 | 144 / 182 | 190 / 228 | 1407 |
-| 8. reasons in explanations (b76384f) | 28.2 | 120 / 57 | 137 / 133 | 146 / 222 | 177 / 254 | 1454 |
-| 9. garbage collector freeze (b0e3ea0) | 23.4 | 107 / 70 | 64 / 133 | 107 / 191 | 200 / 233 | 263 |
-| final (a5146d2) | 25.2 | 118 / 44 | 94 / 100 | 88 / 149 | 131 / 243 | 498 |
+| baseline (b7fbbe6) | 45.1 | 416 / 443 | 900 / 890 | 1771 / 1637 | 2667 / 2524 | 4706 |
+| 1. genre tree fix (9060954) | 43.6 | 494 / 473 | 978 / 1458 | 2076 / 1774 | 3993 / 2669 | 5005 |
+| 2. genre closure stored, new query shape (769fc80) | 45.3 | 250 / 238 | 642 / 270 | 633 / 398 | 2553 / 1328 | 3032 |
+| 3. one query per group (d4054c9) | 50.2 | 145 / 131 | 129 / 252 | 199 / 327 | 545 / 1064 | 1639 |
+| 4. rows read as tuples (d6a4f6f) | 46.3 | 111 / 88 | 108 / 141 | 118 / 288 | 910 / 1288 | 1728 |
+| 5. each genre/person read once (50ae9fd) | 50.9 | 121 / 83 | 102 / 149 | 127 / 203 | 397 / 398 | 925 |
+| 6. N-Triples at startup (f7f6573) | 24.8 | 118 / 80 | 138 / 161 | 132 / 187 | 485 / 421 | 1537 |
+| 7. SQLite sync at checkpoints (9950549) | 26.6 | 118 / 78 | 136 / 140 | 144 / 182 | 190 / 228 | 1407 |
+| 8. reasons in explanations (157328d) | 28.2 | 120 / 57 | 137 / 133 | 146 / 222 | 177 / 254 | 1454 |
+| 9. garbage collector freeze (d24c6f8) | 23.4 | 107 / 70 | 64 / 133 | 107 / 191 | 200 / 233 | 263 |
+| final (360d256) | 25.2 | 118 / 44 | 94 / 100 | 88 / 149 | 131 / 243 | 498 |
 
 With 5 calls per point and a shared machine, single cells move by ±30% between runs; the trend per step is what matters.
 
