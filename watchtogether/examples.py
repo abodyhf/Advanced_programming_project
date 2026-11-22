@@ -60,6 +60,22 @@ EXAMPLES = [
         "expected": [],
         "expected_scores": [],
     },
+    {
+        "name": "liked film",
+        "story": "Ana names Inception as a favourite; Ben likes Christopher Nolan. Both like war and music films.",
+        "members": [
+            {"nickname": "Ana", "likes": ["film:inception-2010", "genre:war", "genre:music"], "dislikes": []},
+            {"nickname": "Ben", "likes": ["person:christopher-nolan", "genre:war", "genre:music"], "dislikes": []},
+        ],
+        # Nolan films reach Ana through Inception (1 of 3 points) and Ben through Nolan (2 of 4):
+        # 100 x (0.6 x 1/3 + 0.4 x (1/3 + 1/2) / 2) = 36.67. Jojo Rabbit only shares "war": 26.67.
+        "expected": ["Inception", "Interstellar", "The Dark Knight", "The Prestige", "Jojo Rabbit"],
+        "expected_scores": [36.6667] * 4 + [26.6667],
+        "expected_reasons": {"Inception": "this film",
+                             "Interstellar": "same director: Christopher Nolan; shared genre: Science fiction",
+                             "The Dark Knight": "same director: Christopher Nolan; shared genre: Action",
+                             "The Prestige": "same director: Christopher Nolan; shared genre: Thriller"},
+    },
 ]
 
 
@@ -92,11 +108,16 @@ def report(results):
             continue
         lines += ["| # | Film | Score | Why, per member |", "| --- | --- | --- | --- |"]
         for number, movie in enumerate(movies, 1):
-            why = "; ".join(f"{match['nickname']} {match['match']}%: {', '.join(match['because'])}"
-                            for match in movie["matches"])
+            why = "; ".join(f"{match['nickname']} {match['match']}%: {connections(match)}" for match in movie["matches"])
             lines.append(f"| {number} | {movie['title']} ({movie['year']}) | {movie['score']} | {why} |")
         lines.append("")
     return "\n".join(lines)
+
+
+def connections(match):
+    """Each like and how it reaches the film, as the shortlist card shows it."""
+    return ", ".join(reason["label"] + (f" ({reason['why']})" if reason["why"] != "genre" else "")
+                     for reason in match["reasons"])
 
 
 def main():

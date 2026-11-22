@@ -31,6 +31,10 @@ def test_example_groups_get_the_expected_shortlist(recommender, example):
     movies = recommender.rank(as_rows(example["members"]))
     assert [movie["title"] for movie in movies] == example["expected"]
     assert [movie["score"] for movie in movies] == example["expected_scores"]
+    for movie in movies:
+        if movie["title"] in example.get("expected_reasons", {}):
+            first = movie["matches"][0]["reasons"]
+            assert [reason["why"] for reason in first if reason["id"].startswith("film:")] == [example["expected_reasons"][movie["title"]]]
 
 
 def test_conflict_dislike_vetoes_the_best_match(recommender):
