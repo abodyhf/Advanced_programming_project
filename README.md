@@ -51,13 +51,14 @@ Find the computer's local network IP address, for example `192.168.1.20`. Open `
 | Taste profiles | Likes/dislikes of films, genres, actors and directors; validated RDF Turtle stored with the membership |
 | Movie graph | RDFLib builds RDF and schema.org Movie descriptions; Oxigraph answers SPARQL queries |
 | Recommendations | Every candidate must match a like of **each** member; all member dislikes are hard exclusions |
-| Fairness and explanations | Score favors the least matched member; each film shows the preferences it connects to for each person |
+| Fairness and explanations | Score favors the least matched member; each film shows, per person, which likes it connects to and how ("Inception: same director, Christopher Nolan") |
 | Voting | One ballot per membership, automatic close, organiser close, deterministic tie handling |
 | Durable state | SQLite rooms/profiles/votes survive server restarts |
 | Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
 | Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
 | UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
-| Quality checks | 64 automated tests and a browser-checked sample flow; see `docs/TEST_REPORT.md` |
+| Quality checks | 104 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
+| Performance | Repeatable benchmark for groups of 2, 4 and 8 on both catalogues; 8 people on 10,000 films rank in 0.09–0.15 s (was 1.6–1.8 s); see `docs/PERFORMANCE_REPORT.md` |
 
 ## Movie data and the 10,000-film goal
 
@@ -93,14 +94,18 @@ Live Wikidata access depends on connectivity and the public endpoint. The includ
 
 ## How the recommendations work
 
-1. SPARQL queries match movies to each member's liked entities. A liked film connects to itself and films sharing a genre, director, or cast member. Liked actors/directors match films they appear in or direct. Genres include configured subgenres through a SPARQL property path.
-2. A disliked genre excludes films in that genre or its configured subgenres; a disliked person excludes their films. A disliked film excludes that exact film, rather than every film resembling it.
+1. SPARQL queries match movies to each member's liked entities. A liked film connects to itself and films sharing a genre, director, or cast member. Liked actors/directors match films they appear in or direct. Genres include their subgenres: the startup step stores each film's genres plus every parent genre (`wt:inGenre`), so queries need no property paths.
+2. A disliked genre excludes films in that genre or any of its subgenres; a disliked person excludes their films. A disliked film excludes that exact film, rather than every film resembling it.
 3. Each remaining film must match **at least one like from every member**. Otherwise it is excluded.
 4. A member's match is the fraction of their weighted likes that connect to that film. Person preferences have weight 2; genre and film preferences have weight 1. Each input like counts at most once, even if several graph paths match it.
 5. The group score is `100 × (0.6 × lowest member match + 0.4 × average member match)`.
 6. Return up to five films, highest score first. If none qualify, explain that the group should change its tastes or expand the catalogue.
 
-These percentages describe graph preference overlap. They are **not measured probabilities of enjoyment**. No language-model API, machine-learning training, or paid key is needed. The supplied OWL ontology describes the domain; the implemented inference is the explicit genre hierarchy in SPARQL, rather than a general OWL reasoner.
+Subgenres come from a small hand-written table (slasher, zombie and vampire are horror; cyberpunk is science fiction, ...) plus the genre names themselves: an imported genre such as `comedy-horror` or `spaghetti-western` is a kind of every catalogue genre spelled inside it. Without this, a horror dislike let 122 of the 10,000 films through (`python -m watchtogether.genre_audit` lists every genre).
+
+Each shortlist card says how every like reaches the film: `this film`, `directs it`, `in the cast`, `via Psychological Thriller` (a subgenre), or for a liked film `same director: …; shared cast: …; shared genre: …`.
+
+These percentages describe graph preference overlap. They are **not measured probabilities of enjoyment**. No language-model API, machine-learning training, or paid key is needed. The supplied OWL ontology describes the domain; the implemented inference is the explicit genre hierarchy, materialised for SPARQL at startup, rather than a general OWL reasoner.
 
 ## Project files
 
@@ -113,6 +118,9 @@ watchtogether/recommender.py    Group scoring and explanations
 watchtogether/import_wikidata.py Resumable external-data importer
 watchtogether/validate_catalog.py Duplicate/missing-field and SHACL checks for a catalogue
 watchtogether/cleanup.py        Scheduled deletion command
+watchtogether/examples.py       Worked example groups with expected shortlists
+watchtogether/benchmark.py      Repeatable timing for groups of 2, 4 and 8
+watchtogether/genre_audit.py    What a genre dislike removes, before/after the genre tree
 data/catalog.json              80-film offline starter catalogue
 data/ontology.ttl               OWL domain vocabulary
 data/shapes.ttl                 Film and closed-profile SHACL constraints
@@ -130,7 +138,18 @@ python -m pip install -r requirements-dev.txt
 python -m pytest tests -q
 ```
 
-Tests create isolated temporary databases and do not call the live Wikidata service.
+Tests create isolated temporary databases and do not call the live Wikidata service. `tests/test_big_catalogue.py` repeats the recommendation checks on `data/wikidata.json` (about 30 s to load) and is skipped when that file is absent.
+
+## Examples and measurements
+
+```bash
+python -m watchtogether.examples            # shared, conflicting, no-overlap and liked-film groups
+python -m watchtogether.benchmark --repeats 10 --out docs/performance/after.json
+python -m watchtogether.benchmark --compare docs/performance/baseline.json docs/performance/after.json
+python -m watchtogether.genre_audit
+```
+
+Results are written up in `docs/EXAMPLES.md` and `docs/PERFORMANCE_REPORT.md`.
 
 ## Expiry when the server is not running
 
@@ -150,7 +169,7 @@ Interactive API documentation is at `/api/docs` when internet access is availabl
 
 This download is a working local Python application and an implementation starting point for the course project. It has not been publicly hosted. For an internet deployment, use a Python-capable host, one application worker, a persistent writable data directory, HTTPS, and deployment-specific rate limits. Membership uses random bearer credentials stored as hashes on the server; it does not verify real-world identity. “One vote” means one vote per membership.
 
-Course milestones still requiring your team: fuller performance measurements at the 10,000-film scale, real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
+Course milestones still requiring your team: real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
 
 ## Technical references
 
