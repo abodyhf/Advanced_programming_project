@@ -179,26 +179,57 @@ class GraphStore:
         Liked film: same film, shared director/cast/genre. Disliked film: that film
         only. Other dislikes exclude any film with the person or (sub)genre.
         All identifiers must be resolved locally before being rendered into VALUES.
+
+        Two queries per call: what the liked films share, then the films of every
+        distinct genre/person involved. Each genre is read once even when several
+        tastes lead to it, which keeps big groups on a big catalogue fast.
         """
         if not tastes:
             return {}
         if any(taste not in self.entities for taste in tastes):
             raise ValueError("Unknown taste identifier")
-        values = " ".join(iri(taste).n3() for taste in tastes)
-        # VALUES first and no "?film a wt:Film" scan: each branch starts from a bound taste.
-        similar = """
-          UNION { ?taste a wt:Film ; wt:inGenre ?genre . ?film wt:inGenre ?genre }
-          UNION { ?taste a wt:Film ; wt:directedBy ?person . ?film wt:directedBy ?person }
-          UNION { ?taste a wt:Film ; wt:hasCast ?person . ?film wt:hasCast ?person }""" if expand_films else ""
-        query = f"""PREFIX wt: <{WT}>
-        SELECT DISTINCT ?film ?taste WHERE {{
-          VALUES ?taste {{ {values} }}
-          {{ ?taste a wt:Film . BIND(?taste AS ?film) }}
-          UNION {{ ?film wt:inGenre ?taste }}
-          UNION {{ ?film wt:directedBy ?taste }}
-          UNION {{ ?film wt:hasCast ?taste }}{similar}
-        }}"""
-        result, ids = {}, self.term_ids
-        for film, taste in self.store.query(query):
-            result.setdefault(ids[film], set()).add(ids[taste])
+        ids, prefix = self.term_ids, f"PREFIX wt: <{WT}>\n"
+        relation = {NamedNode(str(WT.inGenre)): "genre", NamedNode(str(WT.directedBy)): "director",
+                    NamedNode(str(WT.hasCast)): "cast"}
+        # 1. What each liked film offers to share: its genres (with parents), directors and cast.
+        shares = {}
+        films = [taste for taste in tastes if taste in self.movies] if expand_films else []
+        if films:
+            # One branch per fixed predicate; a variable predicate made Oxigraph scan every triple.
+            branches = " UNION ".join(f"{{ ?taste {name} ?shared BIND({name} AS ?relation) }}"
+                                      for name in ("wt:inGenre", "wt:directedBy", "wt:hasCast"))
+            query = prefix + f"""SELECT ?taste ?relation ?shared WHERE {{
+              VALUES ?taste {{ {" ".join(iri(film).n3() for film in films)} }} {branches} }}"""
+            for taste, link, shared in self.store.query(query):
+                shares.setdefault(ids[taste], []).append((relation[link], ids[shared]))
+        # 2. One lookup per distinct genre/person for the whole request, however many tastes need it.
+        wanted = {(kind, entity) for pairs in shares.values() for kind, entity in pairs}
+        for taste in tastes:
+            kind = self.entities[taste]["kind"]
+            if kind == "genre":
+                wanted.add(("genre", taste))
+            elif kind == "person":
+                wanted.update({("director", taste), ("cast", taste)})
+        reach = {key: set() for key in wanted}
+        if wanted:
+            branches = []
+            for kind, name in (("genre", "wt:inGenre"), ("director", "wt:directedBy"), ("cast", "wt:hasCast")):
+                entities = " ".join(iri(entity).n3() for wanted_kind, entity in sorted(wanted) if wanted_kind == kind)
+                if entities:
+                    branches.append(f"{{ VALUES ?entity {{ {entities} }} ?film {name} ?entity BIND({name} AS ?relation) }}")
+            query = prefix + f"SELECT ?relation ?entity ?film WHERE {{ {' UNION '.join(branches)} }}"
+            for link, entity, film in self.store.query(query):
+                reach[relation[link], ids[entity]].add(ids[film])
+        # 3. Combine: a liked film reaches itself and everything sharing one of its features.
+        result = {}
+        for taste in tastes:
+            kind = self.entities[taste]["kind"]
+            if kind == "film":
+                films_reached = {taste}.union(*(reach[key] for key in shares.get(taste, [])))
+            elif kind == "genre":
+                films_reached = reach["genre", taste]
+            else:
+                films_reached = reach["director", taste] | reach["cast", taste]
+            for film in films_reached:
+                result.setdefault(film, set()).add(taste)
         return result
