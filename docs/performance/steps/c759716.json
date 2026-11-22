@@ -1,0 +1,557 @@
+{
+ "environment": {
+  "date": "2026-11-22T22:46:33+00:00",
+  "commit": "c759716",
+  "python": "3.11.2",
+  "platform": "Linux-6.1.0-26-amd64-x86_64-with-glibc2.36",
+  "cpu": "x86_64",
+  "cpu_count": 6
+ },
+ "repeats": 5,
+ "seed": 2026,
+ "catalogs": [
+  {
+   "catalog": "data/wikidata.json",
+   "films": 10000,
+   "entities": 62035,
+   "startup_s": 45.28,
+   "groups": [
+    {
+     "members": 2,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Burke & Hare",
+      "Albino",
+      "Charlie and the Chocolate Factory",
+      "Corridor of Mirrors"
+     ],
+     "rank": {
+      "median_ms": 249.61,
+      "p95_ms": 340.27,
+      "min_ms": 222.15,
+      "max_ms": 340.27,
+      "samples_ms": [
+       340.27,
+       287.34,
+       230.8,
+       222.15,
+       249.61
+      ]
+     },
+     "api": {
+      "median_ms": 737.54,
+      "p95_ms": 1665.27,
+      "min_ms": 586.57,
+      "max_ms": 1665.27,
+      "samples_ms": [
+       737.54,
+       980.61,
+       586.57,
+       593.2,
+       1665.27
+      ]
+     }
+    },
+    {
+     "members": 2,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:adventure",
+        "genre:romantic-comedy",
+        "person:Q311219",
+        "film:Q509388"
+       ],
+       "dislikes": [
+        "genre:silent"
+       ]
+      },
+      {
+       "likes": [
+        "genre:horror",
+        "genre:romantic-comedy",
+        "person:Q2439637",
+        "film:Q1060164"
+       ],
+       "dislikes": [
+        "genre:western"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Bride of Chucky",
+      "Donovan's Reef",
+      "Fight and Love with a Terracotta Warrior",
+      "Haunted Honeymoon",
+      "Lovers Like Us"
+     ],
+     "rank": {
+      "median_ms": 237.98,
+      "p95_ms": 258.83,
+      "min_ms": 215.64,
+      "max_ms": 258.83,
+      "samples_ms": [
+       258.83,
+       230.63,
+       215.64,
+       243.79,
+       237.98
+      ]
+     },
+     "api": {
+      "median_ms": 661.14,
+      "p95_ms": 913.37,
+      "min_ms": 535.9,
+      "max_ms": 913.37,
+      "samples_ms": [
+       913.37,
+       661.14,
+       617.34,
+       535.9,
+       909.23
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Burke & Hare",
+      "Albino",
+      "Charlie and the Chocolate Factory",
+      "Corridor of Mirrors"
+     ],
+     "rank": {
+      "median_ms": 642.31,
+      "p95_ms": 1563.65,
+      "min_ms": 489.19,
+      "max_ms": 1563.65,
+      "samples_ms": [
+       1563.65,
+       642.31,
+       586.57,
+       489.19,
+       651.84
+      ]
+     },
+     "api": {
+      "median_ms": 1441.93,
+      "p95_ms": 2414.76,
+      "min_ms": 898.54,
+      "max_ms": 2414.76,
+      "samples_ms": [
+       2414.76,
+       898.54,
+       1441.93,
+       1443.49,
+       1033.76
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:horror",
+        "genre:war",
+        "person:Q36970",
+        "film:Q273568"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:romance",
+        "person:Q182763",
+        "film:Q1199683"
+       ],
+       "dislikes": [
+        "genre:lgbtq-related"
+       ]
+      },
+      {
+       "likes": [
+        "genre:adventure",
+        "genre:fantasy",
+        "person:Q1936098",
+        "film:Q622718"
+       ],
+       "dislikes": [
+        "genre:romantic-comedy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:action",
+        "genre:crime",
+        "person:Q1041544",
+        "film:Q1198073"
+       ],
+       "dislikes": [
+        "genre:war"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Death Proof",
+      "The Frighteners",
+      "Downtown",
+      "Freelancers",
+      "Machete"
+     ],
+     "rank": {
+      "median_ms": 269.81,
+      "p95_ms": 1071.45,
+      "min_ms": 245.4,
+      "max_ms": 1071.45,
+      "samples_ms": [
+       505.25,
+       269.81,
+       262.63,
+       245.4,
+       1071.45
+      ]
+     },
+     "api": {
+      "median_ms": 776.6,
+      "p95_ms": 1234.4,
+      "min_ms": 605.1,
+      "max_ms": 1234.4,
+      "samples_ms": [
+       652.11,
+       605.1,
+       1001.39,
+       776.6,
+       1234.4
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Burke & Hare",
+      "Albino",
+      "Charlie and the Chocolate Factory",
+      "Corridor of Mirrors"
+     ],
+     "rank": {
+      "median_ms": 632.85,
+      "p95_ms": 1524.34,
+      "min_ms": 621.77,
+      "max_ms": 1524.34,
+      "samples_ms": [
+       1524.34,
+       632.85,
+       621.77,
+       1387.96,
+       628.31
+      ]
+     },
+     "api": {
+      "median_ms": 2552.81,
+      "p95_ms": 3031.77,
+      "min_ms": 1370.62,
+      "max_ms": 3031.77,
+      "samples_ms": [
+       1370.62,
+       2890.82,
+       2156.52,
+       3031.77,
+       2552.81
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:war",
+        "genre:crime",
+        "person:Q2439637",
+        "film:Q1213635"
+       ],
+       "dislikes": [
+        "genre:historical"
+       ]
+      },
+      {
+       "likes": [
+        "genre:horror",
+        "genre:drama",
+        "person:Q55469",
+        "film:Q959132"
+       ],
+       "dislikes": [
+        "genre:crime-thriller"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:action",
+        "person:Q188772",
+        "film:Q152350"
+       ],
+       "dislikes": [
+        "genre:film-noir"
+       ]
+      },
+      {
+       "likes": [
+        "genre:romance",
+        "genre:romantic-comedy",
+        "person:Q295257",
+        "film:Q218391"
+       ],
+       "dislikes": [
+        "genre:historical"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:action",
+        "person:Q25089",
+        "film:Q1171679"
+       ],
+       "dislikes": [
+        "genre:spy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:comedy",
+        "person:Q7374",
+        "film:Q171415"
+       ],
+       "dislikes": [
+        "genre:martial-arts"
+       ]
+      },
+      {
+       "likes": [
+        "genre:science-fiction",
+        "genre:war",
+        "person:Q182763",
+        "film:Q249032"
+       ],
+       "dislikes": [
+        "genre:comedy-horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:fantasy",
+        "person:Q311219",
+        "film:Q1214988"
+       ],
+       "dislikes": [
+        "genre:war"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Bandits",
+      "Downtown",
+      "Speedway",
+      "The Tourist",
+      "3000 Miles to Graceland"
+     ],
+     "rank": {
+      "median_ms": 397.68,
+      "p95_ms": 417.76,
+      "min_ms": 339.44,
+      "max_ms": 417.76,
+      "samples_ms": [
+       415.2,
+       417.76,
+       397.68,
+       354.49,
+       339.44
+      ]
+     },
+     "api": {
+      "median_ms": 1328.34,
+      "p95_ms": 1861.1,
+      "min_ms": 1121.82,
+      "max_ms": 1861.1,
+      "samples_ms": [
+       1731.02,
+       1121.82,
+       1861.1,
+       1146.02,
+       1328.34
+      ]
+     }
+    }
+   ],
+   "peak_rss_mb": 914.0
+  }
+ ]
+}
