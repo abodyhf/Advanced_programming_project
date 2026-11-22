@@ -27,3 +27,14 @@ Preference IDs must come from `/catalog`. The backend resolves identifiers again
 Group state is `collecting`, `voting`, or `finished`. Members and tastes freeze during voting. All mutations use a SQLite write transaction, including capacity checks, duplicate vote detection, and automatic close, so simultaneous requests cannot overfill a group or record two votes from one membership.
 
 GET group state returns public membership **counts** without credentials, never the profiles or member list. Authenticated state returns the participant list, the caller's preferences, and group-visible movie explanations. A member cannot read another member's full RDF profile via the export route.
+
+Each shortlist film carries the catalogue fields plus `score` and `matches`, one entry per member:
+
+```json
+{"member_id": "…", "nickname": "Ana", "match": 33,
+ "because": ["Inception"],
+ "reasons": [{"id": "film:inception-2010", "label": "Inception",
+              "why": "same director: Christopher Nolan; shared genre: Science fiction"}]}
+```
+
+`because` lists the labels of the member's likes that reach the film (kept for older clients); `reasons` adds how each one reaches it: `this film`, `genre`, `via <subgenre>`, `directs it`, `in the cast`, `directs it and is in the cast`, or for a liked film any of `same director: …`, `shared cast: …`, `shared genre: …` joined by `; `.
