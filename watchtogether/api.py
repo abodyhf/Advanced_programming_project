@@ -91,6 +91,7 @@ def create_app(data_dir=None, catalog_path=None):
             await task
         except asyncio.CancelledError:
             pass
+        db.close()
 
     app = FastAPI(title="WatchTogether", version="1.0.0", lifespan=lifespan,
                   docs_url="/api/docs", redoc_url=None, openapi_url="/api/openapi.json")

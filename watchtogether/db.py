@@ -31,14 +31,25 @@ class Database:
     def __init__(self, path: Path):
         self.path = path
         path.parent.mkdir(parents=True, exist_ok=True)
-        with self.connect() as connection:
-            connection.executescript(SCHEMA)
+        connection = self.connect()
+        connection.executescript(SCHEMA)
+        connection.close()
+        # SQLite checkpoints and deletes the WAL when its last connection closes, which costs
+        # extra fsyncs on every request. An idle connection keeps the WAL between requests.
+        self._idle = sqlite3.connect(self.path, check_same_thread=False)  # never queried again, only closed
+        self._idle.execute("SELECT COUNT(*) FROM sqlite_master").fetchone()  # attach it to the WAL
+
+    def close(self):
+        self._idle.close()
 
     def connect(self):
         connection = sqlite3.connect(self.path, timeout=15)
         connection.row_factory = sqlite3.Row
         connection.execute("PRAGMA foreign_keys=ON")
         connection.execute("PRAGMA secure_delete=ON")
+        # WAL + NORMAL syncs at checkpoints, not every commit. The database stays consistent;
+        # a power cut can lose the last few commits (votes), which is fine for a movie night.
+        connection.execute("PRAGMA synchronous=NORMAL")
         return connection
 
     @contextmanager
