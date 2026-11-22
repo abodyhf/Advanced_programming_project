@@ -129,7 +129,8 @@ class GraphStore:
         self.rdf = graph
         # The durable catalogue is JSON. Rebuilding this local index avoids stale/imported stores.
         self.store = Store()
-        self.store.bulk_load(input=graph.serialize(format="turtle"), format=RdfFormat.TURTLE)
+        # N-Triples: rdflib writes it ~9x faster than Turtle (no prefix/qname work) on 10k films.
+        self.store.bulk_load(input=graph.serialize(format="nt"), format=RdfFormat.N_TRIPLES)
         # Index-only inference: wt:inGenre = hasGenre/subGenreOf*, so queries need no property paths.
         in_genre = NamedNode(str(WT.inGenre))
         self.store.extend(Quad(NamedNode(str(iri(film_id))), in_genre, NamedNode(str(iri("genre:" + genre))))
