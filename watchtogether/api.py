@@ -332,8 +332,7 @@ def create_app(data_dir=None, catalog_path=None):
             who = member(connection, group_id, authorization)
             owner(group, who)
             connection.execute("DELETE FROM groups WHERE id=?", (group_id,))
-        with db.connect() as connection:
-            connection.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        db.checkpoint()
         return {"deleted": True}
 
     app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")

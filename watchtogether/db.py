@@ -1,5 +1,5 @@
 """Durable room state. A transaction serializes each group mutation."""
-from contextlib import contextmanager
+from contextlib import closing, contextmanager
 import sqlite3
 import time
 from pathlib import Path
@@ -70,6 +70,10 @@ class Database:
         with self.transaction() as connection:
             count = connection.execute("DELETE FROM groups WHERE last_used < ?", (cutoff,)).rowcount
         # Make deleted profile bytes leave the WAL rather than waiting for the next checkpoint.
-        with self.connect() as connection:
-            connection.execute("PRAGMA wal_checkpoint(TRUNCATE)")
+        self.checkpoint()
         return count
+
+    def checkpoint(self):
+        # "with connection" only commits; closing() really closes, so no handle lingers until GC.
+        with closing(self.connect()) as connection:
+            connection.execute("PRAGMA wal_checkpoint(TRUNCATE)")

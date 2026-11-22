@@ -29,3 +29,10 @@ def test_startup_objects_are_kept_out_of_garbage_collection(tmp_path):
     gc.unfreeze()
     with TestClient(create_app(tmp_path)):
         assert gc.get_freeze_count() > 1000
+
+
+def test_cleanup_closes_its_checkpoint_connection(tmp_path):
+    db = Database(tmp_path / "rooms.sqlite3")
+    db.cleanup()
+    db.close()
+    assert not (tmp_path / "rooms.sqlite3-wal").exists()  # an unclosed connection would keep it
