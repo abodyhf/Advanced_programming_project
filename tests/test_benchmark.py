@@ -29,3 +29,9 @@ def test_compare_prints_one_row_per_measured_group():
     table = benchmark.compare(saved, saved)
     groups = sum(len(catalog["groups"]) for catalog in json.loads(saved.read_text())["catalogs"])
     assert table.count("1.0x") == 2 * groups  # rank and API, identical runs
+
+
+def test_summary_has_a_row_per_run():
+    runs = [ROOT / "docs/performance/baseline.json", ROOT / "docs/performance/after.json"]
+    lines = benchmark.summarise(runs).splitlines()
+    assert len(lines) == 4 and lines[2].startswith("| baseline (4be8ad3) |") and lines[3].startswith("| after (")

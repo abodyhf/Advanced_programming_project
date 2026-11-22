@@ -176,6 +176,23 @@ def compare(before_path, after_path):
     return "\n".join(lines)
 
 
+def summarise(paths, catalog="data/wikidata.json"):
+    """One table row per saved run, e.g. one run per commit of a change series."""
+    lines = ["| Run (commit) | Startup s | Rank 2 shared / mixed | Rank 4 shared / mixed | Rank 8 shared / mixed | "
+             "API 8 shared / mixed | Slowest API sample |", "| --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    for path in paths:
+        report = json.loads(Path(path).read_text(encoding="utf-8"))
+        found = next((item for item in report["catalogs"] if item["catalog"] == catalog), None)
+        if found is None:
+            continue
+        groups = {(group["members"], group["scenario"]): group for group in found["groups"]}
+        pair = lambda size, part="rank": " / ".join(f"{groups[size, name][part]['median_ms']:.0f}" for name in ("shared", "mixed"))
+        slowest = max(group["api"]["max_ms"] for group in found["groups"])
+        lines.append(f"| {Path(path).stem} ({report['environment']['commit']}) | {found['startup_s']} | {pair(2)} | {pair(4)} | "
+                     f"{pair(8)} | {pair(8, 'api')} | {slowest:.0f} |")
+    return "\n".join(lines)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--catalog", action="append", help="catalogue JSON (repeatable); default: starter and data/wikidata.json")
@@ -183,9 +200,13 @@ def main(argv=None):
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--out", type=Path, help="write the raw results as JSON")
     parser.add_argument("--compare", nargs=2, metavar=("BEFORE", "AFTER"), help="print a table from two saved runs")
+    parser.add_argument("--summary", nargs="+", metavar="RUN", help="print one row per saved run (imported catalogue)")
     args = parser.parse_args(argv)
     if args.compare:
         print(compare(*args.compare))
+        return None
+    if args.summary:
+        print(summarise(args.summary))
         return None
     catalogs = args.catalog or [str(ROOT / "data/catalog.json")] + ([str(ROOT / "data/wikidata.json")] if (ROOT / "data/wikidata.json").exists() else [])
     report = {"environment": environment(), "repeats": args.repeats, "seed": args.seed, "catalogs": []}
