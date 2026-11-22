@@ -148,3 +148,29 @@ def test_each_dislike_kind_is_a_hard_veto(graph, recommender):
         open_list = recommender.rank(rows([dict(members[0]), dict(members[0], id="b", nickname="B")]), limit=100)
         assert any(banned(movie) for movie in open_list), dislike  # the dislike has something to remove
         assert not any(banned(movie) for movie in recommender.rank(rows(members), limit=100)), dislike
+
+
+def test_explanations_name_exactly_the_likes_that_connect(graph, recommender, truth):
+    checked = 0
+    for members in random_groups(graph, seed=3, count=GROUPS):
+        for movie in recommender.rank(rows(members)):
+            for member, match in zip(members, movie["matches"]):
+                assert match["member_id"] == member["id"] and match["nickname"] == member["nickname"]
+                links = sorted(taste for taste in member["likes"] if truth.liked(taste, movie["id"]))
+                assert match["because"] == [graph.entities[taste]["label"] for taste in links]
+                share = sum(map(reference.weight, links)) / sum(map(reference.weight, member["likes"]))
+                assert match["match"] == round(100 * share)
+                checked += 1
+    assert checked > 200
+
+
+def test_group_score_is_sixty_percent_weakest_plus_forty_percent_average(recommender):
+    members = [{"id": "a", "nickname": "A", "likes": ["genre:comedy", "genre:animation", "person:wes-anderson"], "dislikes": []},
+               {"id": "b", "nickname": "B", "likes": ["genre:comedy", "genre:drama"], "dislikes": []}]
+    movies = {movie["title"]: movie for movie in recommender.rank(rows(members), limit=100)}
+    fox = movies["Fantastic Mr. Fox"]  # A: 4/4, B: 1/2
+    assert [match["match"] for match in fox["matches"]] == [100, 50]
+    assert fox["score"] == pytest.approx(100 * (0.6 * 0.5 + 0.4 * 0.75))
+    tenenbaums = movies["The Royal Tenenbaums"]  # A: comedy + Wes Anderson 3/4, B: 2/2
+    assert tenenbaums["score"] == pytest.approx(100 * (0.6 * 0.75 + 0.4 * 0.875))
+    assert tenenbaums["score"] > fox["score"]
