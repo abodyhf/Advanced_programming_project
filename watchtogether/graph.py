@@ -15,7 +15,53 @@ ENTITY = "https://watchtogether.example/entity/"
 SCHEMA = Namespace("https://schema.org/")
 PARENTS = {"anime": ["animation"], "heist": ["crime"],
            "romantic-comedy": ["romance", "comedy"],
-           "psychological-thriller": ["thriller"], "superhero": ["action", "science-fiction"]}
+           "psychological-thriller": ["thriller"], "superhero": ["action", "science-fiction"],
+           # Imported Wikidata kinds whose name does not spell out the parent genre.
+           "slasher": ["horror"], "zombie": ["horror"], "vampire": ["horror"], "werewolf": ["horror"],
+           "splatter": ["horror"], "gore": ["horror"], "cannibal": ["horror"], "giallo": ["thriller"],
+           "suspense": ["thriller"], "cyberpunk": ["science-fiction"], "postcyberpunk": ["cyberpunk"],
+           "biopunk": ["science-fiction"], "steampunk": ["science-fiction"], "dieselpunk": ["science-fiction"],
+           "dystopian": ["science-fiction"], "post-apocalyptic": ["science-fiction"],
+           "alien-invasion": ["science-fiction"], "time-travel": ["science-fiction"],
+           "space-opera": ["science-fiction"], "tech-noir": ["science-fiction"], "retrofuturism": ["science-fiction"],
+           "slapstick": ["comedy"], "parody": ["comedy"], "mockumentary": ["comedy"], "farce": ["comedy"],
+           "satire": ["comedy"], "satirical": ["comedy"], "tragicomedy": ["comedy", "drama"],
+           "melodrama": ["drama"], "docudrama": ["drama"], "martial-arts": ["action"], "kung-fu": ["martial-arts"],
+           "wuxia": ["martial-arts"], "ninja": ["martial-arts"], "bruceploitation": ["martial-arts", "exploitation"],
+           "girls-with-guns": ["action"], "gangster": ["crime"], "yakuza": ["gangster"], "poliziotteschi": ["crime"],
+           "film-noir": ["crime"], "neo-noir": ["film-noir"], "sword-and-sorcery": ["fantasy"],
+           "cinematic-fairy-tale": ["fantasy"], "rockumentary": ["music-documentary"], "partisan": ["war"],
+           "comedy-porn": ["pornographic"], "erotica": ["erotic"], "sexploitation": ["exploitation"],
+           "nunsploitation": ["exploitation"], "blaxploitation": ["exploitation"]}
+# A compound name is a kind of each genre spelled inside it: "comedy-horror" is comedy and
+# horror, "spaghetti-western" is a western. These words do not count:
+WORD_ALIASES = {"romantic": "romance", "porn": "pornographic"}
+NEVER_PARENT = {"fiction"}  # "science-fiction" films are not the vague "fiction" tag
+NOT_PARENTS = {("live-action-animated", "action"), ("pseudo-documentary", "documentary")}
+KNOWN_GENRES = set(PARENTS) | {parent for parents in PARENTS.values() for parent in parents}
+
+
+def genre_parents(genres):
+    """child -> parents for the genres a catalogue uses (and the parents they reach)."""
+    used, parents = set(genres), {}
+    todo = sorted(used)
+    while todo:
+        genre = todo.pop(0)
+        words = [WORD_ALIASES.get(word, word) for word in genre.split("-")]
+        found = list(PARENTS.get(genre, []))
+        for size in range(len(words) - 1, 0, -1):
+            for start in range(len(words) - size + 1):
+                found.append("-".join(words[start:start + size]))
+        found = [parent for parent in dict.fromkeys(found)
+                 if parent != genre and parent not in NEVER_PARENT and (genre, parent) not in NOT_PARENTS
+                 and (parent in used or parent in KNOWN_GENRES)]
+        if found:
+            parents[genre] = found
+        for parent in found:
+            if parent not in used:  # a known genre no film is tagged with directly
+                used.add(parent)
+                todo.append(parent)
+    return parents
 
 def slug(value):
     value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().lower()
@@ -69,7 +115,8 @@ class GraphStore:
                     if role not in entry["roles"]:
                         entry["roles"].append(role)
                     entry["detail"] = " / ".join(entry["roles"]).title()
-        for child, parents in PARENTS.items():
+        self.genre_parents = genre_parents({genre for film in self.movies.values() for genre in film["genres"]})
+        for child, parents in self.genre_parents.items():
             for parent in parents:
                 graph.add((iri("genre:" + child), WT.subGenreOf, iri("genre:" + parent)))
                 self.entities.setdefault("genre:" + parent, {"id": "genre:" + parent, "label": label_genre(parent), "kind": "genre", "detail": "Genre"})
