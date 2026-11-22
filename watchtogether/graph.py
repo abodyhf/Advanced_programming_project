@@ -135,6 +135,7 @@ class GraphStore:
         self.store.extend(Quad(NamedNode(str(iri(film_id))), in_genre, NamedNode(str(iri("genre:" + genre))))
                           for film_id, film in self.movies.items() for genre in self.film_genres(film_id))
         self.node_ids = {str(iri(key)): key for key in self.entities}
+        self.term_ids = {NamedNode(node): key for node, key in self.node_ids.items()}  # skips .value per row
         self.fingerprint = hashlib.sha256(self.catalog_path.read_bytes()).hexdigest()[:12]
 
     def ancestors(self, genre):
@@ -197,8 +198,7 @@ class GraphStore:
           UNION {{ ?film wt:directedBy ?taste }}
           UNION {{ ?film wt:hasCast ?taste }}{similar}
         }}"""
-        result = {}
-        for row in self.store.query(query):
-            film_id, taste_id = self.node_ids[row["film"].value], self.node_ids[row["taste"].value]
-            result.setdefault(film_id, set()).add(taste_id)
+        result, ids = {}, self.term_ids
+        for film, taste in self.store.query(query):
+            result.setdefault(ids[film], set()).add(ids[taste])
         return result
