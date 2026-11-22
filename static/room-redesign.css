@@ -359,3 +359,4 @@ body.room-page .section-top p, body.room-page .invite-banner p { font-size: 12px
 @media (max-width: 370px) {
   body.room-page .genre-content p { font-size: 9px; }
 }
+.match-person .why{color:#8f9d84}
