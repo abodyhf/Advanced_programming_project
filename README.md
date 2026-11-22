@@ -57,7 +57,7 @@ Find the computer's local network IP address, for example `192.168.1.20`. Open `
 | Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
 | Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
 | UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
-| Quality checks | 104 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
+| Quality checks | 105 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
 | Performance | Repeatable benchmark for groups of 2, 4 and 8 on both catalogues; 8 people on 10,000 films rank in 0.09–0.15 s (was 1.6–1.8 s); see `docs/PERFORMANCE_REPORT.md` |
 
 ## Movie data and the 10,000-film goal
