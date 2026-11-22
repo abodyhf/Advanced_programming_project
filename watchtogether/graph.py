@@ -5,7 +5,7 @@ import re
 import unicodedata
 from pathlib import Path
 from urllib.parse import quote
-from pyoxigraph import Store, RdfFormat
+from pyoxigraph import NamedNode, Quad, Store, RdfFormat
 from pyshacl import validate
 from rdflib import Graph, Literal, Namespace, RDF, RDFS, OWL, URIRef
 
@@ -130,8 +130,26 @@ class GraphStore:
         # The durable catalogue is JSON. Rebuilding this local index avoids stale/imported stores.
         self.store = Store()
         self.store.bulk_load(input=graph.serialize(format="turtle"), format=RdfFormat.TURTLE)
+        # Index-only inference: wt:inGenre = hasGenre/subGenreOf*, so queries need no property paths.
+        in_genre = NamedNode(str(WT.inGenre))
+        self.store.extend(Quad(NamedNode(str(iri(film_id))), in_genre, NamedNode(str(iri("genre:" + genre))))
+                          for film_id, film in self.movies.items() for genre in self.film_genres(film_id))
         self.node_ids = {str(iri(key)): key for key in self.entities}
         self.fingerprint = hashlib.sha256(self.catalog_path.read_bytes()).hexdigest()[:12]
+
+    def ancestors(self, genre):
+        """The genre and every parent above it."""
+        seen, todo = {genre}, [genre]
+        while todo:
+            for parent in self.genre_parents.get(todo.pop(), []):
+                if parent not in seen:
+                    seen.add(parent)
+                    todo.append(parent)
+        return seen
+
+    def film_genres(self, film_id):
+        """Genres a film belongs to, including every parent of its tagged genres."""
+        return sorted({ancestor for genre in self.movies[film_id]["genres"] for ancestor in self.ancestors(genre)})
 
     def search(self, query="", kind="all", limit=24):
         query = query.casefold().strip()
@@ -166,20 +184,18 @@ class GraphStore:
         if any(taste not in self.entities for taste in tastes):
             raise ValueError("Unknown taste identifier")
         values = " ".join(iri(taste).n3() for taste in tastes)
-        similar = """UNION {
-          ?taste a wt:Film .
-          { ?taste wt:hasGenre/wt:subGenreOf* ?genre . ?film wt:hasGenre/wt:subGenreOf* ?genre }
-          UNION { ?taste wt:directedBy ?person . ?film wt:directedBy ?person }
-          UNION { ?taste wt:hasCast ?person . ?film wt:hasCast ?person }
-        }""" if expand_films else ""
+        # VALUES first and no "?film a wt:Film" scan: each branch starts from a bound taste.
+        similar = """
+          UNION { ?taste a wt:Film ; wt:inGenre ?genre . ?film wt:inGenre ?genre }
+          UNION { ?taste a wt:Film ; wt:directedBy ?person . ?film wt:directedBy ?person }
+          UNION { ?taste a wt:Film ; wt:hasCast ?person . ?film wt:hasCast ?person }""" if expand_films else ""
         query = f"""PREFIX wt: <{WT}>
         SELECT DISTINCT ?film ?taste WHERE {{
           VALUES ?taste {{ {values} }}
-          ?film a wt:Film .
           {{ ?taste a wt:Film . BIND(?taste AS ?film) }}
-          UNION {{ ?film wt:hasGenre/wt:subGenreOf* ?taste }}
-          UNION {{ ?film (wt:directedBy|wt:hasCast) ?taste }}
-          {similar}
+          UNION {{ ?film wt:inGenre ?taste }}
+          UNION {{ ?film wt:directedBy ?taste }}
+          UNION {{ ?film wt:hasCast ?taste }}{similar}
         }}"""
         result = {}
         for row in self.store.query(query):

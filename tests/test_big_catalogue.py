@@ -1,5 +1,4 @@
 """The same checks on the 10,000-film Wikidata catalogue (data/wikidata.json)."""
-import time
 import pytest
 from watchtogether.graph import GraphStore, ROOT
 from watchtogether.recommender import Recommender
@@ -55,3 +54,12 @@ def test_random_groups_match_the_reference_rules_on_the_big_catalogue(big):
                 assert not any(truth.disliked(taste, movie["id"]) for other in members for taste in other["dislikes"])
         with_results += bool(actual)
     assert with_results >= 8
+
+
+def test_eight_member_groups_rank_within_budget(big):
+    """Regression budget: the 8-member benchmark groups took 1.6-1.8 s each before the query fixes."""
+    from watchtogether import benchmark
+    graph, recommender, _ = big
+    for name, profiles in benchmark.scenarios(graph, 8, 2026).items():
+        samples = benchmark.timed(lambda: recommender.rank(benchmark.rows(profiles)), repeats=3)
+        assert sorted(samples)[1] < 1000, (name, samples)

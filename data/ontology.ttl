@@ -17,3 +17,5 @@ wt:subGenreOf a owl:ObjectProperty, owl:TransitiveProperty ; rdfs:domain wt:Genr
 wt:likes a owl:ObjectProperty ; rdfs:domain wt:TasteProfile .
 wt:dislikes a owl:ObjectProperty ; rdfs:domain wt:TasteProfile .
 wt:nickname a owl:DatatypeProperty ; rdfs:domain wt:TasteProfile .
+wt:inGenre a owl:ObjectProperty ; rdfs:domain wt:Film ; rdfs:range wt:Genre ;
+  rdfs:comment "wt:hasGenre/wt:subGenreOf*, materialised in the query index at startup" .
