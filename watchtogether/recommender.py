@@ -1,37 +1,47 @@
 """Fairness score: 60% weakest member's match + 40% group average."""
+import heapq
 import json
+
+
+def weight(taste):
+    """People say more about taste than a genre or a single film."""
+    return 2 if taste.startswith("person:") else 1
+
 
 class Recommender:
     def __init__(self, graph):
         self.graph = graph
 
     def rank(self, members, limit=5):
-        members = [dict(member) for member in members]
         profiles = []
-        excluded = set()
         for member in members:
             likes = json.loads(member["likes"])
-            dislikes = json.loads(member["dislikes"])
-            matched = self.graph.links_for(likes)
-            excluded.update(self.graph.links_for(dislikes, expand_films=False))
-            profiles.append((member, likes, matched))
-        recommendations = []
-        for film_id, film in self.graph.movies.items():
+            profiles.append((dict(member), set(likes), sum(map(weight, likes)), json.loads(member["dislikes"])))
+        # One query for every like in the group and one for every dislike, instead of two per member.
+        group_likes = sorted(set().union(*(likes for _, likes, _, _ in profiles)))
+        group_dislikes = sorted({taste for *_, dislikes in profiles for taste in dislikes})
+        matched = self.graph.links_for(group_likes)
+        excluded = self.graph.links_for(group_dislikes, expand_films=False)
+        scored = []
+        for film_id, tastes in matched.items():
             if film_id in excluded:
                 continue
-            scores, explanations = [], []
-            for member, likes, matched in profiles:
-                links = matched.get(film_id, set())
+            scores = []
+            for _, likes, total, _ in profiles:
+                links = tastes & likes
                 if not links:
-                    break
-                weight = lambda item: 2 if item.startswith("person:") else 1
-                score = sum(weight(item) for item in links) / sum(weight(item) for item in likes)
-                scores.append(score)
-                explanations.append({"member_id": member["id"], "nickname": member["nickname"],
-                                     "match": round(100 * score),
-                                     "because": [self.graph.entities[item]["label"] for item in sorted(links)]})
+                    break  # every member needs at least one like that reaches the film
+                scores.append(sum(map(weight, links)) / total)
             else:
                 score = round(100 * (0.6 * min(scores) + 0.4 * sum(scores) / len(scores)), 4)
-                recommendations.append({**film, "score": score, "matches": explanations})
-        recommendations.sort(key=lambda movie: (-movie["score"], movie["title"].casefold(), movie["id"]))
-        return recommendations[:limit]
+                scored.append((-score, self.graph.movies[film_id]["title"].casefold(), film_id))
+        recommendations = []
+        for negative_score, _, film_id in heapq.nsmallest(limit, scored):
+            explanations = []
+            for member, likes, total, _ in profiles:
+                links = sorted(matched[film_id] & likes)
+                explanations.append({"member_id": member["id"], "nickname": member["nickname"],
+                                     "match": round(100 * (sum(map(weight, links)) / total)),
+                                     "because": [self.graph.entities[item]["label"] for item in links]})
+            recommendations.append({**self.graph.movies[film_id], "score": -negative_score, "matches": explanations})
+        return recommendations
