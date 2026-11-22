@@ -1,0 +1,1214 @@
+{
+ "environment": {
+  "date": "2026-11-22T21:52:49+00:00",
+  "commit": "4be8ad3",
+  "python": "3.11.2",
+  "platform": "Linux-6.1.0-26-amd64-x86_64-with-glibc2.36",
+  "cpu": "x86_64",
+  "cpu_count": 6
+ },
+ "repeats": 10,
+ "seed": 2026,
+ "catalogs": [
+  {
+   "catalog": "data/catalog.json",
+   "films": 80,
+   "entities": 352,
+   "startup_s": 2.63,
+   "groups": [
+    {
+     "members": 2,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Catch Me If You Can",
+      "The Green Mile",
+      "Toy Story",
+      "Toy Story 2",
+      "Hunt for the Wilderpeople"
+     ],
+     "rank": {
+      "median_ms": 10.88,
+      "p95_ms": 12.52,
+      "min_ms": 10.43,
+      "max_ms": 12.52,
+      "samples_ms": [
+       10.55,
+       10.86,
+       11.21,
+       10.89,
+       12.52,
+       10.43,
+       10.44,
+       11.26,
+       10.48,
+       12.06
+      ]
+     },
+     "api": {
+      "median_ms": 116.64,
+      "p95_ms": 712.8,
+      "min_ms": 90.44,
+      "max_ms": 712.8,
+      "samples_ms": [
+       97.36,
+       712.8,
+       354.98,
+       92.74,
+       95.12,
+       212.23,
+       90.44,
+       192.21,
+       107.22,
+       126.05
+      ]
+     }
+    },
+    {
+     "members": 2,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:action",
+        "genre:thriller",
+        "person:jessica-chastain",
+        "film:princess-mononoke-1997"
+       ],
+       "dislikes": [
+        "genre:music"
+       ]
+      },
+      {
+       "likes": [
+        "genre:romance",
+        "genre:thriller",
+        "person:scarlett-johansson",
+        "film:alien-1979"
+       ],
+       "dislikes": [
+        "genre:musical"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "The Avengers",
+      "Inception",
+      "John Wick",
+      "Jurassic Park",
+      "The Prestige"
+     ],
+     "rank": {
+      "median_ms": 10.8,
+      "p95_ms": 11.35,
+      "min_ms": 10.7,
+      "max_ms": 11.35,
+      "samples_ms": [
+       10.83,
+       10.92,
+       10.87,
+       11.35,
+       10.79,
+       10.8,
+       10.73,
+       10.8,
+       10.81,
+       10.7
+      ]
+     },
+     "api": {
+      "median_ms": 127.19,
+      "p95_ms": 723.57,
+      "min_ms": 101.28,
+      "max_ms": 723.57,
+      "samples_ms": [
+       126.53,
+       135.01,
+       109.89,
+       399.88,
+       127.85,
+       114.5,
+       101.28,
+       193.49,
+       723.57,
+       112.16
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Catch Me If You Can",
+      "The Green Mile",
+      "Toy Story",
+      "Toy Story 2",
+      "Hunt for the Wilderpeople"
+     ],
+     "rank": {
+      "median_ms": 22.09,
+      "p95_ms": 33.03,
+      "min_ms": 20.87,
+      "max_ms": 33.03,
+      "samples_ms": [
+       33.03,
+       23.73,
+       21.08,
+       20.87,
+       21.91,
+       22.71,
+       22.0,
+       22.26,
+       22.19,
+       21.11
+      ]
+     },
+     "api": {
+      "median_ms": 144.48,
+      "p95_ms": 607.09,
+      "min_ms": 97.07,
+      "max_ms": 607.09,
+      "samples_ms": [
+       607.09,
+       136.64,
+       152.32,
+       105.25,
+       373.23,
+       109.6,
+       101.33,
+       189.8,
+       97.07,
+       201.37
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:romance",
+        "genre:anime",
+        "person:denis-villeneuve",
+        "film:jojo-rabbit-2019"
+       ],
+       "dislikes": [
+        "genre:fantasy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:science-fiction",
+        "genre:fantasy",
+        "person:leonardo-dicaprio",
+        "film:finding-nemo-2003"
+       ],
+       "dislikes": [
+        "genre:romantic-comedy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:action",
+        "genre:mystery",
+        "person:michelle-yeoh",
+        "film:the-grand-budapest-hotel-2014"
+       ],
+       "dislikes": [
+        "genre:thriller"
+       ]
+      },
+      {
+       "likes": [
+        "genre:adventure",
+        "genre:science-fiction",
+        "person:chris-evans",
+        "film:fight-club-1999"
+       ],
+       "dislikes": [
+        "genre:anime"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Dune",
+      "The Avengers",
+      "Arrival",
+      "Everything Everywhere All at Once",
+      "Guardians of the Galaxy"
+     ],
+     "rank": {
+      "median_ms": 23.73,
+      "p95_ms": 26.23,
+      "min_ms": 23.02,
+      "max_ms": 26.23,
+      "samples_ms": [
+       23.47,
+       24.0,
+       23.39,
+       23.42,
+       23.43,
+       24.87,
+       26.23,
+       24.45,
+       24.3,
+       23.02
+      ]
+     },
+     "api": {
+      "median_ms": 240.93,
+      "p95_ms": 971.87,
+      "min_ms": 102.92,
+      "max_ms": 971.87,
+      "samples_ms": [
+       102.92,
+       971.87,
+       296.52,
+       185.34,
+       114.8,
+       895.08,
+       420.91,
+       120.1,
+       146.77,
+       301.93
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:comedy",
+        "person:tom-hanks"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Catch Me If You Can",
+      "The Green Mile",
+      "Toy Story",
+      "Toy Story 2",
+      "Hunt for the Wilderpeople"
+     ],
+     "rank": {
+      "median_ms": 41.57,
+      "p95_ms": 42.11,
+      "min_ms": 30.47,
+      "max_ms": 42.11,
+      "samples_ms": [
+       41.77,
+       41.23,
+       41.68,
+       41.74,
+       41.79,
+       42.11,
+       41.45,
+       41.08,
+       34.5,
+       30.47
+      ]
+     },
+     "api": {
+      "median_ms": 418.92,
+      "p95_ms": 752.91,
+      "min_ms": 146.95,
+      "max_ms": 752.91,
+      "samples_ms": [
+       146.95,
+       282.88,
+       423.85,
+       419.89,
+       500.03,
+       417.96,
+       254.04,
+       752.91,
+       256.25,
+       651.25
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:anime",
+        "genre:science-fiction",
+        "person:scarlett-johansson",
+        "film:forrest-gump-1994"
+       ],
+       "dislikes": [
+        "genre:superhero"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:anime",
+        "person:rachel-mcadams",
+        "film:about-time-2013"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:mystery",
+        "genre:adventure",
+        "person:pete-docter",
+        "film:the-lord-of-the-rings-the-fellowship-of-the-ring-2001"
+       ],
+       "dislikes": [
+        "genre:science-fiction"
+       ]
+      },
+      {
+       "likes": [
+        "genre:fantasy",
+        "genre:action",
+        "person:bill-murray",
+        "film:guardians-of-the-galaxy-2014"
+       ],
+       "dislikes": [
+        "genre:adventure"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:science-fiction",
+        "person:ben-stiller",
+        "film:catch-me-if-you-can-2002"
+       ],
+       "dislikes": [
+        "genre:thriller"
+       ]
+      },
+      {
+       "likes": [
+        "genre:anime",
+        "genre:crime",
+        "person:jordan-peele",
+        "film:toy-story-1995"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:science-fiction",
+        "genre:mystery",
+        "person:jessica-chastain",
+        "film:get-out-2017"
+       ],
+       "dislikes": [
+        "genre:anime"
+       ]
+      },
+      {
+       "likes": [
+        "genre:fantasy",
+        "genre:mystery",
+        "person:daniel-craig",
+        "film:the-dark-knight-2008"
+       ],
+       "dislikes": [
+        "genre:comedy"
+       ]
+      }
+     ],
+     "results": 0,
+     "top": [],
+     "rank": {
+      "median_ms": 45.55,
+      "p95_ms": 46.67,
+      "min_ms": 45.16,
+      "max_ms": 46.67,
+      "samples_ms": [
+       45.63,
+       46.53,
+       45.36,
+       45.27,
+       46.24,
+       45.47,
+       46.67,
+       45.89,
+       45.4,
+       45.16
+      ]
+     },
+     "api": {
+      "median_ms": 59.42,
+      "p95_ms": 61.78,
+      "min_ms": 57.46,
+      "max_ms": 61.78,
+      "samples_ms": [
+       58.36,
+       57.46,
+       59.96,
+       57.75,
+       60.08,
+       59.93,
+       60.96,
+       61.78,
+       58.35,
+       58.92
+      ]
+     }
+    }
+   ],
+   "peak_rss_mb": 80.9
+  },
+  {
+   "catalog": "data/wikidata.json",
+   "films": 10000,
+   "entities": 62034,
+   "startup_s": 45.11,
+   "groups": [
+    {
+     "members": 2,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Albino",
+      "Burke & Hare",
+      "Corridor of Mirrors",
+      "Hamlet"
+     ],
+     "rank": {
+      "median_ms": 415.66,
+      "p95_ms": 463.3,
+      "min_ms": 407.05,
+      "max_ms": 463.3,
+      "samples_ms": [
+       463.3,
+       415.51,
+       415.81,
+       410.79,
+       407.05,
+       412.5,
+       409.25,
+       429.56,
+       425.16,
+       421.42
+      ]
+     },
+     "api": {
+      "median_ms": 1306.11,
+      "p95_ms": 1725.29,
+      "min_ms": 951.17,
+      "max_ms": 1725.29,
+      "samples_ms": [
+       1678.2,
+       1459.84,
+       1063.93,
+       1725.29,
+       1033.42,
+       1337.82,
+       951.17,
+       1274.39,
+       1395.72,
+       1024.28
+      ]
+     }
+    },
+    {
+     "members": 2,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:adventure",
+        "genre:romantic-comedy",
+        "person:Q311219",
+        "film:Q509388"
+       ],
+       "dislikes": [
+        "genre:silent"
+       ]
+      },
+      {
+       "likes": [
+        "genre:horror",
+        "genre:romantic-comedy",
+        "person:Q2439637",
+        "film:Q1060164"
+       ],
+       "dislikes": [
+        "genre:western"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Bride of Chucky",
+      "Donovan's Reef",
+      "Fight and Love with a Terracotta Warrior",
+      "Lovers Like Us",
+      "Mirror Mirror"
+     ],
+     "rank": {
+      "median_ms": 442.68,
+      "p95_ms": 1885.64,
+      "min_ms": 371.68,
+      "max_ms": 1885.64,
+      "samples_ms": [
+       568.55,
+       455.56,
+       1885.64,
+       536.97,
+       448.3,
+       437.06,
+       403.29,
+       379.04,
+       372.54,
+       371.68
+      ]
+     },
+     "api": {
+      "median_ms": 1042.43,
+      "p95_ms": 1850.6,
+      "min_ms": 867.76,
+      "max_ms": 1850.6,
+      "samples_ms": [
+       1850.6,
+       955.68,
+       987.49,
+       1652.36,
+       969.7,
+       1049.55,
+       1504.24,
+       1035.31,
+       867.76,
+       1219.64
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Albino",
+      "Burke & Hare",
+      "Corridor of Mirrors",
+      "Hamlet"
+     ],
+     "rank": {
+      "median_ms": 899.8,
+      "p95_ms": 2269.23,
+      "min_ms": 852.9,
+      "max_ms": 2269.23,
+      "samples_ms": [
+       2269.23,
+       889.72,
+       905.88,
+       904.19,
+       870.77,
+       952.65,
+       1686.45,
+       895.41,
+       852.9,
+       885.78
+      ]
+     },
+     "api": {
+      "median_ms": 1839.34,
+      "p95_ms": 2716.15,
+      "min_ms": 1509.6,
+      "max_ms": 2716.15,
+      "samples_ms": [
+       2576.47,
+       1702.7,
+       2716.15,
+       1672.58,
+       1975.97,
+       1588.27,
+       1622.91,
+       2313.85,
+       1509.6,
+       2468.37
+      ]
+     }
+    },
+    {
+     "members": 4,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:horror",
+        "genre:war",
+        "person:Q36970",
+        "film:Q273568"
+       ],
+       "dislikes": [
+        "genre:romance"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:romance",
+        "person:Q182763",
+        "film:Q1199683"
+       ],
+       "dislikes": [
+        "genre:lgbtq-related"
+       ]
+      },
+      {
+       "likes": [
+        "genre:adventure",
+        "genre:fantasy",
+        "person:Q1936098",
+        "film:Q622718"
+       ],
+       "dislikes": [
+        "genre:romantic-comedy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:action",
+        "genre:crime",
+        "person:Q1041544",
+        "film:Q1198073"
+       ],
+       "dislikes": [
+        "genre:war"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Death Proof",
+      "The Frighteners",
+      "Downtown",
+      "Shutter Island",
+      "American Gun"
+     ],
+     "rank": {
+      "median_ms": 889.79,
+      "p95_ms": 1353.26,
+      "min_ms": 774.05,
+      "max_ms": 1353.26,
+      "samples_ms": [
+       979.33,
+       1353.26,
+       905.34,
+       803.68,
+       844.39,
+       1016.75,
+       1071.82,
+       874.25,
+       824.03,
+       774.05
+      ]
+     },
+     "api": {
+      "median_ms": 1814.46,
+      "p95_ms": 2608.95,
+      "min_ms": 1241.6,
+      "max_ms": 2608.95,
+      "samples_ms": [
+       1886.48,
+       2366.82,
+       1742.44,
+       2029.33,
+       1624.66,
+       1993.4,
+       2608.95,
+       1481.85,
+       1729.38,
+       1241.6
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "shared",
+     "profiles": [
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:comedy",
+        "genre:drama",
+        "person:Q180338"
+       ],
+       "dislikes": [
+        "genre:horror"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "A Feast at Midnight",
+      "Albino",
+      "Burke & Hare",
+      "Corridor of Mirrors",
+      "Hamlet"
+     ],
+     "rank": {
+      "median_ms": 1770.98,
+      "p95_ms": 2769.31,
+      "min_ms": 1613.03,
+      "max_ms": 2769.31,
+      "samples_ms": [
+       2769.31,
+       1808.25,
+       1764.13,
+       1662.12,
+       2591.77,
+       1777.83,
+       1736.01,
+       1661.61,
+       2567.04,
+       1613.03
+      ]
+     },
+     "api": {
+      "median_ms": 2667.23,
+      "p95_ms": 4705.94,
+      "min_ms": 2050.91,
+      "max_ms": 4705.94,
+      "samples_ms": [
+       2864.01,
+       3846.98,
+       2519.53,
+       2050.91,
+       4705.94,
+       2717.67,
+       2616.8,
+       3915.99,
+       2561.89,
+       2146.92
+      ]
+     }
+    },
+    {
+     "members": 8,
+     "scenario": "mixed",
+     "profiles": [
+      {
+       "likes": [
+        "genre:war",
+        "genre:crime",
+        "person:Q2439637",
+        "film:Q1213635"
+       ],
+       "dislikes": [
+        "genre:historical"
+       ]
+      },
+      {
+       "likes": [
+        "genre:horror",
+        "genre:drama",
+        "person:Q55469",
+        "film:Q959132"
+       ],
+       "dislikes": [
+        "genre:crime-thriller"
+       ]
+      },
+      {
+       "likes": [
+        "genre:drama",
+        "genre:action",
+        "person:Q188772",
+        "film:Q152350"
+       ],
+       "dislikes": [
+        "genre:film-noir"
+       ]
+      },
+      {
+       "likes": [
+        "genre:romance",
+        "genre:romantic-comedy",
+        "person:Q295257",
+        "film:Q218391"
+       ],
+       "dislikes": [
+        "genre:historical"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:action",
+        "person:Q25089",
+        "film:Q1171679"
+       ],
+       "dislikes": [
+        "genre:spy"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:comedy",
+        "person:Q7374",
+        "film:Q171415"
+       ],
+       "dislikes": [
+        "genre:martial-arts"
+       ]
+      },
+      {
+       "likes": [
+        "genre:science-fiction",
+        "genre:war",
+        "person:Q182763",
+        "film:Q249032"
+       ],
+       "dislikes": [
+        "genre:comedy-horror"
+       ]
+      },
+      {
+       "likes": [
+        "genre:crime",
+        "genre:fantasy",
+        "person:Q311219",
+        "film:Q1214988"
+       ],
+       "dislikes": [
+        "genre:war"
+       ]
+      }
+     ],
+     "results": 5,
+     "top": [
+      "Bandits",
+      "Speedway",
+      "The Tourist",
+      "A Better Tomorrow 3",
+      "A True Mob Story"
+     ],
+     "rank": {
+      "median_ms": 1637.46,
+      "p95_ms": 2662.23,
+      "min_ms": 1468.07,
+      "max_ms": 2662.23,
+      "samples_ms": [
+       2609.29,
+       1812.68,
+       2662.23,
+       1480.77,
+       1477.86,
+       2244.03,
+       1678.97,
+       1595.95,
+       1500.39,
+       1468.07
+      ]
+     },
+     "api": {
+      "median_ms": 2523.79,
+      "p95_ms": 3512.58,
+      "min_ms": 1744.68,
+      "max_ms": 3512.58,
+      "samples_ms": [
+       2903.88,
+       2234.99,
+       2141.18,
+       2465.75,
+       3343.75,
+       2581.84,
+       2424.32,
+       1744.68,
+       3512.58,
+       2941.16
+      ]
+     }
+    }
+   ],
+   "peak_rss_mb": 912.2
+  }
+ ]
+}
