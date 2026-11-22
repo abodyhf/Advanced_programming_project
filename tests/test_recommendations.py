@@ -2,7 +2,7 @@
 import json
 import random
 import pytest
-from watchtogether.graph import GraphStore, PARENTS, ROOT
+from watchtogether.graph import GraphStore, ROOT
 from watchtogether.recommender import Recommender
 from watchtogether.examples import EXAMPLES, as_rows
 import reference
@@ -23,7 +23,7 @@ def recommender(graph):
 
 @pytest.fixture(scope="module")
 def truth(graph):
-    return reference.load(STARTER, PARENTS)
+    return reference.load(STARTER, graph.genre_parents)
 
 
 @pytest.mark.parametrize("example", EXAMPLES, ids=[example["name"] for example in EXAMPLES])

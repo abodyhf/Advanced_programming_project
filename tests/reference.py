@@ -16,6 +16,7 @@ class Catalogue:
     def __init__(self, films, genre_parents):
         self.films = {film["id"]: film for film in films}
         self.parents = {child: set(parents) for child, parents in genre_parents.items()}
+        self._closures = {}
         self.labels = {}
         self.people = {}
         for film_id, film in self.films.items():
@@ -44,7 +45,9 @@ class Catalogue:
         return seen
 
     def genre_closure(self, film_id):
-        return {"genre:" + g for genre in self.films[film_id]["genres"] for g in self.ancestors(genre)}
+        if film_id not in self._closures:
+            self._closures[film_id] = {"genre:" + g for genre in self.films[film_id]["genres"] for g in self.ancestors(genre)}
+        return self._closures[film_id]
 
     def everyone(self, film_id):
         return set(self.people[film_id]["directors"]) | set(self.people[film_id]["cast"])
