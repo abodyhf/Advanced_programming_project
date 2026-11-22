@@ -153,6 +153,38 @@ class GraphStore:
         """Genres a film belongs to, including every parent of its tagged genres."""
         return sorted({ancestor for genre in self.movies[film_id]["genres"] for ancestor in self.ancestors(genre)})
 
+    def people(self, film_id, field):
+        """Person identifiers for a film's "directors" or "cast", as used in the graph."""
+        film = self.movies[film_id]
+        return film.get(field + "_ids") or ["person:" + slug(name) for name in film[field]]
+
+    def why(self, taste, film_id):
+        """A short, checkable sentence saying how a liked entity reaches a film."""
+        film, kind = self.movies[film_id], self.entities[taste]["kind"]
+        if taste == film_id:
+            return "this film"
+        if kind == "genre":
+            if taste[6:] in film["genres"]:
+                return "genre"
+            via = [self.entities["genre:" + tag]["label"] for tag in film["genres"] if taste[6:] in self.ancestors(tag)]
+            return "via " + ", ".join(via)
+        if kind == "person":
+            directs, acts = taste in self.people(film_id, "directors"), taste in self.people(film_id, "cast")
+            return "directs it and is in the cast" if directs and acts else "directs it" if directs else "in the cast"
+        parts = []
+        for field, heading in (("directors", "same director"), ("cast", "shared cast")):
+            theirs = set(self.people(film_id, field))
+            shared = [self.entities[person]["label"] for person in self.people(taste, field) if person in theirs]
+            if shared:
+                parts.append(f"{heading}: {', '.join(shared[:3])}")
+        shared = set(self.film_genres(taste)) & set(self.film_genres(film_id))
+        # Name the most specific shared genres: "Romantic Comedy", not also "Romance" and "Comedy".
+        specific = sorted(genre for genre in shared
+                          if not any(other != genre and genre in self.ancestors(other) for other in shared))
+        if specific:
+            parts.append("shared genre: " + ", ".join(self.entities["genre:" + genre]["label"] for genre in specific[:3]))
+        return "; ".join(parts)
+
     def search(self, query="", kind="all", limit=24):
         query = query.casefold().strip()
         values = [v for v in self.entities.values()

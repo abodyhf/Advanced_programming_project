@@ -42,6 +42,8 @@ class Recommender:
                 links = sorted(matched[film_id] & likes)
                 explanations.append({"member_id": member["id"], "nickname": member["nickname"],
                                      "match": round(100 * (sum(map(weight, links)) / total)),
-                                     "because": [self.graph.entities[item]["label"] for item in links]})
+                                     "because": [self.graph.entities[item]["label"] for item in links],
+                                     "reasons": [{"id": item, "label": self.graph.entities[item]["label"],
+                                                  "why": self.graph.why(item, film_id)} for item in links]})
             recommendations.append({**self.graph.movies[film_id], "score": -negative_score, "matches": explanations})
         return recommendations
