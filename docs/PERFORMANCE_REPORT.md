@@ -116,7 +116,7 @@ The starter catalogue is unaffected (0 films change).
 
 ## Regression budget
 
-`tests/test_big_catalogue.py::test_eight_member_groups_rank_within_budget` fails if the median of 3 calls for either 8-member benchmark group on 10,000 films takes 1 s or more (they took 1.6-1.8 s before; ~0.1-0.15 s now). It runs with the normal test command whenever `data/wikidata.json` is present; the file is in the repository, so the GitHub Actions workflow runs it too (CI was not observed for this report).
+`tests/test_big_catalogue.py::test_eight_member_groups_rank_within_budget` fails if the median of 3 calls for either 8-member benchmark group on 10,000 films takes 1 s or more (they took 1.6-1.8 s before; ~0.1-0.15 s now). It runs with the normal test command whenever `data/wikidata.json` is present; the file is in the repository, so the GitHub Actions workflow runs it too; the run for commit 3d51a35 passed on Python 3.11 and 3.12.
 
 ## Limits and next steps
 
