@@ -62,3 +62,10 @@ def test_like_reaches_compound_subgenres(small):
     assert {movie["title"] for movie in ranked} == {"Test 1", "Test 2", "Test 3", "Test 4", "Test 7"}
     western = small.rank([member("A", ["genre:western"]), member("B", ["genre:western"])], limit=50)
     assert [movie["title"] for movie in western] == ["Test 6", "Test 8"]
+
+
+def test_genre_audit_counts_what_the_old_tree_let_through():
+    from watchtogether.genre_audit import audit
+    films = [film(1, ["horror"]), film(2, ["slasher"]), film(3, ["comedy-horror"]), film(4, ["comedy"])]
+    [horror] = audit(films, ["horror"])
+    assert horror == {"dislike": "horror", "tagged": 1, "excluded_before": 1, "excluded_now": 3, "leaked_before": 2}
