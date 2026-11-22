@@ -26,13 +26,13 @@ python -m watchtogether.benchmark --repeats 10 --out docs/performance/after.json
 python -m watchtogether.benchmark --compare docs/performance/baseline.json docs/performance/after.json
 
 # the "before" numbers: same command on the commit before any change
-git worktree add ../baseline b7fbbe6
+git worktree add ../baseline 850de32
 cd ../baseline && python -m watchtogether.benchmark --repeats 10 --out ../before.json
 ```
 
 ## Result
 
-Before: commit b7fbbe6 (original code plus the benchmark), after: commit 360d256. Medians in ms, 10 timed runs each.
+Before: commit 850de32 (original code plus the benchmark), after: commit aa51144. Medians in ms, 10 timed runs each.
 
 | Catalogue | Members | Group | Rank before | Rank after | Speed-up | API before | API after | Speed-up |
 | --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -63,22 +63,22 @@ The shortlists are the same before and after, except where the genre fix below c
 `docs/performance/steps/` has a 10k-film run (5 timed calls) at each commit of the series, so every step can be checked on its own:
 
 ```bash
-python -m watchtogether.benchmark --summary docs/performance/baseline.json docs/performance/steps/{9060954,769fc80,d4054c9,d6a4f6f,50ae9fd,f7f6573,9950549,157328d,d24c6f8}.json docs/performance/after.json
+python -m watchtogether.benchmark --summary docs/performance/baseline.json docs/performance/steps/{025fc07,6adbe50,b2c6189,5e2ce91,4c38492,52bdae0,47b0156,4e31ae3,7249a9b}.json docs/performance/after.json
 ```
 
 | Step (commit) | Startup s | Rank 2 shared / mixed | Rank 4 shared / mixed | Rank 8 shared / mixed | API 8 shared / mixed | Slowest API call |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| baseline (b7fbbe6) | 45.1 | 416 / 443 | 900 / 890 | 1771 / 1637 | 2667 / 2524 | 4706 |
-| 1. genre tree fix (9060954) | 43.6 | 494 / 473 | 978 / 1458 | 2076 / 1774 | 3993 / 2669 | 5005 |
-| 2. genre closure stored, new query shape (769fc80) | 45.3 | 250 / 238 | 642 / 270 | 633 / 398 | 2553 / 1328 | 3032 |
-| 3. one query per group (d4054c9) | 50.2 | 145 / 131 | 129 / 252 | 199 / 327 | 545 / 1064 | 1639 |
-| 4. rows read as tuples (d6a4f6f) | 46.3 | 111 / 88 | 108 / 141 | 118 / 288 | 910 / 1288 | 1728 |
-| 5. each genre/person read once (50ae9fd) | 50.9 | 121 / 83 | 102 / 149 | 127 / 203 | 397 / 398 | 925 |
-| 6. N-Triples at startup (f7f6573) | 24.8 | 118 / 80 | 138 / 161 | 132 / 187 | 485 / 421 | 1537 |
-| 7. SQLite sync at checkpoints (9950549) | 26.6 | 118 / 78 | 136 / 140 | 144 / 182 | 190 / 228 | 1407 |
-| 8. reasons in explanations (157328d) | 28.2 | 120 / 57 | 137 / 133 | 146 / 222 | 177 / 254 | 1454 |
-| 9. garbage collector freeze (d24c6f8) | 23.4 | 107 / 70 | 64 / 133 | 107 / 191 | 200 / 233 | 263 |
-| final (360d256) | 25.2 | 118 / 44 | 94 / 100 | 88 / 149 | 131 / 243 | 498 |
+| baseline (850de32) | 45.1 | 416 / 443 | 900 / 890 | 1771 / 1637 | 2667 / 2524 | 4706 |
+| 1. genre tree fix (025fc07) | 43.6 | 494 / 473 | 978 / 1458 | 2076 / 1774 | 3993 / 2669 | 5005 |
+| 2. genre closure stored, new query shape (6adbe50) | 45.3 | 250 / 238 | 642 / 270 | 633 / 398 | 2553 / 1328 | 3032 |
+| 3. one query per group (b2c6189) | 50.2 | 145 / 131 | 129 / 252 | 199 / 327 | 545 / 1064 | 1639 |
+| 4. rows read as tuples (5e2ce91) | 46.3 | 111 / 88 | 108 / 141 | 118 / 288 | 910 / 1288 | 1728 |
+| 5. each genre/person read once (4c38492) | 50.9 | 121 / 83 | 102 / 149 | 127 / 203 | 397 / 398 | 925 |
+| 6. N-Triples at startup (52bdae0) | 24.8 | 118 / 80 | 138 / 161 | 132 / 187 | 485 / 421 | 1537 |
+| 7. SQLite sync at checkpoints (47b0156) | 26.6 | 118 / 78 | 136 / 140 | 144 / 182 | 190 / 228 | 1407 |
+| 8. reasons in explanations (4e31ae3) | 28.2 | 120 / 57 | 137 / 133 | 146 / 222 | 177 / 254 | 1454 |
+| 9. garbage collector freeze (7249a9b) | 23.4 | 107 / 70 | 64 / 133 | 107 / 191 | 200 / 233 | 263 |
+| final (aa51144) | 25.2 | 118 / 44 | 94 / 100 | 88 / 149 | 131 / 243 | 498 |
 
 With 5 calls per point and a shared machine, single cells move by ±30% between runs; the trend per step is what matters.
 
@@ -116,7 +116,7 @@ The starter catalogue is unaffected (0 films change).
 
 ## Regression budget
 
-`tests/test_big_catalogue.py::test_eight_member_groups_rank_within_budget` fails if the median of 3 calls for either 8-member benchmark group on 10,000 films takes 1 s or more (they took 1.6-1.8 s before; ~0.1-0.15 s now). It runs with the normal test command whenever `data/wikidata.json` is present; the file is in the repository, so the GitHub Actions workflow runs it too; the run for commit 3d51a35 passed on Python 3.11 and 3.12.
+`tests/test_big_catalogue.py::test_eight_member_groups_rank_within_budget` fails if the median of 3 calls for either 8-member benchmark group on 10,000 films takes 1 s or more (they took 1.6-1.8 s before; ~0.1-0.15 s now). It runs with the normal test command whenever `data/wikidata.json` is present; the file is in the repository, so the GitHub Actions workflow runs it too; its run passed on Python 3.11 and 3.12.
 
 ## Limits and next steps
 
