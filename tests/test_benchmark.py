@@ -22,3 +22,10 @@ def test_benchmark_groups_are_the_same_every_run():
     graph = GraphStore(ROOT / "data/catalog.json")
     assert benchmark.scenarios(graph, 4, 2026) == benchmark.scenarios(graph, 4, 2026)
     assert benchmark.scenarios(graph, 4, 2026) != benchmark.scenarios(graph, 4, 1)
+
+
+def test_compare_prints_one_row_per_measured_group():
+    saved = ROOT / "docs/performance/baseline.json"
+    table = benchmark.compare(saved, saved)
+    groups = sum(len(catalog["groups"]) for catalog in json.loads(saved.read_text())["catalogs"])
+    assert table.count("1.0x") == 2 * groups  # rank and API, identical runs

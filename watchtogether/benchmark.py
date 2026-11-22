@@ -148,13 +148,45 @@ def environment():
             "cpu_count": os.cpu_count()}
 
 
+def compare(before_path, after_path):
+    """Markdown table of two saved runs (same seed, groups and repeats)."""
+    before, after = (json.loads(Path(path).read_text(encoding="utf-8")) for path in (before_path, after_path))
+    lines = [f"Before: commit {before['environment']['commit']}, after: commit {after['environment']['commit']}; "
+             f"{after['repeats']} timed runs each, medians in ms.", "",
+             "| Catalogue | Members | Group | Rank before | Rank after | Speed-up | API before | API after | Speed-up |",
+             "| --- | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: |"]
+    old = {(c["catalog"], g["members"], g["scenario"]): g for c in before["catalogs"] for g in c["groups"]}
+    for catalog in after["catalogs"]:
+        for group in catalog["groups"]:
+            was = old.get((catalog["catalog"], group["members"], group["scenario"]))
+            if not was:
+                continue
+            cells = []
+            for part in ("rank", "api"):
+                a, b = was[part]["median_ms"], group[part]["median_ms"]
+                cells += [f"{a:.1f}", f"{b:.1f}", f"{a / b:.1f}x" if b else "-"]
+            lines.append(f"| {catalog['catalog']} | {group['members']} | {group['scenario']} | " + " | ".join(cells) + " |")
+    lines += ["", "| Catalogue | Startup before | Startup after | Peak memory before | Peak memory after |",
+              "| --- | ---: | ---: | ---: | ---: |"]
+    starts = {c["catalog"]: c for c in before["catalogs"]}
+    for catalog in after["catalogs"]:
+        was = starts.get(catalog["catalog"], {})
+        lines.append(f"| {catalog['catalog']} | {was.get('startup_s', '-')} s | {catalog['startup_s']} s | "
+                     f"{was.get('peak_rss_mb', '-')} MB | {catalog.get('peak_rss_mb', '-')} MB |")
+    return "\n".join(lines)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--catalog", action="append", help="catalogue JSON (repeatable); default: starter and data/wikidata.json")
     parser.add_argument("--repeats", type=int, default=10)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--out", type=Path, help="write the raw results as JSON")
+    parser.add_argument("--compare", nargs=2, metavar=("BEFORE", "AFTER"), help="print a table from two saved runs")
     args = parser.parse_args(argv)
+    if args.compare:
+        print(compare(*args.compare))
+        return None
     catalogs = args.catalog or [str(ROOT / "data/catalog.json")] + ([str(ROOT / "data/wikidata.json")] if (ROOT / "data/wikidata.json").exists() else [])
     report = {"environment": environment(), "repeats": args.repeats, "seed": args.seed, "catalogs": []}
     for catalog in catalogs:
