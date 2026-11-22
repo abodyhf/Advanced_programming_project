@@ -18,3 +18,14 @@ def test_wal_is_not_checkpointed_after_every_request(tmp_path):
     assert (tmp_path / "rooms.sqlite3-wal").exists()
     db.close()
     assert not (tmp_path / "rooms.sqlite3-wal").exists()
+
+
+def test_startup_objects_are_kept_out_of_garbage_collection(tmp_path):
+    # With the 10k-film graph loaded, one full collection pass took ~750 ms and landed
+    # inside random requests. Freezing what startup built makes those passes ~0 ms.
+    import gc
+    from fastapi.testclient import TestClient
+    from watchtogether.api import create_app
+    gc.unfreeze()
+    with TestClient(create_app(tmp_path)):
+        assert gc.get_freeze_count() > 1000

@@ -1,5 +1,6 @@
 """REST API and browser UI. No e-mail, passwords, LLM, or API keys required."""
 import asyncio
+import gc
 from contextlib import asynccontextmanager
 import hashlib
 import json
@@ -85,6 +86,10 @@ def create_app(data_dir=None, catalog_path=None):
                 await asyncio.sleep(3600)
                 await asyncio.to_thread(db.cleanup)
         task = asyncio.create_task(expiry_loop())
+        # The film graph is millions of long-lived objects; a full garbage-collection pass over
+        # them took ~750 ms on 10k films and could land inside any request. Park them for good.
+        gc.collect()
+        gc.freeze()
         yield
         task.cancel()
         try:
