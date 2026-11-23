@@ -13,3 +13,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m pip install -r requirements-dev.txt
       - run: python -m pytest tests -q
+      - name: Validate the shipped catalogues
+        run: |
+          python -m watchtogether.validate_catalog data/wikidata.json
+          python -m watchtogether.validate_catalog data/catalog.json
