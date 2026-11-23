@@ -287,6 +287,36 @@ def test_state_survives_new_app_instance(client,tmp_path):
         state=reopened.get(f'/api/groups/{gid}',headers=auth(people[0])).json()
         assert state['me']['nickname']=='Deniz' and state['me']['ready']
 
+def test_filtered_shortlist_survives_restart(client, tmp_path):
+    from fastapi.testclient import TestClient
+    from watchtogether.api import create_app
+
+    gid, people = make_group(client, likes=["film:inception-2010", "genre:comedy", "genre:drama"])
+    group = f"/api/groups/{gid}"
+    headers = auth(people[0])
+    options = client.get("/api/catalog/filters").json()
+    assert options["has_runtime"] and "English" in options["languages"]
+    filters = {"min_year": 2010, "max_year": 2010, "max_runtime": 148, "language": "English"}
+    endpoint = group + "/recommendations"
+    assert client.post(endpoint, headers=auth(people[1]), json=filters).status_code == 403
+    assert client.post(endpoint, headers=headers, json={**filters, "min_year": 2011}).status_code == 422
+    assert client.post(endpoint, headers=headers, json={**filters, "max_runtime": 1}).status_code == 409
+
+    response = client.post(endpoint + "?allow_compromise=true", headers=headers, json=filters)
+    assert response.status_code == 200, response.text
+    shortlist = response.json()["recommendations"]
+    assert any(movie["id"] == "film:inception-2010" for movie in shortlist)
+    for movie in shortlist:
+        assert movie["year"] == 2010
+        assert movie["runtime_minutes"] <= 148
+        assert "English" in movie["languages"]
+
+    with TestClient(create_app(tmp_path)) as reopened:
+        state = reopened.get(group, headers=auth(people[1])).json()
+        assert state["filters"] == filters
+        assert reopened.post(group + "/reset", headers=headers).status_code == 200
+        assert reopened.get(group, headers=headers).json()["filters"] == {}
+
 def test_expired_room_cannot_be_revived_by_a_read(client):
     gid,people=make_group(client)
     with client.app.state.db.transaction() as connection:

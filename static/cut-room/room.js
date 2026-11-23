@@ -55,6 +55,7 @@ let active = 0;
 let chapter = 0;
 let moving = false;
 let matchConflict = null;
+let matchConflictMessage = '';
 let touchStart;
 
 function art(genre) {
@@ -260,6 +261,42 @@ function drawPicks() {
   `).join('')}</ul>` : '<p>No tastes picked yet. Like or avoid an item from the deck or catalogue.</p>';
 }
 
+async function loadFilterOptions() {
+  try {
+    const options = await api('/catalog/filters');
+    $('#runtime-filter').hidden = !options.has_runtime;
+    $('#language-filter').hidden = !options.languages.length;
+    $('#filter-coverage').hidden = !options.has_runtime && !options.languages.length;
+    for (const language of options.languages) {
+      $('#movie-language').add(new Option(language, language));
+    }
+  } catch (error) {
+    note(error.message, true);
+  }
+}
+
+function buildShortlist(allowCompromise = false) {
+  const fields = {'max_runtime': '#max-runtime', 'min_year': '#min-year', 'max_year': '#max-year'};
+  const filters = {};
+  for (const [key, selector] of Object.entries(fields)) {
+    const input = $(selector);
+    if (!input.reportValidity()) return;
+    if (input.value) filters[key] = input.valueAsNumber;
+  }
+  if (filters.min_year > filters.max_year) {
+    note('The first release year must be at or before the last release year.', true);
+    return;
+  }
+  const language = $('#movie-language').value;
+  if (language) filters.language = language;
+  return submit('/recommendations' + (allowCompromise ? '?allow_compromise=true' : ''), 'POST', filters);
+}
+
+$('#movie-filters').addEventListener('input', () => {
+  matchConflict = null;
+  drawProgress();
+});
+
 function drawProgress() {
   if (!editable()) return;
   const choices = profile();
@@ -273,6 +310,8 @@ function drawProgress() {
   save.disabled = busy || !valid || saved;
   save.hidden = saved && host();
   save.innerHTML = saved ? 'Tastes saved <span aria-hidden="true">✓</span>' : 'Save my tastes <span aria-hidden="true">↗</span>';
+  $('#movie-filters').hidden = !host();
+  for (const input of $('#movie-filters').querySelectorAll('input, select')) input.disabled = busy;
   shortlistButton.hidden = !host() || !saved;
   shortlistButton.disabled = busy || !ready;
   const recovery = $('#match-recovery');
@@ -284,8 +323,8 @@ function drawProgress() {
     const hasOption = matchConflict === 'no_full_match';
     $('#recovery-title').textContent = hasOption ? 'No film matches everyone' : 'No films fit these choices';
     $('#recovery-copy').textContent = hasOption
-      ? 'A compromise ballot can match fewer guests while still respecting every Avoid.'
-      : 'Even the compromise search found no film that matches a Like and respects every Avoid. Add another Like or remove an Avoid you’re flexible on, then save again.';
+      ? matchConflictMessage + ' A compromise ballot can match fewer guests while still respecting every Avoid.'
+      : matchConflictMessage;
   }
   if (!valid) progressHelp.textContent = picks.size >= 3 ? 'Add at least one Like to continue.' : 'Pick at least three tastes.';
   else if (!saved) progressHelp.textContent = 'Save these tastes to mark yourself ready.';
@@ -422,11 +461,15 @@ async function submit(action, method = 'POST', body) {
       return;
     }
     if (action === '/votes') note('Vote recorded.');
+    if (action === '/reset') {
+      for (const input of $('#movie-filters').querySelectorAll('input, select')) input.value = '';
+    }
     await refreshRoom({force: true});
     return result;
   } catch (error) {
     if (['no_full_match', 'no_compromise'].includes(error.conflict)) {
       matchConflict = error.conflict;
+      matchConflictMessage = error.message;
       drawProgress();
       $('#recovery-title').focus();
     } else note(error.message, true);
@@ -443,6 +486,14 @@ const movieGenres = movie => movie.genres.slice(0, 2).map(value => value.replace
 const filmTally = movie => room.tally[movie.id] || 0;
 
 function drawBallot(animate) {
+  const {max_runtime, min_year, max_year, language} = room.filters || {};
+  const filters = [
+    max_runtime && `Up to ${max_runtime} min`,
+    min_year && max_year ? `${min_year}–${max_year}` : min_year ? `${min_year} and later` : max_year && `${max_year} and earlier`,
+    language,
+  ].filter(Boolean);
+  $('#ballot-filters').textContent = filters.join(' · ');
+  $('#ballot-filters').hidden = !filters.length;
   const open = new Set([...ballot.querySelectorAll('details[open]')].map(details => details.dataset.film));
   const compromise = room.recommendations.some(movie => movie.matches.some(match => !match.because.length));
   $('#ballot-label').textContent = compromise ? 'Compromise ballot' : 'Group ballot';
@@ -458,6 +509,7 @@ function drawBallot(animate) {
       <div class="film-poster" data-art="rose"><span aria-hidden="true">${esc(movie.title)}</span>${poster(movie)}</div>
       <h2>${esc(movie.title)}</h2>
       <p>${esc(movie.year)} · ${esc(movieGenres(movie))}</p>
+      ${movie.runtime_minutes || movie.languages?.length ? `<p>${esc([movie.runtime_minutes && `${movie.runtime_minutes} min`, movie.languages?.join(', ')].filter(Boolean).join(' · '))}</p>` : ''}
       <details class="match-details" data-film="${esc(movie.id)}" ${open.has(movie.id) ? 'open' : ''}>
         <summary>${compromise ? `Matches ${movie.matches.filter(match => match.because.length).length} of ${movie.matches.length} guests` : `${Math.round(movie.score)}% taste match`}</summary>
         ${movie.matches.map(match => `<div><strong>${esc(match.nickname)} · ${match.match}%</strong>
@@ -699,8 +751,8 @@ document.addEventListener('click', async event => {
     return;
   }
   if (button === $('#save-button')) { await submit('/profile', 'PUT', profile()); return; }
-  if (button === shortlistButton) { await submit('/recommendations'); return; }
-  if (action === 'start-compromise') { await submit('/recommendations?allow_compromise=true'); return; }
+  if (button === shortlistButton) { await buildShortlist(); return; }
+  if (action === 'start-compromise') { await buildShortlist(true); return; }
   if (genre !== undefined && editable()) { moveTo(Number(genre), null, Math.sign(Number(genre) - active)); return; }
   if (vote && room?.phase === 'voting' && !room.my_vote) {
     button.disabled = true;
@@ -757,6 +809,7 @@ if (validRoomId(roomId)) {
   if (params.has('room')) history.replaceState(null, '', roomPath(roomId));
   refreshRoom();
   loadFeaturedGenres();
+  loadFilterOptions();
   setInterval(() => { if (!document.hidden && !busy) refreshRoom({quiet: true}); }, 2500);
   document.addEventListener('visibilitychange', () => { if (!document.hidden && !busy) refreshRoom({quiet: true}); });
 } else if (roomId || location.pathname.startsWith('/g/')) {

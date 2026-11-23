@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS groups (
  id TEXT PRIMARY KEY, title TEXT NOT NULL, owner_id TEXT NOT NULL,
  phase TEXT NOT NULL DEFAULT 'collecting', created_at REAL NOT NULL,
  last_used REAL NOT NULL, recommendations TEXT NOT NULL DEFAULT '[]',
- winner TEXT, is_demo INTEGER NOT NULL DEFAULT 0
+ winner TEXT, filters TEXT NOT NULL DEFAULT '{}', is_demo INTEGER NOT NULL DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS members (
  id TEXT PRIMARY KEY, group_id TEXT NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
@@ -34,6 +34,10 @@ class Database:
         connection = self.connect()
         connection.executescript(SCHEMA)
         connection.close()
+        with self.transaction() as connection:
+            columns = {column["name"] for column in connection.execute("PRAGMA table_info(groups)")}
+            if "filters" not in columns:
+                connection.execute("ALTER TABLE groups ADD COLUMN filters TEXT NOT NULL DEFAULT '{}'")
         # SQLite checkpoints and deletes the WAL when its last connection closes, which costs
         # extra fsyncs on every request. An idle connection keeps the WAL between requests.
         self._idle = sqlite3.connect(self.path, check_same_thread=False)  # never queried again, only closed

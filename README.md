@@ -26,6 +26,7 @@ On macOS/Linux, use `python3` if `python` is not available. On Windows, `py` can
 2. Choose **Invite friends**, then **Copy invite link** and send it to your friends.
 3. Each person joins with a different nickname and selects at least three tastes, including at least one like. Use the genre deck or **Browse catalogue** to search films, genres, actors, or directors.
 4. Everyone clicks **Save my tastes**. When 2–8 members are ready, the organiser clicks **Build our shortlist**.
+   The organiser can open **Movie filters** and set a maximum runtime in minutes, an inclusive release-year range, or an original language. Filters also apply to compromise ballots. Runtime and language filters include only films with the corresponding metadata.
 5. Each member votes once. Voting closes automatically when everyone has voted, or the organiser can close it after at least one vote.
 6. The film with the most votes wins. A tie goes to the film higher on the shortlist.
 
@@ -88,7 +89,7 @@ Open the HTTPS address printed by cloudflared. The Quick Tunnel costs $0 and sta
 | Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
 | Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
 | UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
-| Quality checks | 106 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
+| Quality checks | 107 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
 | Performance | Repeatable benchmark for groups of 2, 4 and 8 on both catalogues; 8 people on 10,000 films rank in 0.09–0.15 s (was 1.6–1.8 s); see `docs/PERFORMANCE_REPORT.md` |
 
 ## Movie data and the 10,000-film goal

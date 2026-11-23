@@ -12,7 +12,7 @@ class Recommender:
     def __init__(self, graph):
         self.graph = graph
 
-    def rank(self, members, limit=5, *, allow_compromise=False):
+    def rank(self, members, limit=5, *, allow_compromise=False, eligible=None):
         profiles = []
         for member in members:
             likes = json.loads(member["likes"])
@@ -24,7 +24,7 @@ class Recommender:
         excluded = self.graph.links_for(group_dislikes, expand_films=False)
         scored = []
         for film_id, tastes in matched.items():
-            if film_id in excluded:
+            if film_id in excluded or (eligible is not None and film_id not in eligible):
                 continue
             scores = []
             for _, likes, total, _ in profiles:

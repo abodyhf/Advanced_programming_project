@@ -79,6 +79,10 @@ class GraphStore:
         catalog = json.loads(self.catalog_path.read_text(encoding="utf-8"))
         self.source = catalog["source"]
         self.movies = {film["id"]: film for film in catalog["films"]}
+        metadata_path = ROOT / "data/movie-filter-metadata.json"
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))["films"]
+        for film_id in self.movies.keys() & metadata.keys():
+            self.movies[film_id] = {**metadata[film_id], **self.movies[film_id]}
         if len(self.movies) != len(catalog["films"]):
             raise ValueError("Catalogue contains duplicate film identifiers")
         self.entities = {}

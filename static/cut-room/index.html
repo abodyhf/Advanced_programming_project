@@ -55,6 +55,20 @@
           <button type="button" class="text-button" data-dialog="picks-dialog">Review picks <span aria-hidden="true">↗</span></button>
         </div>
         <button type="button" class="continue" id="save-button" disabled>Save my tastes <span aria-hidden="true">↗</span></button>
+        <details class="movie-filters" id="movie-filters" hidden>
+          <summary>Movie filters</summary>
+          <label id="runtime-filter" hidden>Maximum runtime (minutes)
+            <input type="number" id="max-runtime" min="1" step="1">
+          </label>
+          <div class="filter-years">
+            <label>Release year from <input type="number" id="min-year" min="1870" max="2100" step="1"></label>
+            <label>Through <input type="number" id="max-year" min="1870" max="2100" step="1"></label>
+          </div>
+          <label id="language-filter" hidden>Original language
+            <select id="movie-language"><option value="">Any language</option></select>
+          </label>
+          <p id="filter-coverage" hidden>Runtime and language filters only include films with known values.</p>
+        </details>
         <button type="button" class="continue" id="shortlist-button" hidden disabled>Build our shortlist <span aria-hidden="true">↗</span></button>
         <p class="progress-help" id="progress-help"></p>
         <section class="match-recovery" id="match-recovery" aria-labelledby="recovery-title" hidden>
@@ -92,6 +106,7 @@
       <div class="brief">
         <h1 id="ballot-title" tabindex="-1">Make<br> the cut<span>.</span></h1>
         <p id="ballot-copy">Choose one film. The film with the most votes wins.</p>
+        <p id="ballot-filters" hidden></p>
         <div class="after-tastes">
           <button type="button" class="text-button" data-dialog="logic-dialog">How the shortlist works ↗</button>
           <button type="button" class="text-button" data-dialog="picks-dialog">Review my tastes ↗</button>

@@ -1,0 +1,2963 @@
+{
+  "source": "Wikidata (CC0), duration (P2047) and original language (P364)",
+  "films": {
+    "film:inception-2010": {
+      "runtime_minutes": 148,
+      "languages": [
+        "English",
+        "French",
+        "Japanese"
+      ]
+    },
+    "film:interstellar-2014": {
+      "runtime_minutes": 169,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-dark-knight-2008": {
+      "runtime_minutes": 155,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-prestige-2006": {
+      "runtime_minutes": 125,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-martian-2015": {
+      "runtime_minutes": 141,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:arrival-2016": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:blade-runner-2049-2017": {
+      "runtime_minutes": 164,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:dune-2021": {
+      "runtime_minutes": 155,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:everything-everywhere-all-at-once-2022": {
+      "runtime_minutes": 139,
+      "languages": [
+        "Cantonese",
+        "English",
+        "Mandarin"
+      ]
+    },
+    "film:back-to-the-future-1985": {
+      "runtime_minutes": 115,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-truman-show-1998": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:eternal-sunshine-of-the-spotless-mind-2004": {
+      "runtime_minutes": 104,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:knives-out-2019": {
+      "runtime_minutes": 130,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:glass-onion-2022": {
+      "runtime_minutes": 140,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-grand-budapest-hotel-2014": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:fantastic-mr-fox-2009": {
+      "runtime_minutes": 87,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:isle-of-dogs-2018": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English",
+        "Japanese"
+      ]
+    },
+    "film:moonrise-kingdom-2012": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-life-aquatic-with-steve-zissou-2004": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-royal-tenenbaums-2001": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:little-miss-sunshine-2006": {
+      "runtime_minutes": 98,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-secret-life-of-walter-mitty-2013": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:hunt-for-the-wilderpeople-2016": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:jojo-rabbit-2019": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:what-we-do-in-the-shadows-2014": {
+      "runtime_minutes": 86,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:spirited-away-2001": {
+      "runtime_minutes": 125,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:howl-s-moving-castle-2004": {
+      "runtime_minutes": 119,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:my-neighbor-totoro-1988": {
+      "runtime_minutes": 86,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:princess-mononoke-1997": {
+      "runtime_minutes": 128,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:kiki-s-delivery-service-1989": {
+      "runtime_minutes": 103,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:your-name-2016": {
+      "runtime_minutes": 107,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:toy-story-1995": {
+      "runtime_minutes": 80,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "film:toy-story-2-1999": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:finding-nemo-2003": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:wall-e-2008": {
+      "runtime_minutes": 98,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:up-2009": {
+      "runtime_minutes": 96,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:inside-out-2015": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:soul-2020": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:coco-2017": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "film:ratatouille-2007": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English",
+        "French"
+      ]
+    },
+    "film:the-incredibles-2004": {
+      "runtime_minutes": 111,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:spider-man-into-the-spider-verse-2018": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:paddington-2-2017": {
+      "runtime_minutes": 103,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:paddington-2014": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:wonka-2023": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-princess-bride-1987": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:stardust-2007": {
+      "runtime_minutes": 127,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-lord-of-the-rings-the-fellowship-of-the-ring-2001": {
+      "runtime_minutes": 178,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:harry-potter-and-the-prisoner-of-azkaban-2004": {
+      "runtime_minutes": 141,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:jurassic-park-1993": {
+      "runtime_minutes": 127,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:catch-me-if-you-can-2002": {
+      "runtime_minutes": 140,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-terminal-2004": {
+      "runtime_minutes": 128,
+      "languages": [
+        "English",
+        "French",
+        "Russian"
+      ]
+    },
+    "film:forrest-gump-1994": {
+      "runtime_minutes": 142,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-shawshank-redemption-1994": {
+      "runtime_minutes": 142,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-green-mile-1999": {
+      "runtime_minutes": 189,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-social-network-2010": {
+      "runtime_minutes": 121,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:gone-girl-2014": {
+      "runtime_minutes": 149,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:fight-club-1999": {
+      "runtime_minutes": 139,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-curious-case-of-benjamin-button-2008": {
+      "runtime_minutes": 166,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:ocean-s-eleven-2001": {
+      "runtime_minutes": 112,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:logan-lucky-2017": {
+      "runtime_minutes": 119,
+      "languages": [
+        "American English"
+      ]
+    },
+    "film:the-nice-guys-2016": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:la-la-land-2016": {
+      "runtime_minutes": 128,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:whiplash-2014": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-notebook-2004": {
+      "runtime_minutes": 123,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:about-time-2013": {
+      "runtime_minutes": 123,
+      "languages": [
+        "English",
+        "German"
+      ]
+    },
+    "film:notting-hill-1999": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "film:crazy-rich-asians-2018": {
+      "runtime_minutes": 116,
+      "languages": [
+        "Cantonese",
+        "English",
+        "French",
+        "Malay",
+        "Singaporean Hokkien",
+        "Singaporean Mandarin"
+      ]
+    },
+    "film:get-out-2017": {
+      "runtime_minutes": 104,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:us-2019": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:a-quiet-place-2018": {
+      "runtime_minutes": 90,
+      "languages": [
+        "American Sign Language",
+        "English"
+      ]
+    },
+    "film:alien-1979": {
+      "runtime_minutes": 117,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-shining-1980": {
+      "runtime_minutes": 144,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:parasite-2019": {
+      "runtime_minutes": 132,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:the-grandmaster-2013": {
+      "runtime_minutes": 130,
+      "languages": [
+        "Chinese"
+      ]
+    },
+    "film:mad-max-fury-road-2015": {
+      "runtime_minutes": 120,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-matrix-1999": {
+      "runtime_minutes": 136,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:john-wick-2014": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:guardians-of-the-galaxy-2014": {
+      "runtime_minutes": 121,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:the-avengers-2012": {
+      "runtime_minutes": 142,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q593": {
+      "runtime_minutes": 103,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q11621": {
+      "runtime_minutes": 115,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q18418": {
+      "runtime_minutes": 60,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q19405": {
+      "runtime_minutes": 133,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q72909": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q74958": {
+      "runtime_minutes": 143,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q80609": {
+      "runtime_minutes": 105,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q82989": {
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q84220": {
+      "runtime_minutes": 111,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q105801": {
+      "runtime_minutes": 121,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q123166": {
+      "runtime_minutes": 250,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q126376": {
+      "runtime_minutes": 105,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q127665": {
+      "runtime_minutes": 96,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q128945": {
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q129657": {
+      "runtime_minutes": 130,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q132266": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q135465": {
+      "runtime_minutes": 88,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q151705": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q25503": {
+      "runtime_minutes": 129,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q25454": {
+      "runtime_minutes": 101,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q29327": {
+      "runtime_minutes": 150,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q32228": {
+      "runtime_minutes": 103,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q38143": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q41132": {
+      "runtime_minutes": 98,
+      "languages": [
+        "English",
+        "French"
+      ]
+    },
+    "film:Q45386": {
+      "runtime_minutes": 80,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q59249": {
+      "runtime_minutes": 93,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q59722": {
+      "runtime_minutes": 117,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q64017": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q152105": {
+      "runtime_minutes": 143,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q153685": {
+      "runtime_minutes": 77
+    },
+    "film:Q157975": {
+      "runtime_minutes": 127,
+      "languages": [
+        "English",
+        "German"
+      ]
+    },
+    "film:Q161259": {
+      "runtime_minutes": 70,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q168889": {
+      "runtime_minutes": 70,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q172271": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q175222": {
+      "runtime_minutes": 82,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q182300": {
+      "runtime_minutes": 155,
+      "languages": [
+        "Thai"
+      ]
+    },
+    "film:Q178094": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q180244": {
+      "runtime_minutes": 90,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q185658": {
+      "runtime_minutes": 127,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q185888": {
+      "runtime_minutes": 121,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q187276": {
+      "runtime_minutes": 105,
+      "languages": [
+        "French",
+        "German"
+      ]
+    },
+    "film:Q191418": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q194766": {
+      "runtime_minutes": 60,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q195949": {
+      "runtime_minutes": 96,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q208572": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q211222": {
+      "runtime_minutes": 105,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q212675": {
+      "runtime_minutes": 97,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q217182": {
+      "runtime_minutes": 105,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q199732": {
+      "runtime_minutes": 112,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q200672": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "film:Q201234": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q219988": {
+      "runtime_minutes": 73,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q221983": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q244900": {
+      "runtime_minutes": 100,
+      "languages": [
+        "Bosnian"
+      ]
+    },
+    "film:Q245815": {
+      "runtime_minutes": 101,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q248505": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q232106": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q232251": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q239794": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q260208": {
+      "runtime_minutes": 113,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q261854": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q264893": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q267063": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q251585": {
+      "runtime_minutes": 77,
+      "languages": [
+        "Russian"
+      ]
+    },
+    "film:Q253331": {
+      "runtime_minutes": 96,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q257515": {
+      "runtime_minutes": 79,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q270599": {
+      "runtime_minutes": 120,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q276299": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q277527": {
+      "runtime_minutes": 105,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q280292": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English",
+        "Polish"
+      ]
+    },
+    "film:Q281830": {
+      "runtime_minutes": 120,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q283555": {
+      "runtime_minutes": 140,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q284184": {
+      "runtime_minutes": 156,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q300622": {
+      "runtime_minutes": 100,
+      "languages": [
+        "Mandarin"
+      ]
+    },
+    "film:Q303095": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q303999": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q309459": {
+      "runtime_minutes": 90,
+      "languages": [
+        "Arabic"
+      ]
+    },
+    "film:Q314642": {
+      "runtime_minutes": 105,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q318169": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q320064": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English",
+        "French"
+      ]
+    },
+    "film:Q322872": {
+      "runtime_minutes": 123,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q324011": {
+      "runtime_minutes": 124,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q325355": {
+      "runtime_minutes": 115,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q327214": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q371413": {
+      "runtime_minutes": 80,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q337747": {
+      "runtime_minutes": 104,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q339648": {
+      "runtime_minutes": 118,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q343711": {
+      "runtime_minutes": 92,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q332497": {
+      "runtime_minutes": 121,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q373652": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q375454": {
+      "runtime_minutes": 97,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q377039": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q392924": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q402645": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q407749": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q425669": {
+      "runtime_minutes": 96,
+      "languages": [
+        "Swedish"
+      ]
+    },
+    "film:Q379319": {
+      "runtime_minutes": 114,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q388319": {
+      "runtime_minutes": 116,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q389548": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q386522": {
+      "runtime_minutes": 94,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q426332": {
+      "runtime_minutes": 100,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q428761": {
+      "runtime_minutes": 117,
+      "languages": [
+        "Mandarin"
+      ]
+    },
+    "film:Q429673": {
+      "languages": [
+        "Telugu"
+      ]
+    },
+    "film:Q427386": {
+      "runtime_minutes": 123,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q441780": {
+      "runtime_minutes": 87,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q444063": {
+      "runtime_minutes": 107,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q449222": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q451603": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q457333": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q461540": {
+      "runtime_minutes": 132,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q463869": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q464638": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q465979": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q466593": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English",
+        "Hebrew"
+      ]
+    },
+    "film:Q467251": {
+      "runtime_minutes": 96,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q468572": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q470393": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q471159": {
+      "runtime_minutes": 138,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q477307": {
+      "runtime_minutes": 88,
+      "languages": [
+        "Norwegian"
+      ]
+    },
+    "film:Q478212": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q480273": {
+      "runtime_minutes": 100,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q482632": {
+      "runtime_minutes": 115,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q484068": {
+      "runtime_minutes": 100,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q485144": {
+      "runtime_minutes": 103,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q486065": {
+      "runtime_minutes": 84,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q487348": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q488376": {
+      "runtime_minutes": 160,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q490300": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q491442": {
+      "runtime_minutes": 136,
+      "languages": [
+        "English",
+        "German"
+      ]
+    },
+    "film:Q492108": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q497303": {
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q498765": {
+      "runtime_minutes": 106,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q499680": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q500916": {
+      "runtime_minutes": 88,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q502363": {
+      "runtime_minutes": 139,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q504829": {
+      "runtime_minutes": 97,
+      "languages": [
+        "Tamil"
+      ]
+    },
+    "film:Q506418": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q507285": {
+      "runtime_minutes": 88,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q509169": {
+      "runtime_minutes": 145,
+      "languages": [
+        "Hungarian"
+      ]
+    },
+    "film:Q511505": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q514357": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Swedish"
+      ]
+    },
+    "film:Q525289": {
+      "runtime_minutes": 108,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q528601": {
+      "runtime_minutes": 105,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q531362": {
+      "runtime_minutes": 90,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q534447": {
+      "runtime_minutes": 105,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q518906": {
+      "runtime_minutes": 106,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q522235": {
+      "runtime_minutes": 82,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q539442": {
+      "runtime_minutes": 91,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q542465": {
+      "runtime_minutes": 104,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q550520": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q553603": {
+      "runtime_minutes": 98,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q548978": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q562548": {
+      "runtime_minutes": 112,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q564614": {
+      "runtime_minutes": 92,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q567897": {
+      "runtime_minutes": 91,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q628851": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q631103": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q633131": {
+      "runtime_minutes": 103,
+      "languages": [
+        "English",
+        "Norwegian"
+      ]
+    },
+    "film:Q556933": {
+      "runtime_minutes": 93,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q559757": {
+      "runtime_minutes": 79,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q576581": {
+      "runtime_minutes": 52,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q573320": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Arabic"
+      ]
+    },
+    "film:Q578061": {
+      "runtime_minutes": 128,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q580440": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q581642": {
+      "runtime_minutes": 103,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q583859": {
+      "runtime_minutes": 140,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q585821": {
+      "runtime_minutes": 154,
+      "languages": [
+        "Serbian"
+      ]
+    },
+    "film:Q587565": {
+      "runtime_minutes": 85,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q589001": {
+      "runtime_minutes": 121,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q568858": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q570417": {
+      "runtime_minutes": 117,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q571371": {
+      "runtime_minutes": 82,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q598548": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Catalan",
+        "Spanish"
+      ]
+    },
+    "film:Q604928": {
+      "runtime_minutes": 89,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q618475": {
+      "runtime_minutes": 120,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q620731": {
+      "runtime_minutes": 112,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q603819": {
+      "runtime_minutes": 102,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q606991": {
+      "runtime_minutes": 93,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q609236": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q610450": {
+      "runtime_minutes": 88,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q612096": {
+      "runtime_minutes": 86,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q613633": {
+      "runtime_minutes": 83,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q615800": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q621716": {
+      "runtime_minutes": 124,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q661141": {
+      "runtime_minutes": 133,
+      "languages": [
+        "English",
+        "French"
+      ]
+    },
+    "film:Q663034": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q664295": {
+      "languages": [
+        "Dutch"
+      ]
+    },
+    "film:Q666077": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q627022": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Korean"
+      ]
+    },
+    "film:Q774004": {
+      "runtime_minutes": 118,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q775923": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q776964": {
+      "runtime_minutes": 77,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q598865": {
+      "runtime_minutes": 94
+    },
+    "film:Q600299": {
+      "runtime_minutes": 93,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q601651": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q688886": {
+      "runtime_minutes": 145,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q639864": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q641061": {
+      "runtime_minutes": 152,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q647316": {
+      "runtime_minutes": 88,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q649656": {
+      "runtime_minutes": 118,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q651353": {
+      "runtime_minutes": 90,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q652380": {
+      "runtime_minutes": 97,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q654856": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q656357": {
+      "runtime_minutes": 93,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q675746": {
+      "runtime_minutes": 113,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q667799": {
+      "runtime_minutes": 93,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q669628": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q671410": {
+      "runtime_minutes": 338,
+      "languages": [
+        "Arabic",
+        "English",
+        "French",
+        "German",
+        "Spanish"
+      ]
+    },
+    "film:Q671881": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q754515": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q758583": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q771927": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q685741": {
+      "runtime_minutes": 133,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q697393": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q698458": {
+      "runtime_minutes": 110,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q690525": {
+      "runtime_minutes": 160,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q692208": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q700725": {
+      "runtime_minutes": 120,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q701977": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q704912": {
+      "runtime_minutes": 140,
+      "languages": [
+        "English",
+        "Hungarian"
+      ]
+    },
+    "film:Q706592": {
+      "runtime_minutes": 89,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q726544": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q728236": {
+      "runtime_minutes": 87,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q730370": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q732230": {
+      "languages": [
+        "Hungarian"
+      ]
+    },
+    "film:Q734008": {
+      "runtime_minutes": 169,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q736254": {
+      "runtime_minutes": 127,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q737904": {
+      "runtime_minutes": 107,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q739241": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q747919": {
+      "runtime_minutes": 111,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q749688": {
+      "runtime_minutes": 104,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q751279": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q743258": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q745334": {
+      "runtime_minutes": 141,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q753122": {
+      "runtime_minutes": 98,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q759397": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q760221": {
+      "runtime_minutes": 97,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q762649": {
+      "runtime_minutes": 151,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q764639": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q766263": {
+      "runtime_minutes": 102,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q767751": {
+      "runtime_minutes": 115,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q769527": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q778929": {
+      "runtime_minutes": 96,
+      "languages": [
+        "English",
+        "Hindi"
+      ]
+    },
+    "film:Q786492": {
+      "runtime_minutes": 88,
+      "languages": [
+        "Hungarian"
+      ]
+    },
+    "film:Q789741": {
+      "runtime_minutes": 145,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q794306": {
+      "runtime_minutes": 91,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q813464": {
+      "runtime_minutes": 104,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q814718": {
+      "runtime_minutes": 109,
+      "languages": [
+        "Standard Chinese"
+      ]
+    },
+    "film:Q817786": {
+      "runtime_minutes": 88,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q820553": {
+      "runtime_minutes": 81,
+      "languages": [
+        "Italian",
+        "Spanish"
+      ]
+    },
+    "film:Q840872": {
+      "runtime_minutes": 92,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q842067": {
+      "runtime_minutes": 81,
+      "languages": [
+        "Swedish"
+      ]
+    },
+    "film:Q844274": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q821340": {
+      "runtime_minutes": 98,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q822458": {
+      "runtime_minutes": 102,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q837945": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q829143": {
+      "runtime_minutes": 19,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q830773": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q832337": {
+      "runtime_minutes": 98,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q851044": {
+      "runtime_minutes": 103,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q852162": {
+      "runtime_minutes": 86,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q848785": {
+      "runtime_minutes": 125,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q847599": {
+      "runtime_minutes": 117,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q856805": {
+      "runtime_minutes": 135,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q859143": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q861445": {
+      "runtime_minutes": 93,
+      "languages": [
+        "Italian",
+        "Spanish"
+      ]
+    },
+    "film:Q864882": {
+      "runtime_minutes": 63,
+      "languages": [
+        "Russian"
+      ]
+    },
+    "film:Q867000": {
+      "runtime_minutes": 94,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q870053": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q872852": {
+      "runtime_minutes": 110,
+      "languages": [
+        "English",
+        "German"
+      ]
+    },
+    "film:Q891898": {
+      "runtime_minutes": 114,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q893925": {
+      "runtime_minutes": 81,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q895856": {
+      "runtime_minutes": 111,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q902337": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q911659": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q913558": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q915845": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q917547": {
+      "runtime_minutes": 103,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q833579": {
+      "runtime_minutes": 87,
+      "languages": [
+        "Russian"
+      ]
+    },
+    "film:Q834385": {
+      "runtime_minutes": 84,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q953744": {
+      "runtime_minutes": 90,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q955822": {
+      "runtime_minutes": 97,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q957800": {
+      "runtime_minutes": 84,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q959312": {
+      "runtime_minutes": 96,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q948456": {
+      "runtime_minutes": 95,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q950142": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Tagalog"
+      ]
+    },
+    "film:Q952079": {
+      "runtime_minutes": 99,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q929266": {
+      "runtime_minutes": 81,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q930746": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q845235": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Bosnian",
+        "Croatian",
+        "English",
+        "French",
+        "German",
+        "Serbian",
+        "Serbo-Croatian"
+      ]
+    },
+    "film:Q1102121": {
+      "runtime_minutes": 87,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q945593": {
+      "runtime_minutes": 84,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q947076": {
+      "runtime_minutes": 110,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q947729": {
+      "runtime_minutes": 87,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1027087": {
+      "runtime_minutes": 136,
+      "languages": [
+        "Portuguese"
+      ]
+    },
+    "film:Q1029347": {
+      "runtime_minutes": 96,
+      "languages": [
+        "Hungarian"
+      ]
+    },
+    "film:Q1031956": {
+      "runtime_minutes": 127,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1002480": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1004657": {
+      "runtime_minutes": 113,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1015884": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Cantonese",
+        "Polish",
+        "Yue Chinese"
+      ]
+    },
+    "film:Q1021571": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English",
+        "Persian"
+      ]
+    },
+    "film:Q1026370": {
+      "runtime_minutes": 86,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q971109": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q972191": {
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q974706": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English",
+        "Italian"
+      ]
+    },
+    "film:Q976934": {
+      "runtime_minutes": 100,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q993972": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q998219": {
+      "runtime_minutes": 80,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1138876": {
+      "runtime_minutes": 106,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1171334": {
+      "runtime_minutes": 98,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1171544": {
+      "runtime_minutes": 101,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1171720": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q878124": {
+      "runtime_minutes": 110,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q880226": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q979900": {
+      "runtime_minutes": 90,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q984161": {
+      "runtime_minutes": 167,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q989036": {
+      "runtime_minutes": 124,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1055796": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1056748": {
+      "runtime_minutes": 92,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1094519": {
+      "runtime_minutes": 91,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1099384": {
+      "runtime_minutes": 111,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1046576": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English",
+        "Spanish"
+      ]
+    },
+    "film:Q1049558": {
+      "runtime_minutes": 86,
+      "languages": [
+        "Dutch"
+      ]
+    },
+    "film:Q1144006": {
+      "runtime_minutes": 80,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1066749": {
+      "runtime_minutes": 133,
+      "languages": [
+        "Japanese"
+      ]
+    },
+    "film:Q1070160": {
+      "runtime_minutes": 100,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1073800": {
+      "runtime_minutes": 93,
+      "languages": [
+        "Mandarin",
+        "Spanish"
+      ]
+    },
+    "film:Q1077315": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1082595": {
+      "runtime_minutes": 92,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1086921": {
+      "runtime_minutes": 104,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1088489": {
+      "runtime_minutes": 90,
+      "languages": [
+        "Latin"
+      ]
+    },
+    "film:Q1090307": {
+      "runtime_minutes": 109,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1057738": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1167255": {
+      "runtime_minutes": 110,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1167810": {
+      "runtime_minutes": 83,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1168233": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1113544": {
+      "runtime_minutes": 88,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1123251": {
+      "runtime_minutes": 105,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1124867": {
+      "runtime_minutes": 108,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1126420": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1127167": {
+      "runtime_minutes": 145,
+      "languages": [
+        "French",
+        "Russian"
+      ]
+    },
+    "film:Q1133710": {
+      "runtime_minutes": 99,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q1135349": {
+      "runtime_minutes": 206,
+      "languages": [
+        "Hindi"
+      ]
+    },
+    "film:Q1137251": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1138055": {
+      "runtime_minutes": 84,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1139094": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1140062": {
+      "runtime_minutes": 116,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1140605": {
+      "runtime_minutes": 107,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1141677": {
+      "runtime_minutes": 85,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1144983": {
+      "runtime_minutes": 113,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1156694": {
+      "runtime_minutes": 194,
+      "languages": [
+        "Croatian"
+      ]
+    },
+    "film:Q1148704": {
+      "runtime_minutes": 84,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1151197": {
+      "runtime_minutes": 89,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1151947": {
+      "runtime_minutes": 119,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1163934": {
+      "runtime_minutes": 91,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1193177": {
+      "runtime_minutes": 111,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1193450": {
+      "runtime_minutes": 118,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1197951": {
+      "runtime_minutes": 113,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1203742": {
+      "runtime_minutes": 98,
+      "languages": [
+        "Cantonese"
+      ]
+    },
+    "film:Q1154221": {
+      "runtime_minutes": 90,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1168826": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1169212": {
+      "runtime_minutes": 83,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1218009": {
+      "runtime_minutes": 87,
+      "languages": [
+        "Turkish"
+      ]
+    },
+    "film:Q1218318": {
+      "runtime_minutes": 117,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1218576": {
+      "runtime_minutes": 96,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1218993": {
+      "runtime_minutes": 100,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1091145": {
+      "runtime_minutes": 115,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1093085": {
+      "runtime_minutes": 89,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q933339": {
+      "runtime_minutes": 75,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q935105": {
+      "runtime_minutes": 108,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q936302": {
+      "runtime_minutes": 83,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1197383": {
+      "runtime_minutes": 90,
+      "languages": [
+        "Spanish"
+      ]
+    },
+    "film:Q1197583": {
+      "runtime_minutes": 92,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1211082": {
+      "runtime_minutes": 85,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1199393": {
+      "runtime_minutes": 66,
+      "languages": [
+        "Polish"
+      ]
+    },
+    "film:Q1199628": {
+      "runtime_minutes": 90,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1214671": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1214972": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1213017": {
+      "runtime_minutes": 95,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1219231": {
+      "runtime_minutes": 69,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1219516": {
+      "runtime_minutes": 114,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1219738": {
+      "runtime_minutes": 94,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1194976": {
+      "runtime_minutes": 82,
+      "languages": [
+        "Russian"
+      ]
+    },
+    "film:Q1198825": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1199354": {
+      "runtime_minutes": 83,
+      "languages": [
+        "English",
+        "German"
+      ]
+    },
+    "film:Q1198175": {
+      "runtime_minutes": 75,
+      "languages": [
+        "Azerbaijani"
+      ]
+    },
+    "film:Q1198448": {
+      "runtime_minutes": 43,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1115105": {
+      "runtime_minutes": 118,
+      "languages": [
+        "Arabic",
+        "English",
+        "Russian",
+        "Swedish"
+      ]
+    },
+    "film:Q1117198": {
+      "runtime_minutes": 107,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1120093": {
+      "runtime_minutes": 74,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1199832": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1209916": {
+      "runtime_minutes": 95,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1155695": {
+      "runtime_minutes": 130,
+      "languages": [
+        "Chinese"
+      ]
+    },
+    "film:Q1157412": {
+      "runtime_minutes": 97,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1160173": {
+      "runtime_minutes": 95,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1163014": {
+      "runtime_minutes": 99,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1212516": {
+      "runtime_minutes": 183,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1213196": {
+      "runtime_minutes": 91,
+      "languages": [
+        "German"
+      ]
+    },
+    "film:Q1257219": {
+      "runtime_minutes": 110,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1261289": {
+      "runtime_minutes": 113,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1263650": {
+      "runtime_minutes": 112,
+      "languages": [
+        "Italian"
+      ]
+    },
+    "film:Q1266693": {
+      "runtime_minutes": 90,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1213593": {
+      "runtime_minutes": 102,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1213960": {
+      "runtime_minutes": 55,
+      "languages": [
+        "English"
+      ]
+    },
+    "film:Q1215948": {
+      "runtime_minutes": 83,
+      "languages": [
+        "French"
+      ]
+    },
+    "film:Q1390192": {
+      "runtime_minutes": 117,
+      "languages": [
+        "German"
+      ]
+    }
+  }
+}

@@ -15,7 +15,7 @@ from typing import Literal
 from fastapi import FastAPI, Header, HTTPException, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from .db import Database
 from .graph import GraphStore, ROOT
 from .recommender import Recommender
@@ -55,6 +55,28 @@ class Profile(BaseModel):
 class Ballot(BaseModel):
     film_id: str = Field(min_length=1, max_length=150)
 
+class MovieFilters(BaseModel):
+    max_runtime: int | None = Field(default=None, ge=1)
+    min_year: int | None = Field(default=None, ge=1870, le=2100)
+    max_year: int | None = Field(default=None, ge=1870, le=2100)
+    language: str | None = Field(default=None, min_length=1, max_length=80)
+
+    @model_validator(mode="after")
+    def check_year_range(self):
+        if self.min_year is not None and self.max_year is not None and self.min_year > self.max_year:
+            raise ValueError("The first release year must be at or before the last release year")
+        return self
+
+    def includes(self, film):
+        runtime = film.get("runtime_minutes")
+        return (
+            (self.max_runtime is None or (runtime is not None and runtime <= self.max_runtime))
+            and (self.min_year is None or film["year"] >= self.min_year)
+            and (self.max_year is None or film["year"] <= self.max_year)
+            and (self.language is None or self.language in film.get("languages", []))
+        )
+
+
 def digest(token):
     return hashlib.sha256(token.encode()).hexdigest()
 
@@ -77,7 +99,7 @@ def create_app(data_dir=None, catalog_path=None):
                 connection.execute("UPDATE members SET likes=?,dislikes=?,rdf_ttl=NULL WHERE id=?",
                                    (json.dumps(known_likes), json.dumps(known_dislikes), person["id"]))
                 connection.execute("DELETE FROM votes WHERE group_id=(SELECT group_id FROM members WHERE id=?)", (person["id"],))
-                connection.execute("UPDATE groups SET phase='collecting',recommendations='[]',winner=NULL WHERE id=(SELECT group_id FROM members WHERE id=?)", (person["id"],))
+                connection.execute("UPDATE groups SET phase='collecting',recommendations='[]',filters='{}',winner=NULL WHERE id=(SELECT group_id FROM members WHERE id=?)", (person["id"],))
 
     @asynccontextmanager
     async def lifespan(app):
@@ -206,6 +228,15 @@ def create_app(data_dir=None, catalog_path=None):
     def featured_collection():
         return {"films": collection}
 
+    filter_options = {
+        "has_runtime": any(film.get("runtime_minutes") for film in graph.movies.values()),
+        "languages": sorted({language for film in graph.movies.values() for language in film.get("languages", [])}),
+    }
+
+    @app.get("/api/catalog/filters")
+    def catalogue_filters():
+        return filter_options
+
     @app.get("/api/catalog")
     def search(q: str = Query(default="", max_length=80), kind: Literal["all", "film", "genre", "actor", "director"] = "all",
                offset: int = Query(default=0, ge=0, le=100000), limit: int = Query(default=24, ge=1, le=100)):
@@ -263,7 +294,7 @@ def create_app(data_dir=None, catalog_path=None):
                 tally[vote["film_id"]] = tally.get(vote["film_id"], 0) + 1
             result.update({"owner_id": group["owner_id"], "me": {"id": who["id"], "nickname": who["nickname"], "likes": json.loads(who["likes"]), "dislikes": json.loads(who["dislikes"]), "taste_items": [graph.entities[value] for value in json.loads(who["likes"]) + json.loads(who["dislikes"])], "ready": who["rdf_ttl"] is not None},
                            "members": [{"id": item["id"], "nickname": item["nickname"], "ready": item["rdf_ttl"] is not None, "voted": any(vote["member_id"] == item["id"] for vote in votes)} for item in members],
-                           "recommendations": json.loads(group["recommendations"]), "winner": group["winner"], "tally": tally,
+                           "recommendations": json.loads(group["recommendations"]), "filters": json.loads(group["filters"]), "winner": group["winner"], "tally": tally,
                            "my_vote": next((vote["film_id"] for vote in votes if vote["member_id"] == who["id"]), None), "vote_count": len(votes)})
             return result
 
@@ -286,7 +317,7 @@ def create_app(data_dir=None, catalog_path=None):
             return Response(who["rdf_ttl"], media_type="text/turtle")
 
     @app.post("/api/groups/{group_id}/recommendations")
-    def recommend(group_id: str, allow_compromise: bool = False, authorization: str | None = Header(default=None)):
+    def recommend(group_id: str, body: MovieFilters | None = None, allow_compromise: bool = False, authorization: str | None = Header(default=None)):
         with db.transaction() as connection:
             group = room(connection, group_id)
             who = member(connection, group_id, authorization)
@@ -298,13 +329,24 @@ def create_app(data_dir=None, catalog_path=None):
             unready = [person["nickname"] for person in people if person["rdf_ttl"] is None]
             if unready:
                 raise HTTPException(409, "Waiting for taste profiles from: " + ", ".join(unready))
-            ranked = recommender.rank(people, allow_compromise=allow_compromise)
+            filters = body or MovieFilters()
+            active = filters.model_dump(exclude_none=True)
+            if filters.language is not None and filters.language not in filter_options["languages"]:
+                raise HTTPException(422, "Choose a language available in the catalogue")
+            eligible = None
+            if active:
+                eligible = {film_id for film_id, film in graph.movies.items() if filters.includes(film)}
+                if not eligible:
+                    raise HTTPException(409, "No films meet these filters. Try widening or clearing them.")
+            ranked = recommender.rank(people, allow_compromise=allow_compromise, eligible=eligible)
             if not ranked:
                 code = "no_compromise" if allow_compromise else "no_full_match"
                 message = ("No film matches any guest's likes while respecting all avoids." if allow_compromise
                            else "No film matches everyone while respecting all dislikes.")
+                if active:
+                    message += " Try widening or clearing the movie filters."
                 raise HTTPException(409, message, headers={"X-Recommendation-Conflict": code})
-            connection.execute("UPDATE groups SET phase='voting',recommendations=? WHERE id=?", (json.dumps(ranked), group_id))
+            connection.execute("UPDATE groups SET phase='voting',recommendations=?,filters=? WHERE id=?", (json.dumps(ranked), json.dumps(active), group_id))
             if group["is_demo"]:
                 for index, person in enumerate(people[1:]):
                     connection.execute("INSERT INTO votes VALUES(?,?,?)", (group_id, person["id"], ranked[index % len(ranked)]["id"]))
@@ -346,7 +388,7 @@ def create_app(data_dir=None, catalog_path=None):
             who = member(connection, group_id, authorization)
             owner(group, who)
             connection.execute("DELETE FROM votes WHERE group_id=?", (group_id,))
-            connection.execute("UPDATE groups SET phase='collecting',recommendations='[]',winner=NULL WHERE id=?", (group_id,))
+            connection.execute("UPDATE groups SET phase='collecting',recommendations='[]',filters='{}',winner=NULL WHERE id=?", (group_id,))
             return {"reset": True}
 
     @app.delete("/api/groups/{group_id}")

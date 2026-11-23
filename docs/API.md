@@ -13,6 +13,7 @@ Creating or joining a group returns a `token`, `member_id`, and `group_id`. Supp
 | GET | `/groups/{id}` | Public room summary; authenticated full group state | Invitation holder / member |
 | PUT | `/groups/{id}/profile` | JSON: `likes: [entity IDs]`, `dislikes: [entity IDs]` | Member; collecting only |
 | GET | `/groups/{id}/profile.ttl` | Download own validated RDF profile | Member |
+| GET | `/catalog/filters` | Runtime availability and original-language options | Public |
 | POST | `/groups/{id}/recommendations` | Freeze profiles and make shortlist | Organiser |
 | POST | `/groups/{id}/votes` | JSON: `film_id`; cast one ballot | Member; voting only |
 | POST | `/groups/{id}/close` | Close early if at least one vote exists | Organiser |
@@ -29,6 +30,8 @@ Group state is `collecting`, `voting`, or `finished`. Members and tastes freeze 
 GET group state returns public membership **counts** without credentials, never the profiles or member list. Authenticated state returns the participant list, the caller's preferences, and group-visible movie explanations. A member cannot read another member's full RDF profile via the export route.
 
 The standard request requires a like from every member. If it finds none, it returns 409 with `X-Recommendation-Conflict: no_full_match` and leaves the room collecting tastes. The organiser can retry with `?allow_compromise=true` to match fewer guests while keeping all avoids. That retry prefers full matches if available, otherwise ranks by guest coverage then score. If it still finds no films, it returns `no_compromise`. In a tied ballot, the earliest film in the saved shortlist wins.
+
+A shortlist request can include an optional JSON body with `max_runtime` (minutes), `min_year`, `max_year`, and `language` (a value from `/catalog/filters`). The bounds are inclusive. The same filters apply to compromise ballots. Authenticated group state includes the filters used to build the current ballot.
 
 Each shortlist film carries the catalogue fields plus `score` and `matches`, one entry per member:
 
