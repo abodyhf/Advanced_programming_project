@@ -43,6 +43,37 @@ python app.py --host 0.0.0.0
 
 Find the computer's local network IP address, for example `192.168.1.20`. Open `http://192.168.1.20:8000` on that computer before creating the group, then share the invitation generated there. `127.0.0.1` only works on the device running Python. Other devices must be on the same reachable network, and the operating system may ask to allow the server through its firewall.
 
+### Friends over the internet
+
+Open WatchTogether using the public HTTPS address before creating the room. Copy the invitation from there so it contains that address and the `/g/<room-id>` path. Both devices must use the same public address. Keep each participant's room tab open so it retains their membership.
+
+#### Free two-device test on Windows
+
+In PowerShell from the project directory, install and start the app:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+$env:WATCHTOGETHER_DATA_DIR = Join-Path $PWD 'instance\hosted'
+$env:WATCHTOGETHER_CATALOG = Join-Path $PWD 'data\catalog.json'
+.\.venv\Scripts\python.exe app.py --host 127.0.0.1 --port 8000
+```
+
+Install [cloudflared](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/downloads/) and run this in a second terminal:
+
+```powershell
+cloudflared tunnel --url http://127.0.0.1:8000
+```
+
+Open the HTTPS address printed by cloudflared. The Quick Tunnel costs $0 and stays reachable while the host is online and both processes are running. Its address changes when cloudflared restarts. For a stable deployment, use a Python host or an always-on machine, one app process, a fixed HTTPS hostname, and a persistent disk mounted at `WATCHTOGETHER_DATA_DIR`. On a managed Python host, use `python -m pip install -r requirements.txt` to build and `python app.py --host 0.0.0.0` to start. The app reads the host's `PORT` variable, with a default of 8000. Use a consistent catalogue on restarts. Confirm any hosting charges before provisioning.
+
+#### Verify and restart
+
+1. On the first device, create a real room from the public address and copy its invitation. On a second physical device, ideally on mobile data, open the invitation and join with a different nickname.
+2. On both devices, like Comedy, Adventure, and Drama and save. The host builds the shortlist once both members show as ready. Both participants vote and check that the same winner appears.
+3. Stop the Python server with Ctrl+C and repeat the same start command using the same data directory and catalogue. Leave cloudflared and both room tabs open during the restart. After `/api/health` returns `status: ok` again, refresh both tabs and verify that the members, saved tastes, votes, and winning film are still present.
+4. In a separate test room, check that a guest cannot build the shortlist, close voting manually, or reset the round. After voting, the guest should have no second ballot. Fill a separate room with eight members including the host and verify that the ninth join is refused. The API tests cover these checks, including concurrent attempts.
+
 ## What is included
 
 | Feature | Implementation |
@@ -167,7 +198,7 @@ Deletion cascades to group members, saved profile RDF, votes and recommendations
 
 Interactive API documentation is at `/api/docs` when internet access is available for its Swagger UI assets; the JSON schema is at `/api/openapi.json`. Endpoint notes are in `docs/API.md`.
 
-This download is a working local Python application and an implementation starting point for the course project. It has not been publicly hosted. For an internet deployment, use a Python-capable host, one application worker, a persistent writable data directory, HTTPS, and deployment-specific rate limits. Membership uses random bearer credentials stored as hashes on the server; it does not verify real-world identity. “One vote” means one vote per membership.
+For an internet deployment, see the hosting and restart settings above. Configure request rate limits at the public proxy for a long-running deployment. Membership uses random bearer credentials stored as hashes on the server; it does not verify real-world identity. “One vote” means one vote per membership.
 
 Course milestones still requiring your team: real-group usability/satisfaction studies, team review, and repository release. No claimed survey results or team approvals are fabricated.
 
