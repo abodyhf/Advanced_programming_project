@@ -176,14 +176,35 @@ def create_app(data_dir=None, catalog_path=None):
         tally = dict(connection.execute("SELECT film_id,COUNT(*) FROM votes WHERE group_id=? GROUP BY film_id", (group_id,)).fetchall())
         if not tally:
             raise HTTPException(409, "At least one person must vote before closing the vote")
-        # Shortlist is already ordered by score, title, and identifier. max keeps the first tie.
+        # The shortlist already holds the ranking used to break ties. max keeps the first tie.
         shortlist = json.loads(group["recommendations"])
-        winner = max(shortlist, key=lambda item: (tally.get(item["id"], 0), item["score"]))
+        winner = max(shortlist, key=lambda item: tally.get(item["id"], 0))
         connection.execute("UPDATE groups SET phase='finished',winner=? WHERE id=?", (winner["id"], group_id))
 
     @app.get("/api/health")
     def health():
         return {"status": "ok", "films": len(graph.movies), "catalogue_source": graph.source, "catalogue_version": graph.fingerprint}
+
+    # The shelf follows the active catalogue, including smaller offline imports.
+    shelf_titles = [
+        ("Amélie", 2001), ("Blade Runner", 1982), ("In the Mood for Love", 2000),
+        ("The Life Aquatic with Steve Zissou", 2004), ("Cinema Paradiso", 1988),
+        ("The Princess Bride", 1987), ("Paris, Texas", 1984), ("Chungking Express", 1994),
+        ("Roman Holiday", 1953), ("The Apartment", 1960), ("La Haine", 1995),
+        ("The Fifth Element", 1997), ("Spirited Away", 2001), ("The Grand Budapest Hotel", 2014),
+        ("Princess Mononoke", 1997), ("Interstellar", 2014), ("The Truman Show", 1998),
+    ]
+    shelf_order = {title_year: index for index, title_year in enumerate(shelf_titles)}
+    ordered_films = sorted(graph.movies.values(), key=lambda film: shelf_order.get(
+        (film["title"], film["year"]), len(shelf_order)))
+    collection = [{
+        "title": film["title"], "year": film["year"], "image": film.get("image"),
+        "genres": film["genres"][:4], "directors": film["directors"], "cast": film["cast"][:5],
+    } for film in ordered_films[:12]]
+
+    @app.get("/api/collection")
+    def featured_collection():
+        return {"films": collection}
 
     @app.get("/api/catalog")
     def search(q: str = Query(default="", max_length=80), kind: Literal["all", "film", "genre", "actor", "director"] = "all",
@@ -265,7 +286,7 @@ def create_app(data_dir=None, catalog_path=None):
             return Response(who["rdf_ttl"], media_type="text/turtle")
 
     @app.post("/api/groups/{group_id}/recommendations")
-    def recommend(group_id: str, authorization: str | None = Header(default=None)):
+    def recommend(group_id: str, allow_compromise: bool = False, authorization: str | None = Header(default=None)):
         with db.transaction() as connection:
             group = room(connection, group_id)
             who = member(connection, group_id, authorization)
@@ -277,9 +298,12 @@ def create_app(data_dir=None, catalog_path=None):
             unready = [person["nickname"] for person in people if person["rdf_ttl"] is None]
             if unready:
                 raise HTTPException(409, "Waiting for taste profiles from: " + ", ".join(unready))
-            ranked = recommender.rank(people)
+            ranked = recommender.rank(people, allow_compromise=allow_compromise)
             if not ranked:
-                raise HTTPException(409, "No film matches everyone while respecting all dislikes. Try more likes or fewer dislikes, or import more films.")
+                code = "no_compromise" if allow_compromise else "no_full_match"
+                message = ("No film matches any guest's likes while respecting all avoids." if allow_compromise
+                           else "No film matches everyone while respecting all dislikes.")
+                raise HTTPException(409, message, headers={"X-Recommendation-Conflict": code})
             connection.execute("UPDATE groups SET phase='voting',recommendations=? WHERE id=?", (json.dumps(ranked), group_id))
             if group["is_demo"]:
                 for index, person in enumerate(people[1:]):
@@ -338,8 +362,11 @@ def create_app(data_dir=None, catalog_path=None):
     app.mount("/static", StaticFiles(directory=ROOT / "static"), name="static")
 
     @app.get("/", include_in_schema=False)
-    @app.get("/g/{group_id}", include_in_schema=False)
     def index():
         return FileResponse(ROOT / "static/index.html")
+
+    @app.get("/g/{group_id}", include_in_schema=False)
+    def group_page(group_id: str):
+        return FileResponse(ROOT / "static/cut-room/index.html")
 
     return app

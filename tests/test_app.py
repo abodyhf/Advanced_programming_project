@@ -160,7 +160,40 @@ def test_no_common_film_is_explained(client):
     client.put(f'/api/groups/{gid}/profile',headers=auth(people[0]),json={'likes':['person:tom-hanks'],'dislikes':all_genres})
     result = client.post(f'/api/groups/{gid}/recommendations',headers=auth(people[0]))
     assert result.status_code == 409 and 'No film matches' in result.text
+    assert result.headers['X-Recommendation-Conflict'] == 'no_full_match'
+    compromise = client.post(f'/api/groups/{gid}/recommendations?allow_compromise=true', headers=auth(people[0]))
+    assert compromise.status_code == 409
+    assert compromise.headers['X-Recommendation-Conflict'] == 'no_compromise'
     assert client.get(f'/api/groups/{gid}',headers=auth(people[0])).json()['phase'] == 'collecting'
+
+
+def test_host_can_open_a_compromise_ballot_without_overriding_avoids(client):
+    gid, (host, guest) = make_group(client)
+    path = f'/api/groups/{gid}'
+    assert client.put(path + '/profile', headers=auth(host), json={
+        'likes': ['genre:anime', 'genre:family', 'person:hayao-miyazaki'], 'dislikes': ['genre:horror'],
+    }).status_code == 200
+    assert client.put(path + '/profile', headers=auth(guest), json={
+        'likes': ['genre:horror', 'genre:thriller', 'person:jordan-peele'],
+    }).status_code == 200
+
+    assert client.post(path + '/recommendations', headers=auth(host)).status_code == 409
+    assert client.get(path, headers=auth(host)).json()['phase'] == 'collecting'
+    compromise = path + '/recommendations?allow_compromise=true'
+    assert client.post(compromise, headers=auth(guest)).status_code == 403
+    response = client.post(compromise, headers=auth(host))
+    assert response.status_code == 200, response.text
+    films = response.json()['recommendations']
+    excluded = client.app.state.graph.links_for(['genre:horror'], expand_films=False)
+    assert len(films) >= 2
+    assert all(film['id'] not in excluded for film in films)
+    assert all(sum(bool(match['because']) for match in film['matches']) == 1 for film in films)
+    assert client.get(path, headers=auth(guest)).json()['recommendations'] == films
+
+    for person, film in zip((host, guest), films):
+        assert client.post(path + '/votes', headers=auth(person), json={'film_id': film['id']}).status_code == 201
+    assert client.get(path, headers=auth(host)).json()['winner'] == films[0]['id']
+
 
 def test_subgenre_matches_parent_and_parent_dislike(client):
     graph = client.app.state.graph

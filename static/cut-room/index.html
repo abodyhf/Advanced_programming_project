@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5ede2">
+  <meta name="description" content="Try a new WatchTogether screening room. Set the mood, vote on the shortlist, and find tonight’s film.">
+  <title>The Cut Room · WatchTogether</title>
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/static/cut-room/room.css">
+  <script src="/static/cut-room/room.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to the room</a>
+  <header class="mast wrap">
+    <a class="brand" href="/" aria-label="WatchTogether home"><img src="/static/favicon.svg" width="38" height="38" alt="">WatchTogether</a>
+    <div class="mast-room" id="mast-room"><span>Movie room</span><strong id="room-title"></strong><span id="sample-label" hidden>Sample group</span></div>
+    <div class="mast-actions">
+      <button class="invite" type="button" data-dialog="invite-dialog" id="invite-button" hidden>Invite friends <span aria-hidden="true">↗</span></button>
+      <button class="guests" type="button" data-dialog="guests-dialog" id="guests-button" hidden><span class="avatars" id="avatars" aria-hidden="true"></span><span id="guest-button-label">Guests</span></button>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <ol class="chapters" id="chapters" aria-label="Movie night progress" hidden>
+      <li aria-current="step"><b>01</b> Taste deck</li>
+      <li><b>02</b> Group ballot</li>
+      <li><b>03</b> Final cut</li>
+    </ol>
+
+    <section id="taste-view" class="view view-tastes" aria-labelledby="taste-title">
+      <div class="brief">
+        <h1 id="taste-title" tabindex="-1">Set the<br> mood<span>.</span></h1>
+        <div id="room-entry" class="room-entry">
+          <p id="entry-copy">Opening the screening room…</p>
+          <form id="entry-form" hidden>
+            <label id="title-field">Room name <input name="title" maxlength="60" placeholder="Friday film club" required></label>
+            <label>Your nickname <input name="nickname" autocomplete="nickname" maxlength="24" placeholder="e.g. Sam" required></label>
+            <button type="submit" class="continue" id="entry-submit">Create a room <span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="entry-actions">
+            <button type="button" class="text-button" data-action="demo" id="sample-button" hidden>Try a sample group ↗</button>
+            <button type="button" class="text-button" data-dialog="catalog-dialog" hidden id="entry-catalog">Browse catalogue ↗</button>
+          </p>
+        </div>
+        <div id="room-controls" hidden>
+        <p class="brief-copy">Pick at least three tastes, including one Like. Skip anything you feel neutral about. Avoid rules out matching films for the whole room.</p>
+        <button type="button" class="catalog-launch" data-dialog="catalog-dialog"><strong>Browse catalogue</strong><small id="catalog-count">Films, genres, actors &amp; directors</small><span aria-hidden="true">↗</span></button>
+
+        <div class="taste-progress">
+          <div class="taste-summary">
+            <strong id="taste-count">0 choices</strong>
+            <span id="taste-breakdown">0 liked · 0 avoided</span>
+          </div>
+          <button type="button" class="text-button" data-dialog="picks-dialog">Review picks <span aria-hidden="true">↗</span></button>
+        </div>
+        <button type="button" class="continue" id="save-button" disabled>Save my tastes <span aria-hidden="true">↗</span></button>
+        <button type="button" class="continue" id="shortlist-button" hidden disabled>Build our shortlist <span aria-hidden="true">↗</span></button>
+        <p class="progress-help" id="progress-help"></p>
+        <section class="match-recovery" id="match-recovery" aria-labelledby="recovery-title" hidden>
+          <h2 id="recovery-title" tabindex="-1">No film matches everyone</h2>
+          <p id="recovery-copy"></p>
+          <button type="button" class="continue" id="compromise-button" data-action="start-compromise">Start compromise ballot <span aria-hidden="true">↗</span></button>
+          <button type="button" class="text-button" data-dialog="picks-dialog">Review my picks <span aria-hidden="true">↗</span></button>
+        </section>
+        <p class="keyboard-hint"><kbd>←</kbd> <kbd>→</kbd> to browse</p>
+        </div>
+      </div>
+
+      <div class="deck">
+        <div class="screen" id="screen">
+          <div class="screen-head">
+            <span class="screen-title"><i aria-hidden="true"></i> Genre deck</span>
+            <div class="deck-nav" id="deck-nav" aria-label="Browse genres" hidden>
+              <button type="button" data-action="previous" aria-label="Previous genre">←</button>
+              <span id="frame-count" aria-hidden="true">01 / 06</span>
+              <button type="button" data-action="next" aria-label="Next genre">→</button>
+            </div>
+          </div>
+          <div class="stage" id="stage" aria-hidden="true"></div>
+          <div class="screen-actions" id="deck-actions" hidden aria-label="Rate this genre" role="group">
+            <button class="rate rate-avoid" type="button" data-action="avoid"><span aria-hidden="true">−</span> <b class="rate-label">Avoid</b> <kbd aria-hidden="true">A</kbd></button>
+            <button class="rate rate-skip" type="button" data-action="skip">Skip <span aria-hidden="true">→</span><kbd aria-hidden="true">S</kbd></button>
+            <button class="rate rate-like" type="button" data-action="like"><span aria-hidden="true">+</span> <b class="rate-label">Like</b> <kbd aria-hidden="true">D</kbd></button>
+          </div>
+        </div>
+        <nav class="film-index" hidden id="film-index" aria-label="Jump to a genre"></nav>
+      </div>
+    </section>
+
+    <section class="view view-ballot" id="ballot-view" aria-labelledby="ballot-title" hidden>
+      <div class="brief">
+        <h1 id="ballot-title" tabindex="-1">Make<br> the cut<span>.</span></h1>
+        <p id="ballot-copy">Choose one film. The film with the most votes wins.</p>
+        <div class="after-tastes">
+          <button type="button" class="text-button" data-dialog="logic-dialog">How the shortlist works ↗</button>
+          <button type="button" class="text-button" data-dialog="picks-dialog">Review my tastes ↗</button>
+          <button type="button" class="text-button" data-dialog="catalog-dialog">Browse catalogue ↗</button>
+        </div>
+        <button type="button" class="continue" data-action="close-round" id="close-round" hidden>Close voting <span aria-hidden="true">↗</span></button>
+        <button type="button" class="text-button edit-tastes" data-action="reset" id="reset-open" hidden>Start a new round ↻</button>
+      </div>
+      <div class="ballot">
+        <header><span id="ballot-label">Group ballot</span><span id="vote-progress"></span></header>
+        <div class="ballot-films" id="ballot-films"></div>
+      </div>
+    </section>
+
+    <section class="view view-final" id="final-view" aria-labelledby="final-title" hidden>
+      <div class="brief">
+        <h1 id="final-title" tabindex="-1">That’s<br> a wrap<span>.</span></h1>
+        <p id="final-copy">The votes are in.</p>
+        <div class="after-tastes">
+          <button type="button" class="text-button" data-dialog="picks-dialog">Review my tastes ↗</button>
+          <button type="button" class="text-button" data-dialog="catalog-dialog">Browse catalogue ↗</button>
+        </div>
+        <button type="button" class="continue restart" id="reset-finished" data-action="reset" hidden>Start another round <span aria-hidden="true">↻</span></button>
+      </div>
+      <div id="final-feature" class="final-feature"></div>
+    </section>
+    <p class="sr-only" aria-live="polite" id="announcement"></p>
+    <p class="notice" id="notice" role="status" hidden></p>
+  </main>
+
+  <footer class="foot wrap"><span>WatchTogether / The Cut Room</span><a href="/">Back to WatchTogether ↗</a></footer>
+
+  <dialog id="picks-dialog" aria-labelledby="picks-title">
+    <div class="dialog-inner">
+      <button type="button" class="dialog-close" data-close aria-label="Close review">×</button>
+      <h2 id="picks-title">Your picks</h2>
+      <div id="picks-list"></div>
+    </div>
+  </dialog>
+  <dialog id="guests-dialog" aria-labelledby="guests-title">
+    <div class="dialog-inner">
+      <button type="button" class="dialog-close" data-close aria-label="Close guest list">×</button>
+      <h2 id="guests-title">Guests</h2>
+      <p id="guest-summary"></p>
+      <ul class="guest-list" id="guest-list"></ul>
+      <button type="button" class="text-button delete-room" id="delete-room" data-action="delete" hidden>Delete room</button>
+    </div>
+  </dialog>
+  <dialog id="invite-dialog" aria-labelledby="invite-title">
+    <div class="dialog-inner">
+      <button type="button" class="dialog-close" data-close aria-label="Close invite">×</button>
+      <h2 id="invite-title">Invite friends</h2>
+      <p>Anyone with this link can join while the room is collecting tastes and has a free seat.</p>
+      <label for="invite-url">Room link</label>
+      <input id="invite-url" type="url" readonly>
+      <button type="button" class="continue" data-action="copy-invite" id="copy-invite">Copy invite link <span aria-hidden="true">↗</span></button>
+      <p class="dialog-note" id="invite-note" hidden></p>
+      <p class="dialog-note" id="copy-status" role="status"></p>
+    </div>
+  </dialog>
+  <dialog id="catalog-dialog" class="catalog-dialog" aria-labelledby="catalog-title">
+    <div class="dialog-inner">
+      <button type="button" class="dialog-close" data-close aria-label="Close catalogue">×</button>
+      <h2 id="catalog-title">Browse catalogue</h2>
+      <p class="catalog-summary" id="catalog-summary"></p>
+      <div class="catalog-filters" role="group" aria-label="Catalogue category">
+        <button type="button" data-kind="film" aria-pressed="true">Films</button>
+        <button type="button" data-kind="genre" aria-pressed="false">Genres</button>
+        <button type="button" data-kind="actor" aria-pressed="false">Actors</button>
+        <button type="button" data-kind="director" aria-pressed="false">Directors</button>
+      </div>
+      <label class="sr-only" for="catalog-search">Search the catalogue</label>
+      <input type="search" id="catalog-search" placeholder="Search film titles…" maxlength="80">
+      <p class="catalog-status" id="catalog-status" role="status"></p>
+      <ul class="catalog-results" id="catalog-results" aria-label="Catalogue results"></ul>
+      <button type="button" class="text-button" data-action="more-catalog" id="catalog-more" hidden>Load more results ↓</button>
+    </div>
+  </dialog>
+  <dialog id="logic-dialog" aria-labelledby="logic-title">
+    <div class="dialog-inner">
+      <button type="button" class="dialog-close" data-close aria-label="Close explanation">×</button>
+      <h2 id="logic-title">How we pick the shortlist</h2>
+      <ol class="logic-list">
+        <li>Exclude films connected to anyone’s avoids. Avoiding a specific film only excludes that film.</li>
+        <li>Require at least one match to every guest’s likes. A liked film can match by genre, cast or director.</li>
+        <li>Rank by each guest’s taste match. The lowest match counts for 60%, and the group average counts for 40%.</li>
+        <li>If there is no full match, the host can start a compromise ballot. It still respects every Avoid and ranks films by how many guests match, then taste score.</li>
+        <li>Everyone gets one vote. If votes tie, the film higher on the shortlist wins.</li>
+      </ol>
+    </div>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,227 @@
+.cinema-home {
+  --bg: #100c0e;
+  --panel: #20161a;
+  --ink: #fff5e9;
+  --muted: #c2afb3;
+  --line: #3d292f;
+  --accent: #f8c8a9;
+  --mast-height: 76px;
+}
+
+.cinema-home .site-head {
+  position: absolute;
+  z-index: 2;
+  inset: 0 0 auto;
+  min-height: var(--mast-height);
+  border-bottom: 1px solid #fff3e821;
+}
+
+.cinema-home .wordmark img { filter: sepia(1) saturate(1.4) hue-rotate(335deg) brightness(1.1); }
+.cinema-home .library-link { color: #f3dfd6; }
+.cinema-home .help-button { border-color: #fff3e85c; background: #170e125c; }
+.cinema-home .help-button:hover { background: #ffffff15; }
+.cinema-home #app { width: 100%; }
+
+.cinema-hero {
+  isolation: isolate;
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: clamp(620px, 83svh, 960px);
+  padding: calc(var(--mast-height) + 46px) var(--gutter) 28px;
+  overflow: clip;
+  background: #231014;
+  text-align: center;
+}
+
+.cinema-scene,
+.cinema-scene picture,
+.cinema-scene img,
+.cinema-hero::before {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cinema-scene { z-index: -2; }
+.cinema-scene picture { transform: translate(var(--drift-x, 0), var(--drift-y, 0)); }
+.cinema-scene img {
+  object-fit: cover;
+  object-position: center 56%;
+  transform: scale(1.025);
+}
+
+.cinema-hero::before {
+  z-index: -1;
+  content: '';
+  background:
+    linear-gradient(0deg, var(--bg), #100c0e70 12%, transparent 29%, transparent 84%, #100c0e70),
+    radial-gradient(ellipse 50% 41% at 50% 43%, #160c11c2, #160c116e 60%, transparent);
+}
+
+.cinema-light {
+  position: absolute;
+  inset: -30% -50%;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 21% 39% at center, #ffbd8c5e, transparent 72%);
+  mix-blend-mode: screen;
+}
+
+.hero-content {
+  align-self: center;
+  justify-self: center;
+  padding-bottom: clamp(46px, 11.5svh, 120px);
+}
+
+.group-size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  margin: 0 0 19px;
+  color: #ffe0c8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.group-size::before, .group-size::after {
+  content: '';
+  width: 25px;
+  height: 1px;
+  background: currentColor;
+  opacity: .6;
+}
+
+.hero-content h1 {
+  margin: 0;
+  font-size: clamp(59px, 8.3vw, 126px);
+  line-height: .9;
+  font-weight: 590;
+  letter-spacing: -.087em;
+  color: #fff5e9;
+  text-shadow: 0 8px 40px #19070d64;
+}
+
+.hero-content h1 em {
+  display: inline-block;
+  margin-top: .025em;
+  color: #ffccac;
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 1.15em;
+  font-weight: 400;
+  letter-spacing: -.036em;
+}
+
+.hero-description {
+  max-width: 38ch;
+  margin: 21px auto 26px;
+  color: #fae9e0;
+  font-size: clamp(15px, 1.27vw, 18px);
+  line-height: 1.55;
+  text-wrap: balance;
+  text-shadow: 0 2px 14px #100408;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cinema-home .club-primary {
+  color: #261216;
+  background: #ffe6d2;
+  border-color: #fff0df;
+  border-radius: 100px;
+  min-height: 49px;
+  padding-inline: 21px;
+}
+
+.cinema-home .club-primary:hover:not(:disabled) { background: #fff5ec; }
+.hero-actions .club-primary { box-shadow: 0 6px 26px #1204094a; }
+.hero-actions .club-demo {
+  min-height: 49px;
+  border: 1px solid #ffede084;
+  border-radius: 100px;
+  padding: 7px 17px;
+  background: #220c16ab;
+  color: #fff4e9;
+  transition: border-color .2s, background .2s;
+}
+.hero-actions .club-demo:hover { border-color: #fff1e6; background: #4d222bdd; }
+.hero-actions .play-outline { width: 16px; height: 16px; }
+
+.cinema-browse {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 620;
+  color: #f5ddd1;
+}
+.cinema-browse span { font-size: 18px; transition: transform .2s; }
+.cinema-browse:hover span { transform: translateY(3px); }
+
+.cinema-home #collection {
+  width: min(100% - 2 * var(--gutter), var(--page-width));
+  margin: 0 auto clamp(36px, 5vw, 72px);
+  padding-top: clamp(18px, 3vw, 40px);
+  scroll-margin-top: 12px;
+}
+.cinema-home .collection-heading { margin-bottom: 18px; }
+.cinema-home .collection-controls button { border-color: #64454c; }
+.cinema-home .collection-poster { border-radius: 5px; }
+.cinema-home .collection-dialog { background: var(--panel); }
+.cinema-home .collection-close { background: #24171b; }
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.cinema-home) { scroll-behavior: smooth; }
+  .cinema-scene picture { transition: transform .7s cubic-bezier(.2,.8,.2,1); }
+  .cinema-scene img { animation: cinema-push 3.3s cubic-bezier(.16,.75,.22,1) both; }
+  .cinema-light { animation: house-lights 2.9s ease-out both; }
+  .hero-content { animation: title-reveal .9s .12s cubic-bezier(.22,.75,.22,1) backwards; }
+}
+
+@keyframes cinema-push {
+  from { transform: scale(1.095); filter: brightness(.66); }
+  to   { transform: scale(1.025); filter: brightness(1); }
+}
+
+@keyframes house-lights {
+  0% { transform: translate(-29%, -12%); opacity: 0; }
+  32% { opacity: .87; }
+  100% { transform: translate(29%, 12%); opacity: 0; }
+}
+
+@keyframes title-reveal {
+  from { transform: translateY(16px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .cinema-home { --mast-height: 65px; }
+  .cinema-hero { min-height: clamp(570px, 83svh, 730px); padding-top: calc(var(--mast-height) + 32px); padding-bottom: 15px; }
+  .cinema-scene img { object-position: center 53%; }
+  .cinema-hero::before {
+    background:
+      linear-gradient(0deg, var(--bg), #100c0e69 12%, transparent 26%, transparent 85%, #100c0e70),
+      radial-gradient(ellipse 100% 44% at 50% 42%, #160c11d4, #160c1164 70%, transparent);
+  }
+  .hero-content { padding-bottom: clamp(30px, 7svh, 60px); }
+  .hero-content h1 { font-size: clamp(49px, 13.2vw, 79px); }
+  .group-size { margin-bottom: 16px; }
+  .hero-description { margin: 17px auto 21px; max-width: 32ch; }
+  .hero-actions { gap: 8px; }
+  .cinema-home .club-primary, .hero-actions .club-demo { min-height: 45px; padding-inline: 13px; }
+  .hero-actions .club-demo { gap: 6px; }
+}

@@ -12,7 +12,7 @@ class Recommender:
     def __init__(self, graph):
         self.graph = graph
 
-    def rank(self, members, limit=5):
+    def rank(self, members, limit=5, *, allow_compromise=False):
         profiles = []
         for member in members:
             likes = json.loads(member["likes"])
@@ -29,14 +29,18 @@ class Recommender:
             scores = []
             for _, likes, total, _ in profiles:
                 links = tastes & likes
-                if not links:
+                if not links and not allow_compromise:
                     break  # every member needs at least one like that reaches the film
                 scores.append(sum(map(weight, links)) / total)
             else:
+                coverage = sum(score > 0 for score in scores) if allow_compromise else len(profiles)
                 score = round(100 * (0.6 * min(scores) + 0.4 * sum(scores) / len(scores)), 4)
-                scored.append((-score, self.graph.movies[film_id]["title"].casefold(), film_id))
+                scored.append((-coverage, -score, self.graph.movies[film_id]["title"].casefold(), film_id))
+        # If profiles changed since the first attempt, prefer a regular ballot when possible.
+        if allow_compromise and any(candidate[0] == -len(profiles) for candidate in scored):
+            scored = [candidate for candidate in scored if candidate[0] == -len(profiles)]
         recommendations = []
-        for negative_score, _, film_id in heapq.nsmallest(limit, scored):
+        for _, negative_score, _, film_id in heapq.nsmallest(limit, scored):
             explanations = []
             for member, likes, total, _ in profiles:
                 links = sorted(matched[film_id] & likes)

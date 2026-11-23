@@ -28,6 +28,8 @@ Group state is `collecting`, `voting`, or `finished`. Members and tastes freeze 
 
 GET group state returns public membership **counts** without credentials, never the profiles or member list. Authenticated state returns the participant list, the caller's preferences, and group-visible movie explanations. A member cannot read another member's full RDF profile via the export route.
 
+The standard request requires a like from every member. If it finds none, it returns 409 with `X-Recommendation-Conflict: no_full_match` and leaves the room collecting tastes. The organiser can retry with `?allow_compromise=true` to match fewer guests while keeping all avoids. That retry prefers full matches if available, otherwise ranks by guest coverage then score. If it still finds no films, it returns `no_compromise`. In a tied ballot, the earliest film in the saved shortlist wins.
+
 Each shortlist film carries the catalogue fields plus `score` and `matches`, one entry per member:
 
 ```json

@@ -17,17 +17,17 @@ On macOS/Linux, use `python3` if `python` is not available. On Windows, `py` can
 
 1. Click **Try a sample group**. You join as “You,” with Ada and Cem as clearly marked sample members.
 2. Add or remove a few tastes and click **Save my tastes**.
-3. Click **Find our movies**. Ada and Cem automatically cast sample votes.
+3. Click **Build our shortlist**. Ada and Cem automatically cast sample votes.
 4. Vote for your favorite. The final pick appears.
 
 ## Use it with real friends
 
 1. Enter a group name and your nickname on the home page.
-2. Copy the invitation link and send it to your friends.
-3. Each person joins with a different nickname and selects at least three tastes, including at least one like. Search genres, films, actors, or directors.
-4. Everyone clicks **Save my tastes**. When 2–8 members are ready, the organiser clicks **Find our movies**.
+2. Choose **Invite friends**, then **Copy invite link** and send it to your friends.
+3. Each person joins with a different nickname and selects at least three tastes, including at least one like. Use the genre deck or **Browse catalogue** to search films, genres, actors, or directors.
+4. Everyone clicks **Save my tastes**. When 2–8 members are ready, the organiser clicks **Build our shortlist**.
 5. Each member votes once. Voting closes automatically when everyone has voted, or the organiser can close it after at least one vote.
-6. Most votes wins. A tie goes to the higher recommendation score; a remaining tie uses title/identifier order for a repeatable result.
+6. The film with the most votes wins. A tie goes to the film higher on the shortlist.
 
 The organiser can start a new round, keeping tastes while clearing the shortlist and votes, or delete the whole group. New members and taste edits are locked during voting so the shortlist stays consistent.
 
@@ -57,7 +57,7 @@ Find the computer's local network IP address, for example `192.168.1.20`. Open `
 | Privacy | Nickname and tastes; no e-mail or account registration. Profile SHACL shapes reject extra personal fields |
 | Expiry | 30 days of inactivity; cleaned at startup and hourly while the server runs |
 | UI | Responsive HTML/CSS/JavaScript served by the Python application; no Node.js or frontend build needed |
-| Quality checks | 105 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
+| Quality checks | 106 automated tests, incl. an independent reference recommender and the same checks on the 10,000-film catalogue; see `docs/TEST_REPORT.md` |
 | Performance | Repeatable benchmark for groups of 2, 4 and 8 on both catalogues; 8 people on 10,000 films rank in 0.09–0.15 s (was 1.6–1.8 s); see `docs/PERFORMANCE_REPORT.md` |
 
 ## Movie data and the 10,000-film goal
@@ -99,7 +99,7 @@ Live Wikidata access depends on connectivity and the public endpoint. The includ
 3. Each remaining film must match **at least one like from every member**. Otherwise it is excluded.
 4. A member's match is the fraction of their weighted likes that connect to that film. Person preferences have weight 2; genre and film preferences have weight 1. Each input like counts at most once, even if several graph paths match it.
 5. The group score is `100 × (0.6 × lowest member match + 0.4 × average member match)`.
-6. Return up to five films, highest score first. If none qualify, explain that the group should change its tastes or expand the catalogue.
+6. Return up to five films, highest score first. If none qualify, the host can explicitly start a compromise ballot. It still respects every Avoid. It requires at least one guest to match and ranks by how many guests match, then by taste score. If no film qualifies even then, the group can review its tastes and try again.
 
 Subgenres come from a small hand-written table (slasher, zombie and vampire are horror; cyberpunk is science fiction, ...) plus the genre names themselves: an imported genre such as `comedy-horror` or `spaghetti-western` is a kind of every catalogue genre spelled inside it. Without this, a horror dislike let 122 of the 10,000 films through (`python -m watchtogether.genre_audit` lists every genre).
 

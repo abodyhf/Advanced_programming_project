@@ -2,20 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#101211">
-  <meta name="description" content="Find a movie your whole group can get behind. Share tastes, discover your shortlist, and vote.">
-  <title>WatchTogether — One group. One great movie.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10131d">
+  <meta name="description" content="Find a film for your whole group. Share your tastes, discover a shortlist, and vote for tonight’s movie.">
+  <title>WatchTogether — Your movie night</title>
   <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/static/fonts/dm-sans.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/static/styles.css">
-  <link rel="stylesheet" href="/static/room-redesign.css?v=cinema6">
-  <script src="/static/app.js?v=cinema6" defer></script>
+  <link rel="stylesheet" href="/static/collection.css">
+  <link rel="stylesheet" href="/static/cinema.css">
+  <script src="/static/app.js" defer></script>
+  <script src="/static/collection.js" defer></script>
+  <script src="/static/cinema.js" defer></script>
 </head>
 <body>
-  <header class="topbar"><a href="/" class="brand" aria-label="WatchTogether home"><span class="brand-mark">w<span>t</span></span>WatchTogether<span class="brand-dot">●</span></a><span class="top-note">GOOD FILMS. GREAT COMPANY.</span></header>
-  <main id="app" aria-live="polite"><div class="loading">Getting the popcorn ready…</div></main>
-  <footer><span>Made for the part before “press play.”</span><span>Python + a movie knowledge graph <span class="footer-dot">·</span> <a href="/api/docs" target="_blank" rel="noopener">API docs ↗</a></span></footer>
-  <p class="data-credit">Film data from Wikidata (CC0). Film pictures from Wikimedia Commons and TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+  <a class="skip-link" href="#app">Skip to content</a>
+  <header class="site-head">
+    <a href="/" class="wordmark" aria-label="WatchTogether home"><img src="/static/favicon.svg" alt="" width="38" height="38">WatchTogether</a>
+    <nav aria-label="Main navigation">
+      <a class="library-link" href="/#collection">Film collection</a>
+      <button type="button" class="help-button" data-dialog="how-dialog"><span class="help-icon" aria-hidden="true">?</span>How it works</button>
+    </nav>
+  </header>
+  <main id="app" tabindex="-1"><div class="loading">Loading your movie night…</div></main>
+  <footer class="site-footer">
+    <span>WatchTogether</span>
+    <details><summary>Credits</summary><div class="credit-content">Cinema artwork generated for WatchTogether. Film data from Wikidata (CC0). Film pictures from Wikimedia Commons and TMDB. This product uses the TMDB API but is not endorsed or certified by TMDB.</div></details>
+    <a href="/api/docs" target="_blank" rel="noopener">API docs ↗</a>
+  </footer>
   <div id="toast" class="toast" role="status"></div>
+
+  <template id="landing-view">
+    <section class="cinema-hero" aria-labelledby="hero-title">
+      <div class="cinema-scene" aria-hidden="true">
+        <picture>
+          <source media="(max-width: 600px)" srcset="/static/images/cinema-portrait.webp">
+          <img src="/static/images/cinema-wide.webp" alt="" fetchpriority="high">
+        </picture>
+        <div class="cinema-light"></div>
+      </div>
+      <div class="hero-content">
+        <p class="group-size">Movie night for 2–8</p>
+        <h1 id="hero-title">One night.<br><em>One great film.</em></h1>
+        <p class="hero-description">Invite your friends, share your tastes, and vote for the film you’ll watch together.</p>
+        <div class="hero-actions">
+          <button type="button" class="club-primary" data-dialog="create-dialog">Create a room <span aria-hidden="true">→</span></button>
+          <button type="button" class="club-demo" data-action="demo"><span class="play-outline" aria-hidden="true"></span>Try a sample group</button>
+        </div>
+      </div>
+      <a class="cinema-browse" href="#collection">
+        Explore the collection <span aria-hidden="true">↓</span>
+      </a>
+    </section>
+    <section id="collection" aria-labelledby="collection-title"></section>
+  </template>
+
+  <dialog class="club-dialog" id="create-dialog" aria-labelledby="create-title">
+    <div class="dialog-inner">
+      <button class="dialog-x" type="button" data-close aria-label="Close">×</button>
+      <h2 id="create-title">Start a movie night</h2>
+      <p>Name your room. You’ll get a link to invite your friends.</p>
+      <form id="create-form">
+        <label for="title">Room name</label>
+        <input id="title" name="title" placeholder="Friday film club" maxlength="60" required autofocus>
+        <label for="nickname">Your nickname</label>
+        <input id="nickname" name="nickname" placeholder="What should we call you?" maxlength="24" required autocomplete="off">
+        <div class="form-error" id="form-error" role="alert"></div>
+        <button class="club-primary" type="submit">Create room <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog class="club-dialog" id="how-dialog" aria-labelledby="how-title">
+    <div class="dialog-inner">
+      <button class="dialog-x" type="button" data-close aria-label="Close">×</button>
+      <h2 id="how-title">How it works</h2>
+      <ol class="how-list">
+        <li><strong>Invite your group</strong><p>Create a room and share the link with up to seven friends. All you need is a nickname.</p></li>
+        <li><strong>Choose your tastes</strong><p>Each person picks at least three tastes, including one like. Try films, genres, actors, or directors.</p></li>
+        <li><strong>Vote for tonight’s film</strong><p>When everyone is ready, the host makes a shortlist. Everyone gets one vote.</p></li>
+      </ol>
+      <button class="club-primary" type="button" data-close>Got it</button>
+    </div>
+  </dialog>
 </body>
 </html>
