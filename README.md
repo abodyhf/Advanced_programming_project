@@ -94,7 +94,12 @@ Open the HTTPS address printed by cloudflared. The Quick Tunnel costs $0 and sta
 
 ## Movie data and the 10,000-film goal
 
-The app ships with **80 hand-curated starter movies** so recommendations work without any external service. This is a starter catalogue, **not** 10,000 downloaded Wikidata movies. Genres are simplified editorial categories, and cast lists are intentionally partial.
+The repository ships two catalogues:
+
+- `data/wikidata.json`: **10,000 real films imported from Wikidata** (CC0), each with a title, year, directors, cast and genres, and a poster or picture link for 9,917 of them. The app uses this file by default. It was validated with `python -m watchtogether.validate_catalog`; see `docs/IMPORT_REPORT.md`.
+- `data/catalog.json`: **80 hand-curated starter movies**, used when `data/wikidata.json` is absent or when `WATCHTOGETHER_CATALOG` points to it. Its genres are simplified editorial categories and its cast lists are intentionally partial.
+
+The sections below explain how to rebuild or extend the Wikidata catalogue.
 
 A separate importer fetches real Wikidata records in small SPARQL batches. Wikimedia refuses scripts that do not say who runs them (HTTP 403), so first set a contact e-mail address or URL. It is sent to Wikidata in the User-Agent header and is not stored in the project:
 
