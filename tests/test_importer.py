@@ -95,6 +95,14 @@ def test_record_checks_report_duplicates_and_missing_fields():
     for name in ['missing title','missing year','missing genres','missing directors','blank entry in actors']:
         assert problems[name]==['film:Q1'], name
 
+def test_record_checks_reject_pictures_the_app_cannot_show():
+    good=importer.parse_films(rows())[0]
+    for url in ['https://image.tmdb.org/t/p/w342/abc.jpg','https://commons.wikimedia.org/wiki/Special:FilePath/A.jpg?width=400']:
+        assert validate_catalog.check_records([{**good,'image':url}])=={}, url
+    for url in ['http://image.tmdb.org/t/p/w342/abc.jpg','https://example.com/poster.jpg','https://image.tmdb.org/',
+                'javascript:alert(1)','https://image.tmdb.org/a b.jpg',None]:
+        assert validate_catalog.check_records([{**good,'image':url}])=={'invalid picture address':['film:Q1']}, url
+
 def test_user_agent_carries_contact_and_403_is_explained():
     agent=importer.build_user_agent('https://example.org/me')
     assert agent.startswith('WatchTogether/1.0 (https://example.org/me;') and 'httpx/' in agent

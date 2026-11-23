@@ -8,9 +8,18 @@ import json
 import sys
 from collections import Counter
 from pathlib import Path
+from urllib.parse import urlsplit
 from .graph import ROOT, GraphStore
 
 LIST_FIELDS = {"genres": "genres", "directors": "directors", "cast": "actors"}
+# The only image hosts the app's Content-Security-Policy allows; a picture elsewhere would never display.
+PICTURE_HOSTS = {"commons.wikimedia.org", "upload.wikimedia.org", "thumb.wikimedia.org", "image.tmdb.org"}
+
+def valid_picture(url):
+    if not isinstance(url, str) or any(char.isspace() for char in url):
+        return False
+    parts = urlsplit(url)
+    return parts.scheme == "https" and parts.hostname in PICTURE_HOSTS and len(parts.path) > 1
 
 def check_records(films):
     """Return {problem: [film ids]} for every record-level defect found."""
@@ -44,6 +53,8 @@ def check_records(films):
                 flag(f"{field} names and identifiers differ in length", film)
             if ids and len(set(ids)) != len(ids):
                 flag(f"repeated person in {field}", film)
+        if "image" in film and not valid_picture(film["image"]):
+            flag("invalid picture address", film)
     return problems
 
 def summarize(films):
